@@ -28,3 +28,11 @@ Thanks for the investigation, now I want you to sumarize all the processes and f
 3. Add a Lean Canvas diagram to understand the business model
 ```
 
+<< **Buy vs Build** >>
+```markdown
+I need you to study the alternatives again, and give an elaborate justification to select one of the following strategies: buy vs build.
+---
+Please let me know which open source ATS are best known?
+Which commercial ATS are best known? Compare them based on the main functionalities in AI automations and assess which would be the best option.
+```
+
