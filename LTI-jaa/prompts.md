@@ -57,3 +57,9 @@ You need to identify the most important fields of the enities with their field n
 
 Finally, you need to create a data model diagram with all the entities, fields and relationshipts already identitied, please create the diagram in using mermaid script.
 ```
+The ERD mermaid diagram was with bad sintaxis, and it needed to be re-gneerated using eraser
+
+<< **GPT: ERASER - DIAGRAMGPT** >>
+```markdown
+Create an ERD with Job Posting (JobID, Title, Description, Requirements, Status, Dates) related to Candidate (CandidateID, Name, Email, Phone, Address, Resume, Skills, Experience, Education) in a Many-to-Many relationship. Also include Interview (InterviewID, CandidateID, JobID, Date, Interviewer, Type, Feedback) with relationships to Candidate and Job Posting.
+```
