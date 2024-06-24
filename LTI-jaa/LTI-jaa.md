@@ -410,57 +410,115 @@ These diagrams correctly represent the use cases for job posting and distributio
 
 ## Data model diagram 
 
-To design the data model for the ATS (Applicant Tracking System) software based on the identified use cases, we will first analyze the entities required and their relationships. Here's a breakdown of the entities, their fields with data types, and relationships:
+Based on the use cases provided, we can identify several entities and their relationships for an Applicant Tracking System (ATS). Here’s a breakdown of the entities, their fields, data types, and relationships:
 
 ### Entities and Fields
 
 1. **Job Posting**
-   - **Fields:**
-     - JobID: Integer (Primary Key)
-     - Title: String
-     - Description: Text
-     - Requirements: Text
-     - Status: Enum ('Draft', 'Published', 'Closed')
-     - PostedDate: Date
-     - UpdatedDate: Date
-     - ExpiryDate: Date
-   - **Relationships:**
-     - One-to-Many with Candidate (Many candidates can apply to one job)
+   - Fields:
+     - `job_id` (Primary Key, Integer)
+     - `title` (String)
+     - `description` (Text)
+     - `requirements` (Text)
+     - `status` (String, e.g., Draft, Approved)
+     - `created_at` (DateTime)
+     - `updated_at` (DateTime)
+   - Relationships:
+     - One-to-Many with `JobDistribution`
 
-2. **Candidate**
-   - **Fields:**
-     - CandidateID: Integer (Primary Key)
-     - FirstName: String
-     - LastName: String
-     - Email: String
-     - Phone: String
-     - Address: Text
-     - Resume: Text (file or link)
-     - Skills: Text
-     - Experience: Text
-     - Education: Text
-   - **Relationships:**
-     - Many-to-Many with Job Posting (A candidate can apply to many jobs, and a job can have many applicants)
-     - One-to-Many with Interview (A candidate can have multiple interviews)
+2. **Job Distribution**
+   - Fields:
+     - `distribution_id` (Primary Key, Integer)
+     - `job_id` (Foreign Key to Job Posting, Integer)
+     - `platform` (String, e.g., LinkedIn, Indeed)
+     - `status` (String, e.g., Pending, Published)
+   - Relationships:
+     - Many-to-One with `Job Posting`
 
-3. **Interview**
-   - **Fields:**
-     - InterviewID: Integer (Primary Key)
-     - CandidateID: Integer (Foreign Key referencing Candidate)
-     - JobID: Integer (Foreign Key referencing Job Posting)
-     - InterviewDate: DateTime
-     - Interviewer: String
-     - InterviewType: String
-     - Feedback: Text
-   - **Relationships:**
-     - Many-to-One with Candidate (Many interviews can be conducted with one candidate)
-     - Many-to-One with Job Posting (Many interviews can be scheduled for one job)
+3. **Candidate**
+   - Fields:
+     - `candidate_id` (Primary Key, Integer)
+     - `name` (String)
+     - `email` (String)
+     - `phone` (String)
+     - `resume_text` (Text)
+     - `parsed_data` (Text, JSON structure for parsed resume data)
+     - `status` (String, e.g., New, In Review, Hired)
+     - `created_at` (DateTime)
+     - `updated_at` (DateTime)
+   - Relationships:
+     - One-to-Many with `Interview`
 
-### Explanation of Relationships:
-- **JobPosting <-> Candidate:** One job posting can be associated with many candidates (One-to-Many).
-- **Candidate <-> Interview:** A candidate can attend multiple interviews (One-to-Many).
-- **JobPosting <-> Interview:** Many interviews can be scheduled for one job posting (One-to-Many).
+4. **Interview**
+   - Fields:
+     - `interview_id` (Primary Key, Integer)
+     - `candidate_id` (Foreign Key to Candidate, Integer)
+     - `interviewer_name` (String)
+     - `start_time` (DateTime)
+     - `end_time` (DateTime)
+     - `location` (String)
+     - `status` (String, e.g., Scheduled, Completed)
+     - `feedback` (Text)
+     - `created_at` (DateTime)
+     - `updated_at` (DateTime)
+   - Relationships:
+     - Many-to-One with `Candidate`
 
-![image](https://github.com/eltonina/AI4Devs-design/assets/23495050/061f896c-b158-4d74-a656-7699e034d06b)
+### Relationships Overview
+- **Job Posting** can have multiple **Job Distributions** (One-to-Many).
+- **Candidate** can have multiple **Interviews** (One-to-Many).
+- Each **Interview** belongs to exactly one **Candidate** (Many-to-One).
 
-This data model diagram encapsulates the essential entities, their fields, and their relationships as identified from the ATS use cases. It provides a structured approach to managing job postings, candidates, and interviews within the system, facilitating efficient tracking and management of recruitment processes.
+### Data Model Diagram (using Mermaid syntax)
+
+```mermaid
+erDiagram
+    JOB_POSTING ||--o{ JOB_DISTRIBUTION : "Distributes"
+    CANDIDATE ||--o{ INTERVIEW : "Attends"
+    JOB_POSTING {
+        int job_id
+        string title
+        text description
+        text requirements
+        string status
+        datetime created_at
+        datetime updated_at
+    }
+    JOB_DISTRIBUTION {
+        int distribution_id
+        int job_id
+        string platform
+        string status
+    }
+    CANDIDATE {
+        int candidate_id
+        string name
+        string email
+        string phone
+        text resume_text
+        text parsed_data
+        string status
+        datetime created_at
+        datetime updated_at
+    }
+    INTERVIEW {
+        int interview_id
+        int candidate_id
+        string interviewer_name
+        datetime start_time
+        datetime end_time
+        string location
+        string status
+        text feedback
+        datetime created_at
+        datetime updated_at
+    }
+```
+
+### Explanation
+- **JOB_POSTING** entity represents job postings with details such as title, description, and requirements.
+- **JOB_DISTRIBUTION** entity manages the distribution of job postings to various platforms.
+- **CANDIDATE** entity stores candidate information including their resume and parsed data.
+- **INTERVIEW** entity handles interview details including scheduling, feedback, and status updates.
+
+This data model captures the essential entities and their relationships as per the identified use cases for the ATS software. It supports functionalities like job posting management, candidate profile handling, and interview scheduling seamlessly. Adjustments can be made based on specific additional requirements or further use cases.
