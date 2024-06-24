@@ -50,16 +50,42 @@ This is an incorrect format or sintax to create diagrams in mermaid. Please try 
 
 ```markdown
 I want you to act as a brilliant software architect. You are able to design, explain and diagram the different aspects of the ATS software that we want to implement. 
-
-You need to take a look and analyze the three main use cases already created for our ATS software identify all the important entities needed to create the software and to manage all the use cases.
+You need to take a look and analyze the following use cases already created for an ATS software and identify all the entities needed to create the software and to manage all the use cases.
 
 You need to identify the most important fields of the enities with their field names and data types; and you need to create the relationships between entities as well specifying the kind of relation.
 
 Finally, you need to create a data model diagram with all the entities, fields and relationshipts already identitied, please create the diagram in using mermaid script.
-```
-The ERD mermaid diagram was with bad sintaxis, and it needed to be re-gneerated using eraser
 
-<< **GPT: ERASER - DIAGRAMGPT** >>
-```markdown
-Create an ERD with Job Posting (JobID, Title, Description, Requirements, Status, Dates) related to Candidate (CandidateID, Name, Email, Phone, Address, Resume, Skills, Experience, Education) in a Many-to-Many relationship. Also include Interview (InterviewID, CandidateID, JobID, Date, Interviewer, Type, Feedback) with relationships to Candidate and Job Posting.
+### 
+
+Use Case 1: Job Posting and Distribution
+
+**Description:** This use case involves creating job postings within the ATS and distributing them to various job boards and social media platforms. The goal is to streamline the process of advertising job openings to attract a large pool of qualified candidates.
+
+**Steps:**
+1. **Create Job Posting:** HR manager creates a job posting by filling out a form with job details (title, description, requirements, etc.).
+2. **Approve Job Posting:** The job posting is reviewed and approved by a senior HR manager.
+3. **Distribute Job Posting:** The approved job posting is automatically distributed to selected job boards and social media platforms.
+4. **Monitor and Update:** HR manager monitors the posting's performance and updates the job details if necessary.
+
+Use Case 2: Resume Parsing and Candidate Management
+
+**Description:** This use case involves parsing resumes submitted by candidates, extracting relevant information, and managing candidate profiles within the ATS. The objective is to organize candidate data efficiently and make it easily searchable.
+
+**Steps:**
+1. **Receive Resume:** Candidates submit their resumes through the ATS.
+2. **Parse Resume:** The ATS parses the resume to extract relevant information (name, contact details, experience, skills).
+3. **Create Candidate Profile:** The extracted information is used to create a candidate profile in the ATS.
+4. **Manage Candidate Profile:** Recruiters can view, update, and search candidate profiles.
+
+Use Case 3: Interview Scheduling and Management
+
+**Description:** This use case involves scheduling interviews between candidates and interviewers, sending notifications, and managing interview feedback. The goal is to automate the interview scheduling process and streamline feedback collection.
+
+**Steps:**
+1. **Schedule Interview:** Recruiter selects a candidate and schedules an interview by choosing available time slots.
+2. **Notify Participants:** The ATS sends notifications to the candidate and interviewers with the interview details.
+3. **Conduct Interview:** The interview is conducted as scheduled.
+4. **Collect Feedback:** Interviewers submit their feedback through the ATS.
+5. **Update Candidate Status:** The ATS updates the candidate's status based on the feedback.
 ```
