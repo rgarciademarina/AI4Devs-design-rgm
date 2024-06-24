@@ -46,3 +46,14 @@ Try again because the mermaid diagram was bad
 ```markdown
 This is an incorrect format or sintax to create diagrams in mermaid. Please try again generating the use cases for PlantsUML 
 ```
+## 3. ERD - Data model diagram
+
+```markdown
+I want you to act as a brilliant software architect. You are able to design, explain and diagram the different aspects of the ATS software that we want to implement. 
+
+You need to take a look and analyze the three main use cases already created for our ATS software identify all the important entities needed to create the software and to manage all the use cases.
+
+You need to identify the most important fields of the enities with their field names and data types; and you need to create the relationships between entities as well specifying the kind of relation.
+
+Finally, you need to create a data model diagram with all the entities, fields and relationshipts already identitied, please create the diagram in using mermaid script.
+```
