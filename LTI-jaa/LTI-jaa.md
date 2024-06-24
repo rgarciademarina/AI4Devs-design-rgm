@@ -210,3 +210,108 @@ The ATS software developed by LTI (LeadersTechnology Impact) aims to revolutioni
 | **Cost Structure**                  | - Software development costs.<br>- Marketing and sales expenses.<br>- Customer support and training.<br>- Infrastructure and hosting costs. |
 
 By focusing on these features and leveraging the Lean Canvas approach, LTI's ATS software is positioned to become the leading solution in the market, offering unparalleled efficiency, collaboration, and data-driven insights to transform the recruitment process.
+
+## Buy vs Build
+
+### Buy vs Build: A Detailed Justification
+
+#### Considerations for Building an ATS
+
+**Pros:**
+- **Customization:** Building an ATS in-house allows LTI to tailor the software specifically to the company's needs and workflows.
+- **Competitive Advantage:** Unique features can be developed that differentiate the product in the market.
+- **Control:** Full control over the development process, data security, and future enhancements.
+
+**Cons:**
+- **High Initial Cost:** Significant investment in terms of money, time, and resources for development.
+- **Maintenance:** Ongoing costs for updates, bug fixes, and scaling.
+- **Time to Market:** Longer time to develop and launch the product, potentially missing out on market opportunities.
+
+#### Considerations for Buying an ATS
+
+**Pros:**
+- **Speed:** Faster implementation, allowing LTI to start using the system and gaining benefits almost immediately.
+- **Lower Upfront Costs:** Typically lower initial investment compared to building an ATS from scratch.
+- **Proven Solutions:** Established products with a track record of reliability and performance.
+- **Support and Updates:** Regular updates and support from the vendor, reducing the burden on internal teams.
+
+**Cons:**
+- **Customization Limitations:** Limited ability to customize the software to meet specific needs.
+- **Dependency:** Dependence on the vendor for updates, support, and potential data security concerns.
+- **Cost Over Time:** Ongoing subscription or licensing fees can add up over time.
+
+### Best Known Open Source ATS
+
+1. **OpenCATS**
+   - **Features:** Resume parsing, candidate management, job posting, reporting.
+   - **Pros:** Free, highly customizable, active community support.
+   - **Cons:** Limited advanced features, requires technical expertise to set up and maintain.
+
+2. **CandidATS**
+   - **Features:** Candidate tracking, resume parsing, reporting, interview scheduling.
+   - **Pros:** Free, flexible, and user-friendly.
+   - **Cons:** Less comprehensive than commercial options, limited support.
+
+3. **Odoo Recruitment**
+   - **Features:** Part of a larger ERP suite, includes job posting, candidate tracking, and reporting.
+   - **Pros:** Integrated with other Odoo modules, customizable.
+   - **Cons:** Can become complex, paid enterprise version for advanced features.
+
+### Best Known Commercial ATS
+
+1. **Greenhouse**
+   - **Features:** Advanced interview scheduling, robust analytics, AI-powered resume parsing, collaborative hiring.
+   - **Pros:** Highly scalable, excellent user interface, extensive integrations.
+   - **Cons:** Higher cost, complex pricing structure.
+
+2. **Lever**
+   - **Features:** AI-driven candidate sourcing, automated workflows, CRM features, robust analytics.
+   - **Pros:** Strong focus on automation and AI, user-friendly interface.
+   - **Cons:** Expensive, potential overkill for smaller companies.
+
+3. **Jobvite**
+   - **Features:** AI-powered recruiting, social media integrations, candidate nurturing, onboarding.
+   - **Pros:** Comprehensive feature set, strong analytics, good support.
+   - **Cons:** High cost, some features may require additional modules.
+
+4. **Workday Recruiting**
+   - **Features:** Integrated with HR and finance systems, AI-driven insights, robust analytics.
+   - **Pros:** Comprehensive enterprise solution, seamless integration with other Workday products.
+   - **Cons:** Very expensive, best suited for large enterprises.
+
+### Comparison Based on AI Automations
+
+1. **Greenhouse**
+   - **AI Features:** AI-powered resume parsing, predictive analytics.
+   - **Strengths:** Strong in candidate experience and collaborative hiring.
+   - **Weaknesses:** Higher cost, complex to set up and configure.
+
+2. **Lever**
+   - **AI Features:** AI-driven candidate sourcing, automated workflows, predictive analytics.
+   - **Strengths:** Excellent for automating recruitment workflows and sourcing.
+   - **Weaknesses:** Expensive, may have a steeper learning curve.
+
+3. **Jobvite**
+   - **AI Features:** AI-powered candidate matching, automated scheduling, predictive analytics.
+   - **Strengths:** Comprehensive AI features, good support and user experience.
+   - **Weaknesses:** High cost, additional modules for some features.
+
+4. **Workday Recruiting**
+   - **AI Features:** AI-driven insights, machine learning for candidate matching.
+   - **Strengths:** Best suited for large enterprises with complex needs.
+   - **Weaknesses:** Very expensive, complex implementation.
+
+### Recommended Strategy: Buy
+
+**Justification:**
+Given LTI's startup status and the need to quickly establish a competitive advantage in the market, buying a commercial ATS would be the most prudent strategy. This approach provides immediate access to advanced features, AI capabilities, and a reliable support system, enabling LTI to focus on core business activities and strategic initiatives.
+
+**Best Commercial ATS for LTI: Lever**
+
+- **Reasoning:**
+  - **AI and Automation:** Lever offers strong AI-driven candidate sourcing, automated workflows, and predictive analytics, which align well with LTI's goal of minimizing effort and maximizing efficiency in recruitment.
+  - **User Experience:** Its user-friendly interface ensures quick adoption and ease of use, which is crucial for a startup.
+  - **Scalability:** Lever is highly scalable, allowing LTI to grow and expand its operations without needing to switch systems.
+  - **Support and Integration:** Excellent support and extensive integrations with other HR tools and systems.
+
+Lever's comprehensive feature set, focus on AI and automation, and scalability make it the best fit for LTI to establish itself as a leading HR company in the market.
