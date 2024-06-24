@@ -318,6 +318,8 @@ Lever's comprehensive feature set, focus on AI and automation, and scalability m
 
 ## Use Cases
 
+Sure, let's create the use case diagrams using PlantUML.
+
 ### Use Case 1: Job Posting and Distribution
 
 **Description:** This use case involves creating job postings within the ATS and distributing them to various job boards and social media platforms. The goal is to streamline the process of advertising job openings to attract a large pool of qualified candidates.
@@ -328,22 +330,25 @@ Lever's comprehensive feature set, focus on AI and automation, and scalability m
 3. **Distribute Job Posting:** The approved job posting is automatically distributed to selected job boards and social media platforms.
 4. **Monitor and Update:** HR manager monitors the posting's performance and updates the job details if necessary.
 
-**Mermaid Diagram:**
-```mermaid
-sequenceDiagram
-    participant HRM as HR Manager
-    participant SHRM as Senior HR Manager
-    participant ATS as ATS System
-    participant JB as Job Boards
-    participant SM as Social Media
+**PlantUML Use Case Diagram:**
+```plantuml
+@startuml
+actor "HR Manager" as HRM
+actor "Senior HR Manager" as SHRM
+actor "Job Boards" as JB
+actor "Social Media" as SM
 
-    HRM->>ATS: Create Job Posting
-    ATS-->>SHRM: Notify for Approval
-    SHRM->>ATS: Approve Job Posting
-    ATS->>JB: Distribute Job Posting
-    ATS->>SM: Distribute Job Posting
-    HRM->>ATS: Monitor and Update Job Posting
+HRM --> (Create Job Posting)
+HRM --> (Monitor and Update Job Posting)
+SHRM --> (Approve Job Posting)
+(Create Job Posting) --> (Distribute Job Posting)
+(Approve Job Posting) --> (Distribute Job Posting)
+(Distribute Job Posting) --> JB
+(Distribute Job Posting) --> SM
+@enduml
 ```
+![image](https://github.com/eltonina/AI4Devs-design/assets/23495050/0433d4e2-1fa9-475c-8b9b-905ba4c0680e)
+
 
 ### Use Case 2: Resume Parsing and Candidate Management
 
@@ -355,18 +360,21 @@ sequenceDiagram
 3. **Create Candidate Profile:** The extracted information is used to create a candidate profile in the ATS.
 4. **Manage Candidate Profile:** Recruiters can view, update, and search candidate profiles.
 
-**Mermaid Diagram:**
-```mermaid
-sequenceDiagram
-    participant C as Candidate
-    participant ATS as ATS System
-    participant R as Recruiter
+**PlantUML Use Case Diagram:**
+```plantuml
+@startuml
+actor "Candidate" as C
+actor "Recruiter" as R
 
-    C->>ATS: Submit Resume
-    ATS->>ATS: Parse Resume
-    ATS->>ATS: Create Candidate Profile
-    R->>ATS: View/Update/Search Candidate Profile
+C --> (Submit Resume)
+(Submit Resume) --> (Parse Resume)
+(Parse Resume) --> (Create Candidate Profile)
+R --> (View Candidate Profile)
+R --> (Update Candidate Profile)
+R --> (Search Candidate Profile)
+@enduml
 ```
+![image](https://github.com/eltonina/AI4Devs-design/assets/23495050/b076b666-5f74-48db-9913-b52246623296)
 
 ### Use Case 3: Interview Scheduling and Management
 
@@ -379,21 +387,23 @@ sequenceDiagram
 4. **Collect Feedback:** Interviewers submit their feedback through the ATS.
 5. **Update Candidate Status:** The ATS updates the candidate's status based on the feedback.
 
-**Mermaid Diagram:**
-```mermaid
-sequenceDiagram
-    participant R as Recruiter
-    participant C as Candidate
-    participant I as Interviewer
-    participant ATS as ATS System
+**PlantUML Use Case Diagram:**
+```plantuml
+@startuml
+actor "Recruiter" as R
+actor "Candidate" as C
+actor "Interviewer" as I
 
-    R->>ATS: Schedule Interview
-    ATS->>C: Notify Interview Details
-    ATS->>I: Notify Interview Details
-    C->>ATS: Confirm Interview
-    I->>ATS: Confirm Interview
-    I->>ATS: Submit Interview Feedback
-    ATS->>R: Update Candidate Status
+R --> (Schedule Interview)
+(Schedule Interview) --> (Notify Interview Details)
+(Notify Interview Details) --> C
+(Notify Interview Details) --> I
+I --> (Conduct Interview)
+I --> (Submit Interview Feedback)
+(Submit Interview Feedback) --> (Update Candidate Status)
+R --> (Update Candidate Status)
+@enduml
 ```
+![image](https://github.com/eltonina/AI4Devs-design/assets/23495050/99a0fa02-93fc-48a9-8c19-74d6d8d881a1)
 
-These use cases cover essential functionalities for creating a tailored ATS that meets the specific needs of LTI. The diagrams help visualize the interaction between different actors and the system, ensuring clarity in the implementation process.
+These diagrams correctly represent the use cases for job posting and distribution, resume parsing and candidate management, and interview scheduling and management in the ATS system.
