@@ -407,3 +407,60 @@ R --> (Update Candidate Status)
 ![image](https://github.com/eltonina/AI4Devs-design/assets/23495050/99a0fa02-93fc-48a9-8c19-74d6d8d881a1)
 
 These diagrams correctly represent the use cases for job posting and distribution, resume parsing and candidate management, and interview scheduling and management in the ATS system.
+
+## Data model diagram 
+
+To design the data model for the ATS (Applicant Tracking System) software based on the identified use cases, we will first analyze the entities required and their relationships. Here's a breakdown of the entities, their fields with data types, and relationships:
+
+### Entities and Fields
+
+1. **Job Posting**
+   - **Fields:**
+     - JobID: Integer (Primary Key)
+     - Title: String
+     - Description: Text
+     - Requirements: Text
+     - Status: Enum ('Draft', 'Published', 'Closed')
+     - PostedDate: Date
+     - UpdatedDate: Date
+     - ExpiryDate: Date
+   - **Relationships:**
+     - One-to-Many with Candidate (Many candidates can apply to one job)
+
+2. **Candidate**
+   - **Fields:**
+     - CandidateID: Integer (Primary Key)
+     - FirstName: String
+     - LastName: String
+     - Email: String
+     - Phone: String
+     - Address: Text
+     - Resume: Text (file or link)
+     - Skills: Text
+     - Experience: Text
+     - Education: Text
+   - **Relationships:**
+     - Many-to-Many with Job Posting (A candidate can apply to many jobs, and a job can have many applicants)
+     - One-to-Many with Interview (A candidate can have multiple interviews)
+
+3. **Interview**
+   - **Fields:**
+     - InterviewID: Integer (Primary Key)
+     - CandidateID: Integer (Foreign Key referencing Candidate)
+     - JobID: Integer (Foreign Key referencing Job Posting)
+     - InterviewDate: DateTime
+     - Interviewer: String
+     - InterviewType: String
+     - Feedback: Text
+   - **Relationships:**
+     - Many-to-One with Candidate (Many interviews can be conducted with one candidate)
+     - Many-to-One with Job Posting (Many interviews can be scheduled for one job)
+
+### Explanation of Relationships:
+- **JobPosting <-> Candidate:** One job posting can be associated with many candidates (One-to-Many).
+- **Candidate <-> Interview:** A candidate can attend multiple interviews (One-to-Many).
+- **JobPosting <-> Interview:** Many interviews can be scheduled for one job posting (One-to-Many).
+
+![image](https://github.com/eltonina/AI4Devs-design/assets/23495050/061f896c-b158-4d74-a656-7699e034d06b)
+
+This data model diagram encapsulates the essential entities, their fields, and their relationships as identified from the ATS use cases. It provides a structured approach to managing job postings, candidates, and interviews within the system, facilitating efficient tracking and management of recruitment processes.
