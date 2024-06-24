@@ -315,3 +315,85 @@ Given LTI's startup status and the need to quickly establish a competitive advan
   - **Support and Integration:** Excellent support and extensive integrations with other HR tools and systems.
 
 Lever's comprehensive feature set, focus on AI and automation, and scalability make it the best fit for LTI to establish itself as a leading HR company in the market.
+
+## Use Cases
+
+### Use Case 1: Job Posting and Distribution
+
+**Description:** This use case involves creating job postings within the ATS and distributing them to various job boards and social media platforms. The goal is to streamline the process of advertising job openings to attract a large pool of qualified candidates.
+
+**Steps:**
+1. **Create Job Posting:** HR manager creates a job posting by filling out a form with job details (title, description, requirements, etc.).
+2. **Approve Job Posting:** The job posting is reviewed and approved by a senior HR manager.
+3. **Distribute Job Posting:** The approved job posting is automatically distributed to selected job boards and social media platforms.
+4. **Monitor and Update:** HR manager monitors the posting's performance and updates the job details if necessary.
+
+**Mermaid Diagram:**
+```mermaid
+sequenceDiagram
+    participant HRM as HR Manager
+    participant SHRM as Senior HR Manager
+    participant ATS as ATS System
+    participant JB as Job Boards
+    participant SM as Social Media
+
+    HRM->>ATS: Create Job Posting
+    ATS-->>SHRM: Notify for Approval
+    SHRM->>ATS: Approve Job Posting
+    ATS->>JB: Distribute Job Posting
+    ATS->>SM: Distribute Job Posting
+    HRM->>ATS: Monitor and Update Job Posting
+```
+
+### Use Case 2: Resume Parsing and Candidate Management
+
+**Description:** This use case involves parsing resumes submitted by candidates, extracting relevant information, and managing candidate profiles within the ATS. The objective is to organize candidate data efficiently and make it easily searchable.
+
+**Steps:**
+1. **Receive Resume:** Candidates submit their resumes through the ATS.
+2. **Parse Resume:** The ATS parses the resume to extract relevant information (name, contact details, experience, skills).
+3. **Create Candidate Profile:** The extracted information is used to create a candidate profile in the ATS.
+4. **Manage Candidate Profile:** Recruiters can view, update, and search candidate profiles.
+
+**Mermaid Diagram:**
+```mermaid
+sequenceDiagram
+    participant C as Candidate
+    participant ATS as ATS System
+    participant R as Recruiter
+
+    C->>ATS: Submit Resume
+    ATS->>ATS: Parse Resume
+    ATS->>ATS: Create Candidate Profile
+    R->>ATS: View/Update/Search Candidate Profile
+```
+
+### Use Case 3: Interview Scheduling and Management
+
+**Description:** This use case involves scheduling interviews between candidates and interviewers, sending notifications, and managing interview feedback. The goal is to automate the interview scheduling process and streamline feedback collection.
+
+**Steps:**
+1. **Schedule Interview:** Recruiter selects a candidate and schedules an interview by choosing available time slots.
+2. **Notify Participants:** The ATS sends notifications to the candidate and interviewers with the interview details.
+3. **Conduct Interview:** The interview is conducted as scheduled.
+4. **Collect Feedback:** Interviewers submit their feedback through the ATS.
+5. **Update Candidate Status:** The ATS updates the candidate's status based on the feedback.
+
+**Mermaid Diagram:**
+```mermaid
+sequenceDiagram
+    participant R as Recruiter
+    participant C as Candidate
+    participant I as Interviewer
+    participant ATS as ATS System
+
+    R->>ATS: Schedule Interview
+    ATS->>C: Notify Interview Details
+    ATS->>I: Notify Interview Details
+    C->>ATS: Confirm Interview
+    I->>ATS: Confirm Interview
+    I->>ATS: Submit Interview Feedback
+    ATS->>R: Update Candidate Status
+```
+
+These use cases cover essential functionalities for creating a tailored ATS that meets the specific needs of LTI. The diagrams help visualize the interaction between different actors and the system, ensuring clarity in the implementation process.
