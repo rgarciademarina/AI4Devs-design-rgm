@@ -41,3 +41,8 @@ Which commercial ATS are best known? Compare them based on the main functionalit
 ```markdown
 Now I want you to act as an expert software analyst. The company is going to build the ATS instead of buying because the company wants to create a tailored ATS, we need you to create this ATS. Please list and briefly describes the most important three use cases to implement to achieve the main functionalities. I want you to create a mermaid diagram aside of each use case as well.
 ```
+
+Try again because the mermaid diagram was bad
+```markdown
+This is an incorrect format or sintax to create diagrams in mermaid. Please try again generating the use cases for PlantsUML 
+```
