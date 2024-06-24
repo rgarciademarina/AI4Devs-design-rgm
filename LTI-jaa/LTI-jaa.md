@@ -1,5 +1,5 @@
 
-# Investigration
+# Investigation
 
 ## Analysis of Requirements 
 
