@@ -36,3 +36,8 @@ Please let me know which open source ATS are best known?
 Which commercial ATS are best known? Compare them based on the main functionalities in AI automations and assess which would be the best option.
 ```
 
+## 2. Use Cases
+
+```markdown
+Now I want you to act as an expert software analyst. The company is going to build the ATS instead of buying because the company wants to create a tailored ATS, we need you to create this ATS. Please list and briefly describes the most important three use cases to implement to achieve the main functionalities. I want you to create a mermaid diagram aside of each use case as well.
+```
