@@ -410,88 +410,158 @@ These diagrams correctly represent the use cases for job posting and distributio
 
 ## Data model diagram 
 
-Based on the use cases provided, we can identify several entities and their relationships for an Applicant Tracking System (ATS). Here’s a breakdown of the entities, their fields, data types, and relationships:
+Sure! Here is the updated data model diagram with detailed explanations for each entity and their relationships.
 
 ### Entities and Fields
 
 1. **Job Posting**
-   - Fields:
-     - `job_id` (Primary Key, Integer)
-     - `title` (String)
-     - `description` (Text)
-     - `requirements` (Text)
-     - `status` (String, e.g., Draft, Approved)
-     - `created_at` (DateTime)
-     - `updated_at` (DateTime)
-   - Relationships:
-     - One-to-Many with `JobDistribution`
+   - **Description:** Represents a job opening created by the HR team. It includes details about the job such as title, description, and requirements.
+   - **Fields:**
+     - `id` (Primary Key, Integer): Unique identifier for the job posting.
+     - `title` (String): The title of the job position.
+     - `description` (Text): A detailed description of the job.
+     - `requirements` (Text): The qualifications and skills required for the job.
+     - `status` (String, e.g., Draft, Approved): The current status of the job posting.
+     - `created_at` (DateTime): Timestamp when the job posting was created.
+     - `updated_at` (DateTime): Timestamp when the job posting was last updated.
+     - `hr_manager_id` (Foreign Key to HR Manager, Integer): ID of the HR manager who created the job posting.
+     - `senior_hr_manager_id` (Foreign Key to Senior HR Manager, Integer): ID of the senior HR manager who approved the job posting.
+   - **Relationships:**
+     - One-to-Many with `Job Distribution`
+     - Many-to-One with `HR Manager`
+     - Many-to-One with `Senior HR Manager`
 
 2. **Job Distribution**
-   - Fields:
-     - `distribution_id` (Primary Key, Integer)
-     - `job_id` (Foreign Key to Job Posting, Integer)
-     - `platform` (String, e.g., LinkedIn, Indeed)
-     - `status` (String, e.g., Pending, Published)
-   - Relationships:
+   - **Description:** Manages the distribution of job postings to various platforms like job boards and social media platforms.
+   - **Fields:**
+     - `id` (Primary Key, Integer): Unique identifier for the job distribution.
+     - `job_id` (Foreign Key to Job Posting, Integer): ID of the job posting.
+     - `platform_id` (Foreign Key to Platform, Integer): ID of the platform (job board or social media) where the job is posted.
+     - `status` (String, e.g., Pending, Published): The current status of the job distribution.
+   - **Relationships:**
      - Many-to-One with `Job Posting`
+     - Many-to-One with `Platform` (Job Boards and Social Media Platforms)
 
 3. **Candidate**
-   - Fields:
-     - `candidate_id` (Primary Key, Integer)
-     - `name` (String)
-     - `email` (String)
-     - `phone` (String)
-     - `resume_text` (Text)
-     - `parsed_data` (Text, JSON structure for parsed resume data)
-     - `status` (String, e.g., New, In Review, Hired)
-     - `created_at` (DateTime)
-     - `updated_at` (DateTime)
-   - Relationships:
+   - **Description:** Represents a candidate applying for a job. It includes personal information and resume details.
+   - **Fields:**
+     - `id` (Primary Key, Integer): Unique identifier for the candidate.
+     - `name` (String): The name of the candidate.
+     - `email` (String): The email address of the candidate.
+     - `phone` (String): The phone number of the candidate.
+     - `resume_text` (Text): The resume of the candidate in text format.
+     - `parsed_data` (Text, JSON structure for parsed resume data): Structured data extracted from the resume.
+     - `status` (String, e.g., New, In Review, Hired): The current status of the candidate.
+     - `created_at` (DateTime): Timestamp when the candidate profile was created.
+     - `updated_at` (DateTime): Timestamp when the candidate profile was last updated.
+   - **Relationships:**
      - One-to-Many with `Interview`
 
 4. **Interview**
-   - Fields:
-     - `interview_id` (Primary Key, Integer)
-     - `candidate_id` (Foreign Key to Candidate, Integer)
-     - `interviewer_name` (String)
-     - `start_time` (DateTime)
-     - `end_time` (DateTime)
-     - `location` (String)
-     - `status` (String, e.g., Scheduled, Completed)
-     - `feedback` (Text)
-     - `created_at` (DateTime)
-     - `updated_at` (DateTime)
-   - Relationships:
+   - **Description:** Represents an interview scheduled between a candidate and an interviewer. It includes details about the interview.
+   - **Fields:**
+     - `id` (Primary Key, Integer): Unique identifier for the interview.
+     - `candidate_id` (Foreign Key to Candidate, Integer): ID of the candidate being interviewed.
+     - `recruiter_id` (Foreign Key to Recruiter, Integer): ID of the recruiter who scheduled the interview.
+     - `scheduled_time` (DateTime): The scheduled date and time for the interview.
+     - `interviewer_id` (Foreign Key to Interviewer, Integer): ID of the interviewer conducting the interview.
+     - `status` (String, e.g., Scheduled, Completed): The current status of the interview.
+     - `created_at` (DateTime): Timestamp when the interview was created.
+     - `updated_at` (DateTime): Timestamp when the interview was last updated.
+   - **Relationships:**
      - Many-to-One with `Candidate`
+     - Many-to-One with `Recruiter`
+     - Many-to-One with `Interviewer`
+     - One-to-One with `Interview Feedback`
 
-### Relationships Overview
-- **Job Posting** can have multiple **Job Distributions** (One-to-Many).
-- **Candidate** can have multiple **Interviews** (One-to-Many).
-- Each **Interview** belongs to exactly one **Candidate** (Many-to-One).
+5. **Interview Feedback**
+   - **Description:** Contains feedback provided by the interviewer after an interview.
+   - **Fields:**
+     - `id` (Primary Key, Integer): Unique identifier for the interview feedback.
+     - `interview_id` (Foreign Key to Interview, Integer): ID of the interview.
+     - `feedback_text` (Text): The feedback text provided by the interviewer.
+     - `rating` (Integer): Rating given by the interviewer.
+   - **Relationships:**
+     - One-to-One with `Interview`
+
+6. **HR Manager**
+   - **Description:** Represents an HR manager responsible for creating and approving job postings.
+   - **Fields:**
+     - `id` (Primary Key, Integer): Unique identifier for the HR manager.
+     - `name` (String): The name of the HR manager.
+     - `email` (String): The email address of the HR manager.
+   - **Relationships:**
+     - One-to-Many with `Job Posting`
+
+7. **Recruiter**
+   - **Description:** Represents a recruiter responsible for managing candidate profiles and scheduling interviews.
+   - **Fields:**
+     - `id` (Primary Key, Integer): Unique identifier for the recruiter.
+     - `name` (String): The name of the recruiter.
+     - `email` (String): The email address of the recruiter.
+   - **Relationships:**
+     - One-to-Many with `Interview`
+
+8. **Interviewer**
+   - **Description:** Represents an interviewer responsible for conducting interviews and providing feedback.
+   - **Fields:**
+     - `id` (Primary Key, Integer): Unique identifier for the interviewer.
+     - `name` (String): The name of the interviewer.
+     - `email` (String): The email address of the interviewer.
+   - **Relationships:**
+     - One-to-Many with `Interview`
+
+9. **Job Board**
+   - **Description:** Represents a job board where job postings can be distributed.
+   - **Fields:**
+     - `id` (Primary Key, Integer): Unique identifier for the job board.
+     - `name` (String): The name of the job board.
+     - `url` (String): The URL of the job board.
+   - **Relationships:**
+     - Many-to-One with `Job Distribution`
+
+10. **Social Media Platform**
+    - **Description:** Represents a social media platform where job postings can be shared.
+    - **Fields:**
+      - `id` (Primary Key, Integer): Unique identifier for the social media platform.
+      - `name` (String): The name of the social media platform.
+      - `url` (String): The URL of the social media platform.
+    - **Relationships:**
+      - Many-to-One with `Job Distribution`
 
 ### Data Model Diagram (using Mermaid syntax)
 
 ```mermaid
 erDiagram
     JOB_POSTING ||--o{ JOB_DISTRIBUTION : "Distributes"
+    JOB_POSTING ||--|| HR_MANAGER : "Created by"
+    JOB_POSTING ||--|| SENIOR_HR_MANAGER : "Approved by"
     CANDIDATE ||--o{ INTERVIEW : "Attends"
+    INTERVIEW ||--|| INTERVIEW_FEEDBACK : "Has feedback"
+    INTERVIEW ||--|| RECRUITER : "Scheduled by"
+    INTERVIEW ||--|| INTERVIEWER : "Conducted by"
+    JOB_DISTRIBUTION ||--|| JOB_BOARD : "Posted on"
+    JOB_DISTRIBUTION ||--|| SOCIAL_MEDIA_PLATFORM : "Shared on"
+    
     JOB_POSTING {
-        int job_id
+        int id
         string title
         text description
         text requirements
         string status
         datetime created_at
         datetime updated_at
+        int hr_manager_id
+        int senior_hr_manager_id
     }
     JOB_DISTRIBUTION {
-        int distribution_id
+        int id
         int job_id
-        string platform
+        int platform_id
         string status
     }
     CANDIDATE {
-        int candidate_id
+        int id
         string name
         string email
         string phone
@@ -502,23 +572,46 @@ erDiagram
         datetime updated_at
     }
     INTERVIEW {
-        int interview_id
+        int id
         int candidate_id
-        string interviewer_name
-        datetime start_time
-        datetime end_time
-        string location
+        int recruiter_id
+        int interviewer_id
+        datetime scheduled_time
         string status
-        text feedback
         datetime created_at
         datetime updated_at
     }
+    INTERVIEW_FEEDBACK {
+        int id
+        int interview_id
+        text feedback_text
+        int rating
+    }
+    HR_MANAGER {
+        int id
+        string name
+        string email
+    }
+    RECRUITER {
+        int id
+        string name
+        string email
+    }
+    INTERVIEWER {
+        int id
+        string name
+        string email
+    }
+    JOB_BOARD {
+        int id
+        string name
+        string url
+    }
+    SOCIAL_MEDIA_PLATFORM {
+        int id
+        string name
+        string url
+    }
 ```
 
-### Explanation
-- **JOB_POSTING** entity represents job postings with details such as title, description, and requirements.
-- **JOB_DISTRIBUTION** entity manages the distribution of job postings to various platforms.
-- **CANDIDATE** entity stores candidate information including their resume and parsed data.
-- **INTERVIEW** entity handles interview details including scheduling, feedback, and status updates.
-
-This data model captures the essential entities and their relationships as per the identified use cases for the ATS software. It supports functionalities like job posting management, candidate profile handling, and interview scheduling seamlessly. Adjustments can be made based on specific additional requirements or further use cases.
+This enhanced data model includes all necessary entities, fields, relationships, and explanations, providing a comprehensive view of the ATS system.
