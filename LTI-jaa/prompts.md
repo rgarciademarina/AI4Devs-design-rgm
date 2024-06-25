@@ -98,9 +98,7 @@ Please give a try again, I want you to take the image attached and organize in a
 ```
 ![image](https://github.com/eltonina/AI4Devs-design/assets/23495050/50a81cb9-ed90-49e7-a60c-c6e079498ba7)
 
-## 4. 
-
-### High level arquitecture 
+## 4. High level arquitecture 
 
 I use here as GPT Eraser -  DiagramGPT.
 
