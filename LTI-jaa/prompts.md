@@ -265,3 +265,10 @@ I want you to analyze the following AWS cloud arquitecture attached in a file, p
 ```markdown
 Please elaborate more on the High-Level Architecture Design topic, you only created one sample for Job Posting Service, I need you to include all the services. Please explain any detail related to any external dependency like using rabbit for asyncronous communications, Email and Sms libraries for the notification service, etc.
 ```
+## 5. C4 diagram
+
+Using ChatGPT
+
+```markdown
+Please add a diagram C4, create it a mermaid format using lates mermaid version to avoid issues; please go deeper on the four levels in the "Job Posting Service", use the command CreateJobPostingCommand to create a set of Levels for this service for C1 to C4. Please organize all the diagram in sequence and create an index
+```
