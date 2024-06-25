@@ -616,7 +616,7 @@ erDiagram
 
 This enhanced data model includes all necessary entities, fields, relationships, and explanations, providing a comprehensive view of the ATS system.
 
-## High level architecture 
+## High-Level Architecture Design
 
 ### Technical Documentation for ATS System Architecture on AWS
 
@@ -719,36 +719,168 @@ src/
    - Maps HTTP requests to application layer commands and queries.
    - Implements Swagger for API documentation and versioning.
 
-### High-Level Architecture Design
+### High-Level Design for ATS System
 
-#### Job Posting Service Example
+Below is an elaboration of the high-level architecture design for each service in the ATS system, including external dependencies and specific details relevant to each service.
+
+#### Job Posting Service
 
 1. **JobPostingService.Application**
-   - `Commands`: CreateJobPostingCommand, UpdateJobPostingCommand
-   - `Queries`: GetJobPostingByIdQuery, GetAllJobPostingsQuery
-   - `Handlers`: CreateJobPostingHandler, UpdateJobPostingHandler, GetJobPostingByIdHandler, GetAllJobPostingsHandler
-   - `Interfaces`: IJobPostingRepository, IJobBoardService, ISocialMediaService
+   - **Commands**: `CreateJobPostingCommand`, `UpdateJobPostingCommand`
+   - **Queries**: `GetJobPostingByIdQuery`, `GetAllJobPostingsQuery`
+   - **Handlers**: `CreateJobPostingHandler`, `UpdateJobPostingHandler`, `GetJobPostingByIdHandler`, `GetAllJobPostingsHandler`
+   - **Interfaces**: `IJobPostingRepository`, `IJobBoardService`, `ISocialMediaService`
 
 2. **JobPostingService.Domain**
-   - `Entities`: JobPosting
-   - `ValueObjects`: JobDetails, JobRequirements
-   - `Services`: JobPostingDomainService
-   - `Aggregates`: JobPostingAggregate
+   - **Entities**: `JobPosting`
+   - **ValueObjects**: `JobDetails`, `JobRequirements`
+   - **Services**: `JobPostingDomainService`
+   - **Aggregates**: `JobPostingAggregate`
 
 3. **JobPostingService.Infrastructure**
-   - `Repositories`: JobPostingRepository (implements IJobPostingRepository)
-   - `Persistence`: JobPostingDbContext
-   - `Configurations`: Entity configurations for JobPosting
-   - `ExternalServices`: JobBoardService (implements IJobBoardService), SocialMediaService (implements ISocialMediaService)
+   - **Repositories**: `JobPostingRepository` (implements `IJobPostingRepository`)
+   - **Persistence**: `JobPostingDbContext`
+   - **Configurations**: Entity configurations for `JobPosting`
+   - **ExternalServices**: `JobBoardService` (implements `IJobBoardService`), `SocialMediaService` (implements `ISocialMediaService`)
 
 4. **JobPostingService.API**
-   - `Controllers`: JobPostingController
-   - `DTOs`: JobPostingDto, CreateJobPostingRequest, UpdateJobPostingRequest
-   - `Mappings`: AutoMapper profiles for mapping between domain entities and DTOs
+   - **Controllers**: `JobPostingController`
+   - **DTOs**: `JobPostingDto`, `CreateJobPostingRequest`, `UpdateJobPostingRequest`
+   - **Mappings**: AutoMapper profiles for mapping between domain entities and DTOs
 
-### Conclusion
+#### Job Distribution Service
 
-This architecture ensures each microservice is self-contained and follows the principles of Clean Architecture and Hexagonal Architecture. By adopting this approach, the ATS system becomes modular, easy to maintain, and scalable, allowing for future enhancements and integrations with minimal impact on existing functionality.
+1. **JobDistributionService.Application**
+   - **Commands**: `DistributeJobCommand`
+   - **Queries**: `GetDistributionStatusQuery`
+   - **Handlers**: `DistributeJobHandler`, `GetDistributionStatusHandler`
+   - **Interfaces**: `IJobDistributionRepository`, `IJobBoardService`, `ISocialMediaService`
+
+2. **JobDistributionService.Domain**
+   - **Entities**: `JobDistribution`
+   - **ValueObjects**: `DistributionChannel`
+   - **Services**: `JobDistributionDomainService`
+
+3. **JobDistributionService.Infrastructure**
+   - **Repositories**: `JobDistributionRepository` (implements `IJobDistributionRepository`)
+   - **Persistence**: `JobDistributionDbContext`
+   - **Configurations**: Entity configurations for `JobDistribution`
+   - **ExternalServices**: `JobBoardService` (implements `IJobBoardService`), `SocialMediaService` (implements `ISocialMediaService`)
+
+4. **JobDistributionService.API**
+   - **Controllers**: `JobDistributionController`
+   - **DTOs**: `JobDistributionDto`, `DistributeJobRequest`
+   - **Mappings**: AutoMapper profiles for mapping between domain entities and DTOs
+
+#### Resume Parsing Service
+
+1. **ResumeParsingService.Application**
+   - **Commands**: `ParseResumeCommand`
+   - **Queries**: `GetParsedResumeQuery`
+   - **Handlers**: `ParseResumeHandler`, `GetParsedResumeHandler`
+   - **Interfaces**: `IResumeParsingRepository`
+
+2. **ResumeParsingService.Domain**
+   - **Entities**: `Resume`
+   - **ValueObjects**: `ParsedData`
+   - **Services**: `ResumeParsingDomainService`
+
+3. **ResumeParsingService.Infrastructure**
+   - **Repositories**: `ResumeParsingRepository` (implements `IResumeParsingRepository`)
+   - **Persistence**: `ResumeParsingDbContext`
+   - **Configurations**: Entity configurations for `Resume`
+
+4. **ResumeParsingService.API**
+   - **Controllers**: `ResumeParsingController`
+   - **DTOs**: `ResumeDto`, `ParseResumeRequest`
+   - **Mappings**: AutoMapper profiles for mapping between domain entities and DTOs
+
+#### Candidate Management Service
+
+1. **CandidateManagementService.Application**
+   - **Commands**: `CreateCandidateProfileCommand`, `UpdateCandidateProfileCommand`
+   - **Queries**: `GetCandidateProfileByIdQuery`, `SearchCandidatesQuery`
+   - **Handlers**: `CreateCandidateProfileHandler`, `UpdateCandidateProfileHandler`, `GetCandidateProfileByIdHandler`, `SearchCandidatesHandler`
+   - **Interfaces**: `ICandidateRepository`
+
+2. **CandidateManagementService.Domain**
+   - **Entities**: `CandidateProfile`
+   - **ValueObjects**: `Experience`, `Skills`
+   - **Services**: `CandidateDomainService`
+
+3. **CandidateManagementService.Infrastructure**
+   - **Repositories**: `CandidateRepository` (implements `ICandidateRepository`)
+   - **Persistence**: `CandidateManagementDbContext`
+   - **Configurations**: Entity configurations for `CandidateProfile`
+
+4. **CandidateManagementService.API**
+   - **Controllers**: `CandidateManagementController`
+   - **DTOs**: `CandidateProfileDto`, `CreateCandidateProfileRequest`, `UpdateCandidateProfileRequest`
+   - **Mappings**: AutoMapper profiles for mapping between domain entities and DTOs
+
+#### Interview Scheduling Service
+
+1. **InterviewSchedulingService.Application**
+   - **Commands**: `ScheduleInterviewCommand`, `SubmitFeedbackCommand`
+   - **Queries**: `GetInterviewDetailsQuery`, `GetFeedbackQuery`
+   - **Handlers**: `ScheduleInterviewHandler`, `SubmitFeedbackHandler`, `GetInterviewDetailsHandler`, `GetFeedbackHandler`
+   - **Interfaces**: `IInterviewRepository`, `IFeedbackRepository`
+
+2. **InterviewSchedulingService.Domain**
+   - **Entities**: `Interview`, `InterviewFeedback`
+   - **ValueObjects**: `ScheduledTime`, `FeedbackText`
+   - **Services**: `InterviewDomainService`
+
+3. **InterviewSchedulingService.Infrastructure**
+   - **Repositories**: `InterviewRepository` (implements `IInterviewRepository`), `FeedbackRepository` (implements `IFeedbackRepository`)
+   - **Persistence**: `InterviewSchedulingDbContext`
+   - **Configurations**: Entity configurations for `Interview`, `InterviewFeedback`
+
+4. **InterviewSchedulingService.API**
+   - **Controllers**: `InterviewSchedulingController`
+   - **DTOs**: `InterviewDto`, `ScheduleInterviewRequest`, `SubmitFeedbackRequest`
+   - **Mappings**: AutoMapper profiles for mapping between domain entities and DTOs
+
+#### Notification Service
+
+1. **NotificationService.Application**
+   - **Commands**: `SendNotificationCommand`
+   - **Queries**: `GetNotificationStatusQuery`
+   - **Handlers**: `SendNotificationHandler`, `GetNotificationStatusHandler`
+   - **Interfaces**: `INotificationRepository`, `IEmailService`, `ISmsService`
+
+2. **NotificationService.Domain**
+   - **Entities**: `Notification`
+   - **ValueObjects**: `NotificationType`, `NotificationContent`
+   - **Services**: `NotificationDomainService`
+
+3. **NotificationService.Infrastructure**
+   - **Repositories**: `NotificationRepository` (implements `INotificationRepository`)
+   - **Persistence**: `NotificationDbContext`
+   - **Configurations**: Entity configurations for `Notification`
+   - **ExternalServices**: `EmailService` (implements `IEmailService`), `SmsService` (implements `ISmsService`)
+
+4. **NotificationService.API**
+   - **Controllers**: `NotificationController`
+   - **DTOs**: `NotificationDto`, `SendNotificationRequest`
+   - **Mappings**: AutoMapper profiles for mapping between domain entities and DTOs
+
+### External Dependencies
+
+1. **Asynchronous Communication**
+   - **RabbitMQ**: Used for asynchronous communication between microservices.
+     - **Configuration**: Each microservice subscribes to relevant message queues to handle events.
+     - **Implementation**: RabbitMQ clients are configured in the infrastructure layer to publish and consume messages.
+
+2. **Email and SMS Libraries**
+   - **EmailService**: Handles sending emails using a third-party email service (e.g., Amazon SES, SendGrid).
+     - **Implementation**: The service is implemented in the infrastructure layer and injected into the application layer via dependency injection.
+   - **SmsService**: Handles sending SMS using a third-party SMS service (e.g., Twilio).
+     - **Implementation**: The service is implemented in the infrastructure layer and injected into the application layer via dependency injection.
+
+### Summary
+
+This high-level documentation outlines a clean, modular architecture for the ATS system using the Hexagonal Architecture pattern in ASP.NET Core. Each microservice is self-contained, with clearly defined responsibilities and dependencies. By leveraging RabbitMQ for asynchronous communication and third-party services for email and SMS notifications, the system ensures high scalability and reliability. The architecture promotes maintainability, scalability, and ease of testing, making it suitable for a modern cloud-based ATS system.
 
 ![image](https://github.com/eltonina/AI4Devs-design/assets/23495050/6d546843-e442-4267-9a0f-08cf6a6fff90)
 
