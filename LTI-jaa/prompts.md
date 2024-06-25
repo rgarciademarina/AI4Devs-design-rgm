@@ -89,3 +89,11 @@ Use Case 3: Interview Scheduling and Management
 4. **Collect Feedback:** Interviewers submit their feedback through the ATS.
 5. **Update Candidate Status:** The ATS updates the candidate's status based on the feedback.
 ```
+
+<<< **GPT - ERASER - DIAGRAMGPT** >>>
+I wanted to refine and improve the data model because looks a bit basic:
+
+```markdown
+Please give a try again, I want you to take the image attached and organize in a better way the fields and tables and relationships as well.
+```
+![image](https://github.com/eltonina/AI4Devs-design/assets/23495050/50a81cb9-ed90-49e7-a60c-c6e079498ba7)
