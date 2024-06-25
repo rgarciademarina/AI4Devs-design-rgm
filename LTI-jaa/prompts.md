@@ -97,3 +97,162 @@ I wanted to refine and improve the data model because looks a bit basic:
 Please give a try again, I want you to take the image attached and organize in a better way the fields and tables and relationships as well. Please add the explanation of every object
 ```
 ![image](https://github.com/eltonina/AI4Devs-design/assets/23495050/50a81cb9-ed90-49e7-a60c-c6e079498ba7)
+
+## 4. 
+
+### High level arquitecture 
+
+I use here as GPTEraser -  DiagramGPT.
+
+```markdown
+I need you create a microservices architecture for an ongoing ATS system like Lever, Greenhouse or OpenCATS.
+I'm adding a datamodel and some use cases for a better understanding of the architecture.
+Each microservices should have its own database.
+It also has a frontend that communicates through API.
+Cloud provider is AWS, use proper services to improve security, include load balancing and CDN.
+---
+Use cases:
+Use Case 1: Job Posting and Distribution
+Description: This use case involves creating job postings within the ATS and distributing them to various job boards and social media platforms. The goal is to streamline the process of advertising job openings to attract a large pool of qualified candidates.
+
+Steps:
+1. Create Job Posting: HR manager creates a job posting by filling out a form with job details (title, description, requirements, etc.).
+2. Approve Job Posting: The job posting is reviewed and approved by a senior HR manager.
+3. Distribute Job Posting: The approved job posting is automatically distributed to selected job boards and social media platforms.
+4. Monitor and Update: HR manager monitors the posting's performance and updates the job details if necessary.
+
+Use Case 2: Resume Parsing and Candidate Management
+Description: This use case involves parsing resumes submitted by candidates, extracting relevant information, and managing candidate profiles within the ATS. The objective is to organize candidate data efficiently and make it easily searchable.
+
+Steps:
+1. Receive Resume: Candidates submit their resumes through the ATS.
+2. Parse Resume: The ATS parses the resume to extract relevant information (name, contact details, experience, skills).
+3. Create Candidate Profile: The extracted information is used to create a candidate profile in the ATS.
+4. Manage Candidate Profile: Recruiters can view, update, and search candidate profiles.
+
+Use Case 3: Interview Scheduling and Management
+Description: This use case involves scheduling interviews between candidates and interviewers, sending notifications, and managing interview feedback. The goal is to automate the interview scheduling process and streamline feedback collection.
+
+Steps:
+1. Schedule Interview: Recruiter selects a candidate and schedules an interview by choosing available time slots.
+2. Notify Participants: The ATS sends notifications to the candidate and interviewers with the interview details.
+3. Conduct Interview: The interview is conducted as scheduled.
+4. Collect Feedback: Interviewers submit their feedback through the ATS.
+5. Update Candidate Status: The ATS updates the candidate's status based on the feedback.
+--- 
+Data model diagram
+Job Posting
+Description: Represents a job opening created by the HR team. It includes details about the job such as title, description, and requirements.
+Fields:
+id (Primary Key, Integer): Unique identifier for the job posting.
+title (String): The title of the job position.
+description (Text): A detailed description of the job.
+requirements (Text): The qualifications and skills required for the job.
+status (String, e.g., Draft, Approved): The current status of the job posting.
+created_at (DateTime): Timestamp when the job posting was created.
+updated_at (DateTime): Timestamp when the job posting was last updated.
+hr_manager_id (Foreign Key to HR Manager, Integer): ID of the HR manager who created the job posting.
+senior_hr_manager_id (Foreign Key to Senior HR Manager, Integer): ID of the senior HR manager who approved the job posting.
+Relationships:
+One-to-Many with Job Distribution
+Many-to-One with HR Manager
+Many-to-One with Senior HR Manager
+
+Job Distribution
+Description: Manages the distribution of job postings to various platforms like job boards and social media platforms.
+Fields:
+id (Primary Key, Integer): Unique identifier for the job distribution.
+job_id (Foreign Key to Job Posting, Integer): ID of the job posting.
+platform_id (Foreign Key to Platform, Integer): ID of the platform (job board or social media) where the job is posted.
+status (String, e.g., Pending, Published): The current status of the job distribution.
+Relationships:
+Many-to-One with Job Posting
+Many-to-One with Platform (Job Boards and Social Media Platforms)
+
+Candidate
+Description: Represents a candidate applying for a job. It includes personal information and resume details.
+Fields:
+id (Primary Key, Integer): Unique identifier for the candidate.
+name (String): The name of the candidate.
+email (String): The email address of the candidate.
+phone (String): The phone number of the candidate.
+resume_text (Text): The resume of the candidate in text format.
+parsed_data (Text, JSON structure for parsed resume data): Structured data extracted from the resume.
+status (String, e.g., New, In Review, Hired): The current status of the candidate.
+created_at (DateTime): Timestamp when the candidate profile was created.
+updated_at (DateTime): Timestamp when the candidate profile was last updated.
+Relationships:
+One-to-Many with Interview
+
+Interview
+Description: Represents an interview scheduled between a candidate and an interviewer. It includes details about the interview.
+Fields:
+id (Primary Key, Integer): Unique identifier for the interview.
+candidate_id (Foreign Key to Candidate, Integer): ID of the candidate being interviewed.
+recruiter_id (Foreign Key to Recruiter, Integer): ID of the recruiter who scheduled the interview.
+scheduled_time (DateTime): The scheduled date and time for the interview.
+interviewer_id (Foreign Key to Interviewer, Integer): ID of the interviewer conducting the interview.
+status (String, e.g., Scheduled, Completed): The current status of the interview.
+created_at (DateTime): Timestamp when the interview was created.
+updated_at (DateTime): Timestamp when the interview was last updated.
+Relationships:
+Many-to-One with Candidate
+Many-to-One with Recruiter
+Many-to-One with Interviewer
+One-to-One with Interview Feedback
+
+Interview Feedback
+Description: Contains feedback provided by the interviewer after an interview.
+Fields:
+id (Primary Key, Integer): Unique identifier for the interview feedback.
+interview_id (Foreign Key to Interview, Integer): ID of the interview.
+feedback_text (Text): The feedback text provided by the interviewer.
+rating (Integer): Rating given by the interviewer.
+Relationships:
+One-to-One with Interview
+
+HR Manager
+Description: Represents an HR manager responsible for creating and approving job postings.
+Fields:
+id (Primary Key, Integer): Unique identifier for the HR manager.
+name (String): The name of the HR manager.
+email (String): The email address of the HR manager.
+Relationships:
+One-to-Many with Job Posting
+
+Recruiter
+Description: Represents a recruiter responsible for managing candidate profiles and scheduling interviews.
+Fields:
+id (Primary Key, Integer): Unique identifier for the recruiter.
+name (String): The name of the recruiter.
+email (String): The email address of the recruiter.
+Relationships:
+One-to-Many with Interview
+
+Interviewer
+Description: Represents an interviewer responsible for conducting interviews and providing feedback.
+Fields:
+id (Primary Key, Integer): Unique identifier for the interviewer.
+name (String): The name of the interviewer.
+email (String): The email address of the interviewer.
+Relationships:
+One-to-Many with Interview
+
+Job Board
+Description: Represents a job board where job postings can be distributed.
+Fields:
+id (Primary Key, Integer): Unique identifier for the job board.
+name (String): The name of the job board.
+url (String): The URL of the job board.
+Relationships:
+Many-to-One with Job Distribution
+
+Social Media Platform
+Description: Represents a social media platform where job postings can be shared.
+Fields:
+id (Primary Key, Integer): Unique identifier for the social media platform.
+name (String): The name of the social media platform.
+url (String): The URL of the social media platform.
+Relationships:
+Many-to-One with Job Distribution
+```
