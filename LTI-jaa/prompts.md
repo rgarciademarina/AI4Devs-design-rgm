@@ -102,7 +102,7 @@ Please give a try again, I want you to take the image attached and organize in a
 
 ### High level arquitecture 
 
-I use here as GPTEraser -  DiagramGPT.
+I use here as GPT Eraser -  DiagramGPT.
 
 ```markdown
 I need you create a microservices architecture for an ongoing ATS system like Lever, Greenhouse or OpenCATS.
@@ -255,4 +255,15 @@ name (String): The name of the social media platform.
 url (String): The URL of the social media platform.
 Relationships:
 Many-to-One with Job Distribution
+```
+
+At this point coming back to chatGPT
+```markdown
+I want you to analyze the following AWS cloud arquitecture attached in a file, please explain and elaborate the techincal documentation about it related to this ATS system. Please elaborate a Clean Hexagonal Architecture solution for it, I-d like you desigh it for AspNetCore. remember this is a High Level documentation, for now avoid going deeper in details but only in the Architecture level designing all layers aka. folders need for the solution of this systems.
+```
+![image](https://github.com/eltonina/AI4Devs-design/assets/23495050/141caf85-7a1c-477e-b6f1-164a76f3249b)
+
+
+```markdown
+Please elaborate more on the High-Level Architecture Design topic, you only created one sample for Job Posting Service, I need you to include all the services. Please explain any detail related to any external dependency like using rabbit for asyncronous communications, Email and Sms libraries for the notification service, etc.
 ```
