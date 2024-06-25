@@ -91,6 +91,9 @@ Use Case 3: Interview Scheduling and Management
 ```
 
 <<< **GPT - ERASER - DIAGRAMGPT** >>>
+I repited the prompt using this GPT.
+
+<<< **GPT - ChatGPT** >>>
 I wanted to refine and improve the data model because looks a bit basic:
 
 ```markdown
