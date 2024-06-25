@@ -3,10 +3,6 @@ from diagrams.aws.compute import Lambda
 from diagrams.aws.database import RDS
 from diagrams.aws.network import APIGateway
 from diagrams.aws.security import Cognito
-from diagrams.aws.analytics import Quicksight
-from diagrams.aws.management import Cloudwatch
-from diagrams.aws.integration import SQS
-from diagrams.aws.integration import SNS
 from diagrams.aws.storage import S3
 from diagrams.onprem.client import Users
 

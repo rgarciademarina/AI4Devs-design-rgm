@@ -21,7 +21,7 @@ Genera el modelo de datos que cubra entidades, atributos (nombre y tipo) y relac
 Actúa como un experto arquitecto de software. Diseña el sistema a alto nivel, tanto explicado como con un diagrama para AWS hecho en Diagrams con python
 
 ## PROMPT 5
-Genera un diagrama C4 que llegue en profundidad a uno de los componentes del sistema usando diagrams de python, y explícalo
+Genera un diagrama C4 que llegue en profundidad a uno de los componentes del sistema y explique la arquitectura del sistema en cuatro niveles: contexto, contenedores, componentes y código.
 
 ## PROMPT 6 (extra)
 Genera la tabla de contenidos del siguiente markdown
@@ -522,17 +522,106 @@ with Diagram("ATS de LTI - Arquitectura en AWS", show=False):
 Si tienes alguna otra pregunta o necesitas más ayuda, estaré encantado de asistirte.
 
 ## RESPUESTA 5
-Vamos a crear un diagrama C4 que profundice en el componente "API REST" utilizando la biblioteca `diagrams` en Python. A continuación se presenta el código necesario para generar este diagrama, seguido de una explicación detallada del mismo.
+Vamos a generar un diagrama C4 que profundice en el componente "API REST" del sistema ATS de LTI y explicar la arquitectura del sistema en los cuatro niveles: contexto, contenedores, componentes y código.
 
-### Código para Generar el Diagrama C4
+### Nivel 1: Diagrama de Contexto
 
-Primero, asegúrate de que tienes instalada la biblioteca `diagrams`. Puedes instalarla con el siguiente comando:
+```mermaid
+graph TB
+    title Sistema ATS de LTI - Contexto
 
-```sh
-pip install diagrams
+    A[Recruiter] -->|Gestiona candidatos| B[Sistema de Filtrado de Candidatos]
+    C[Manager] -->|Colabora en la revisión| B[Sistema de Filtrado de Candidatos]
+    D[Candidate] -->|Aplica a ofertas| B[Sistema de Filtrado de Candidatos]
 ```
 
-Luego, utiliza el siguiente código para generar el diagrama C4:
+### Nivel 2: Diagrama de Contenedores
+
+```mermaid
+graph TB
+    title Sistema de Filtrado de Candidatos - Contenedores
+
+    A[Recruiter] -->|Usa| B[Aplicación Web]
+    C[Manager] -->|Usa| B[Aplicación Web]
+    D[Candidate] -->|Usa| B[Aplicación Web]
+
+    B[Aplicación Web] -->|Realiza solicitudes| E[API REST]
+    E[API REST] -->|Lee y escribe datos| F[Base de Datos]
+    E[API REST] -->|Envía currículums para análisis| G[Servicio de IA]
+    G[Servicio de IA] -->|Guarda resultados del filtrado| F[Base de Datos]
+```
+
+### Nivel 3: Diagrama de Componentes
+
+```mermaid
+graph TB
+    title API REST - Componentes
+
+    A[CandidateController] -->|Accede a datos de candidatos| B[DBService]
+    C[JobController] -->|Accede a datos de trabajos| B[DBService]
+    D[FilteringController] -->|Guarda resultados de filtrado| B[DBService]
+    D[FilteringController] -->|Envía currículums para análisis| E[IAServiceClient]
+    F[AuthController] -->|Gestiona usuarios| B[DBService]
+```
+
+### Nivel 4: Diagrama de Código
+
+Para este nivel, se proporciona un ejemplo básico de cómo podría verse el código en uno de los componentes. Aquí, detallamos el `FilteringController`.
+
+```javascript
+// FilteringController.js
+const express = require('express');
+const router = express.Router();
+const dbService = require('../services/DBService');
+const iaServiceClient = require('../services/IAServiceClient');
+
+// Endpoint para filtrar candidatos
+router.post('/filter', async (req, res) => {
+    try {
+        const { jobId, resume } = req.body;
+        const analysisResult = await iaServiceClient.analyzeResume(resume);
+
+        const filteredCandidate = await dbService.saveFilteringResult(jobId, analysisResult);
+        res.status(200).json(filteredCandidate);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+module.exports = router;
+```
+
+### Explicación del Diagrama C4
+
+#### Nivel 1: Contexto
+
+El diagrama de contexto muestra cómo interactúan los actores principales (Recruiter, Manager, Candidate) con el sistema de filtrado de candidatos. Este nivel proporciona una visión general de quién usa el sistema y cómo se relaciona con él.
+
+#### Nivel 2: Contenedores
+
+El diagrama de contenedores descompone el sistema en varios contenedores:
+- **Aplicación Web**: La interfaz de usuario que utilizan los reclutadores, managers y candidatos.
+- **API REST**: Proporciona acceso a los servicios del sistema.
+- **Base de Datos**: Almacena los datos de candidatos, trabajos y resultados del filtrado.
+- **Servicio de IA**: Analiza y filtra los currículums de los candidatos.
+
+#### Nivel 3: Componentes
+
+El diagrama de componentes desglosa el API REST en sus componentes internos:
+- **AuthController**: Gestiona la autenticación y autorización de usuarios.
+- **CandidateController**: Gestiona las operaciones relacionadas con los candidatos.
+- **JobController**: Gestiona las operaciones relacionadas con los trabajos.
+- **FilteringController**: Gestiona el filtrado de candidatos.
+- **DBService**: Servicio para acceder a la base de datos.
+- **IAServiceClient**: Cliente para comunicarse con el Servicio de IA.
+
+#### Nivel 4: Código
+
+El nivel de código proporciona un ejemplo de cómo podría implementarse uno de los componentes, en este caso, el `FilteringController`. Este componente recibe solicitudes para filtrar candidatos, envía los currículums al Servicio de IA para su análisis y guarda los resultados en la base de datos.
+
+### Generación del Diagrama C4 con `diagrams` en Python
+
+Para generar estos diagramas en Python utilizando la biblioteca `diagrams`, puedes usar el siguiente código:
 
 ```python
 from diagrams import Diagram, Cluster, Edge
@@ -540,10 +629,6 @@ from diagrams.aws.compute import Lambda
 from diagrams.aws.database import RDS
 from diagrams.aws.network import APIGateway
 from diagrams.aws.security import Cognito
-from diagrams.aws.analytics import Quicksight
-from diagrams.aws.management import Cloudwatch
-from diagrams.aws.integration import SQS
-from diagrams.aws.integration import SNS
 from diagrams.aws.storage import S3
 from diagrams.onprem.client import Users
 
@@ -585,29 +670,7 @@ with Diagram("ATS de LTI - API REST", show=False):
     auth_service >> Edge(label="Accede a datos") >> database
 ```
 
-### Explicación del Diagrama
-
-El diagrama generado proporciona una visión clara y estructurada de cómo se organiza y funciona el componente "API REST" dentro del sistema ATS de LTI.
-
-1. **Usuarios**: Los usuarios (Reclutadores, Managers, Candidatos) interactúan con la **Aplicación Web** (representada como una función Lambda), que forma parte del frontend del sistema.
-
-2. **API Gateway**: La aplicación web se comunica con el **API Gateway** que actúa como el punto de entrada para todas las solicitudes del frontend. El API Gateway enruta las solicitudes a los microservicios correspondientes.
-
-3. **Autenticación**: El servicio de autenticación está gestionado por **Amazon Cognito**, que autentica a los usuarios antes de permitirles acceder a los demás servicios.
-
-4. **Microservicios**:
-   - **AuthController**: Gestiona la autenticación y autorización de usuarios.
-   - **CandidateController**: Gestiona las operaciones relacionadas con los candidatos (creación, actualización, eliminación, etc.).
-   - **JobController**: Gestiona las operaciones relacionadas con los trabajos (creación, actualización, eliminación, etc.).
-   - **FilteringController**: Gestiona el proceso de filtrado de candidatos. Este servicio envía los currículums al **Servicio de IA** para su análisis y guarda los resultados en la base de datos.
-
-5. **Base de Datos**: **Amazon RDS** se utiliza para almacenar datos estructurados relacionados con candidatos, trabajos y resultados de filtrado.
-
-6. **Servicio de IA**: Implementado como una función Lambda, este servicio analiza los currículums de los candidatos y devuelve los resultados del filtrado al **FilteringController**.
-
-7. **Almacenamiento**: **Amazon S3** se utiliza para almacenar currículums y otros documentos relacionados con los candidatos.
-
-Este diagrama de alto nivel muestra cómo se comunican los diferentes componentes del sistema y cómo se gestionan las operaciones dentro del componente "API REST". Puedes ejecutar este código en tu entorno local para generar el diagrama visualmente.
+Este código genera un diagrama visual que muestra cómo se comunican los diferentes componentes del sistema y cómo se gestionan las operaciones dentro del componente "API REST". Puedes ejecutar este código en tu entorno local para generar el diagrama visualmente.
 
 ## RESPUESTA 6 (extra)
 - [Descripción breve del software LTI](#descripción-breve-del-software-lti)
@@ -615,12 +678,8 @@ Este diagrama de alto nivel muestra cómo se comunican los diferentes componente
 - [Funciones principales](#funciones-principales)
 - [Diagrama Lean Canvas](#diagrama-lean-canvas)
 - [Casos de Uso Principales del ATS de LTI](#casos-de-uso-principales-del-ats-de-lti)
-  - [Caso de Uso 1: Automatización del Filtrado de Candidatos](#caso-de-uso-1-automatización-del-filtrado-de-candidatos)
-  - [Caso de Uso 2: Programación Automática de Entrevistas](#caso-de-uso-2-programación-automática-de-entrevistas)
-  - [Caso de Uso 3: Colaboración en Tiempo Real entre Reclutadores y Managers](#caso-de-uso-3-colaboración-en-tiempo-real-entre-reclutadores-y-managers)
 - [Modelo de datos](#modelo-de-datos)
 - [Diseño del Sistema a Alto Nivel](#diseño-del-sistema-a-alto-nivel)
-  - [Componentes Principales](#componentes-principales)
 - [Diagrama AWS](#diagrama-aws)
 - [Diagrama C4](#diagrama-c4)
 

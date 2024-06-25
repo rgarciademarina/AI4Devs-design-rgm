@@ -5,12 +5,8 @@
 - [Funciones principales](#funciones-principales)
 - [Diagrama Lean Canvas](#diagrama-lean-canvas)
 - [Casos de Uso Principales del ATS de LTI](#casos-de-uso-principales-del-ats-de-lti)
-  - [Caso de Uso 1: Automatización del Filtrado de Candidatos](#caso-de-uso-1-automatización-del-filtrado-de-candidatos)
-  - [Caso de Uso 2: Programación Automática de Entrevistas](#caso-de-uso-2-programación-automática-de-entrevistas)
-  - [Caso de Uso 3: Colaboración en Tiempo Real entre Reclutadores y Managers](#caso-de-uso-3-colaboración-en-tiempo-real-entre-reclutadores-y-managers)
 - [Modelo de datos](#modelo-de-datos)
 - [Diseño del Sistema a Alto Nivel](#diseño-del-sistema-a-alto-nivel)
-  - [Componentes Principales](#componentes-principales)
 - [Diagrama AWS](#diagrama-aws)
 - [Diagrama C4](#diagrama-c4)
 
@@ -210,28 +206,88 @@ El ATS de LTI será diseñado como una arquitectura basada en microservicios uti
 ![alt text](assets/system-diagram.png)
 
 ### Diagrama C4
-Vamos a enfocarnos en el componente de "API REST". Utilizaremos el modelo C4 para describir la arquitectura del sistema en cuatro niveles: contexto, contenedores, componentes y código.
+Vamos a generar un diagrama C4 que profundice en el componente "API REST" del sistema ATS de LTI y explicar la arquitectura del sistema en los cuatro niveles: contexto, contenedores, componentes y código.
 
-![alt text](assets/C4-api-rest.png)
+#### Nivel 1: Diagrama de Contexto
 
-El diagrama generado proporciona una visión clara y estructurada de cómo se organiza y funciona el componente "API REST" dentro del sistema ATS de LTI.
+```mermaid
+graph TB
 
-1. **Usuarios**: Los usuarios (Reclutadores, Managers, Candidatos) interactúan con la **Aplicación Web** (representada como una función Lambda), que forma parte del frontend del sistema.
+    A[Recruiter] -->|Gestiona candidatos| B[Sistema de Filtrado de Candidatos]
+    C[Manager] -->|Colabora en la revisión| B[Sistema de Filtrado de Candidatos]
+    D[Candidate] -->|Aplica a ofertas| B[Sistema de Filtrado de Candidatos]
+```
 
-2. **API Gateway**: La aplicación web se comunica con el **API Gateway** que actúa como el punto de entrada para todas las solicitudes del frontend. El API Gateway enruta las solicitudes a los microservicios correspondientes.
+El diagrama de contexto muestra cómo interactúan los actores principales (Recruiter, Manager, Candidate) con el sistema de filtrado de candidatos. Este nivel proporciona una visión general de quién usa el sistema y cómo se relaciona con él.
 
-3. **Autenticación**: El servicio de autenticación está gestionado por **Amazon Cognito**, que autentica a los usuarios antes de permitirles acceder a los demás servicios.
+#### Nivel 2: Diagrama de Contenedores
 
-4. **Microservicios**:
-   - **AuthController**: Gestiona la autenticación y autorización de usuarios.
-   - **CandidateController**: Gestiona las operaciones relacionadas con los candidatos (creación, actualización, eliminación, etc.).
-   - **JobController**: Gestiona las operaciones relacionadas con los trabajos (creación, actualización, eliminación, etc.).
-   - **FilteringController**: Gestiona el proceso de filtrado de candidatos. Este servicio envía los currículums al **Servicio de IA** para su análisis y guarda los resultados en la base de datos.
+```mermaid
+graph TB
 
-5. **Base de Datos**: **Amazon RDS** se utiliza para almacenar datos estructurados relacionados con candidatos, trabajos y resultados de filtrado.
+    A[Recruiter] -->|Usa| B[Aplicación Web]
+    C[Manager] -->|Usa| B[Aplicación Web]
+    D[Candidate] -->|Usa| B[Aplicación Web]
 
-6. **Servicio de IA**: Implementado como una función Lambda, este servicio analiza los currículums de los candidatos y devuelve los resultados del filtrado al **FilteringController**.
+    B[Aplicación Web] -->|Realiza solicitudes| E[API REST]
+    E[API REST] -->|Lee y escribe datos| F[Base de Datos]
+    E[API REST] -->|Envía currículums para análisis| G[Servicio de IA]
+    G[Servicio de IA] -->|Guarda resultados del filtrado| F[Base de Datos]
+```
 
-7. **Almacenamiento**: **Amazon S3** se utiliza para almacenar currículums y otros documentos relacionados con los candidatos.
+El diagrama de contenedores descompone el sistema en varios contenedores:
+- **Aplicación Web**: La interfaz de usuario que utilizan los reclutadores, managers y candidatos.
+- **API REST**: Proporciona acceso a los servicios del sistema.
+- **Base de Datos**: Almacena los datos de candidatos, trabajos y resultados del filtrado.
+- **Servicio de IA**: Analiza y filtra los currículums de los candidatos.
 
-Este diagrama de alto nivel muestra cómo se comunican los diferentes componentes del sistema y cómo se gestionan las operaciones dentro del componente "API REST".
+#### Nivel 3: Diagrama de Componentes
+
+```mermaid
+graph TB
+
+    A[CandidateController] -->|Accede a datos de candidatos| B[DBService]
+    C[JobController] -->|Accede a datos de trabajos| B[DBService]
+    D[FilteringController] -->|Guarda resultados de filtrado| B[DBService]
+    D[FilteringController] -->|Envía currículums para análisis| E[IAServiceClient]
+    F[AuthController] -->|Gestiona usuarios| B[DBService]
+```
+El diagrama de componentes desglosa el API REST en sus componentes internos:
+- **AuthController**: Gestiona la autenticación y autorización de usuarios.
+- **CandidateController**: Gestiona las operaciones relacionadas con los candidatos.
+- **JobController**: Gestiona las operaciones relacionadas con los trabajos.
+- **FilteringController**: Gestiona el filtrado de candidatos.
+- **DBService**: Servicio para acceder a la base de datos.
+- **IAServiceClient**: Cliente para comunicarse con el Servicio de IA.
+
+#### Nivel 4: Diagrama de Código
+
+Para este nivel, se proporciona un ejemplo básico de cómo podría verse el código en uno de los componentes. Aquí, detallamos el `FilteringController`.
+
+```javascript
+// FilteringController.js
+const express = require('express');
+const router = express.Router();
+const dbService = require('../services/DBService');
+const iaServiceClient = require('../services/IAServiceClient');
+
+// Endpoint para filtrar candidatos
+router.post('/filter', async (req, res) => {
+    try {
+        const { jobId, resume } = req.body;
+        const analysisResult = await iaServiceClient.analyzeResume(resume);
+
+        const filteredCandidate = await dbService.saveFilteringResult(jobId, analysisResult);
+        res.status(200).json(filteredCandidate);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+module.exports = router;
+```
+El nivel de código proporciona un ejemplo de cómo podría implementarse uno de los componentes, en este caso, el `FilteringController`. Este componente recibe solicitudes para filtrar candidatos, envía los currículums al Servicio de IA para su análisis y guarda los resultados en la base de datos.
+
+#### Diagrama C4 con Diagrams
+
+![alt text](assets/c4_diagrams.png)
