@@ -615,3 +615,140 @@ erDiagram
 ```
 
 This enhanced data model includes all necessary entities, fields, relationships, and explanations, providing a comprehensive view of the ATS system.
+
+## High level architecture 
+
+### Technical Documentation for ATS System Architecture on AWS
+
+#### Overview
+
+The provided architecture diagram illustrates a microservices-based Applicant Tracking System (ATS) hosted on AWS. The system is designed to handle various aspects of the recruitment process, including job posting, distribution, resume parsing, candidate management, interview scheduling, and notifications. The architecture leverages AWS services to ensure scalability, reliability, and performance.
+
+#### Components
+
+1. **ATS Frontend**
+   - The user interface for HR managers, recruiters, and candidates. This is typically a web application.
+   - Delivered through AWS CloudFront, a CDN service for low-latency access.
+
+2. **CloudFront**
+   - Distributes content globally with low latency.
+   - Ensures the frontend is quickly accessible from different geographical locations.
+
+3. **API Gateway**
+   - Acts as a single entry point for all client requests.
+   - Provides routing, security, and throttling.
+
+4. **Elastic Load Balancer (ELB)**
+   - Distributes incoming application traffic across multiple microservices.
+   - Ensures high availability and reliability.
+
+5. **Microservices**
+   - Each microservice handles a specific domain within the ATS system, ensuring separation of concerns and scalability.
+   - **Job Posting Service**: Manages job postings.
+   - **Job Distribution Service**: Handles distribution of job postings to job boards and social media platforms.
+   - **Resume Parsing Service**: Parses resumes to extract candidate information.
+   - **Candidate Management Service**: Manages candidate profiles and data.
+   - **Interview Scheduling Service**: Manages interview scheduling and feedback.
+   - **Notification Service**: Sends notifications to candidates, interviewers, and recruiters.
+
+6. **Databases**
+   - Each microservice has its own database to maintain loose coupling and ensure data integrity.
+   - Databases include Job Posting DB, Job Distribution DB, Resume Parsing DB, Candidate Management DB, Interview Scheduling DB, and Notification DB.
+
+#### Clean Hexagonal Architecture for ASP.NET Core
+
+To design a clean, maintainable, and scalable solution, we will adopt the Hexagonal Architecture (Ports and Adapters) approach in ASP.NET Core. This architecture pattern ensures that the core business logic is decoupled from external concerns such as databases, user interfaces, and third-party services.
+
+### High-Level Folder Structure
+
+```
+src/
+├── JobPostingService/
+│   ├── JobPostingService.Application/
+│   ├── JobPostingService.Domain/
+│   ├── JobPostingService.Infrastructure/
+│   ├── JobPostingService.API/
+├── JobDistributionService/
+│   ├── JobDistributionService.Application/
+│   ├── JobDistributionService.Domain/
+│   ├── JobDistributionService.Infrastructure/
+│   ├── JobDistributionService.API/
+├── ResumeParsingService/
+│   ├── ResumeParsingService.Application/
+│   ├── ResumeParsingService.Domain/
+│   ├── ResumeParsingService.Infrastructure/
+│   ├── ResumeParsingService.API/
+├── CandidateManagementService/
+│   ├── CandidateManagementService.Application/
+│   ├── CandidateManagementService.Domain/
+│   ├── CandidateManagementService.Infrastructure/
+│   ├── CandidateManagementService.API/
+├── InterviewSchedulingService/
+│   ├── InterviewSchedulingService.Application/
+│   ├── InterviewSchedulingService.Domain/
+│   ├── InterviewSchedulingService.Infrastructure/
+│   ├── InterviewSchedulingService.API/
+├── NotificationService/
+│   ├── NotificationService.Application/
+│   ├── NotificationService.Domain/
+│   ├── NotificationService.Infrastructure/
+│   ├── NotificationService.API/
+```
+
+### Explanation of Layers
+
+1. **Application Layer**
+   - Contains application logic and orchestrates the use cases.
+   - Implements CQRS (Command Query Responsibility Segregation) pattern with MediatR library.
+   - Handles commands, queries, and their respective handlers.
+   - Interfaces for services, repositories, and external APIs.
+
+2. **Domain Layer**
+   - Contains the core business logic and domain entities.
+   - Implements domain services, value objects, and aggregates.
+   - Enforces domain invariants and business rules.
+
+3. **Infrastructure Layer**
+   - Contains implementations for interfaces defined in the application layer.
+   - Manages database context and migrations using Entity Framework Core.
+   - Implements repositories, external API clients, and other I/O operations.
+   - Configuration for dependency injection.
+
+4. **API Layer**
+   - Contains controllers and endpoints for the microservice.
+   - Maps HTTP requests to application layer commands and queries.
+   - Implements Swagger for API documentation and versioning.
+
+### High-Level Architecture Design
+
+#### Job Posting Service Example
+
+1. **JobPostingService.Application**
+   - `Commands`: CreateJobPostingCommand, UpdateJobPostingCommand
+   - `Queries`: GetJobPostingByIdQuery, GetAllJobPostingsQuery
+   - `Handlers`: CreateJobPostingHandler, UpdateJobPostingHandler, GetJobPostingByIdHandler, GetAllJobPostingsHandler
+   - `Interfaces`: IJobPostingRepository, IJobBoardService, ISocialMediaService
+
+2. **JobPostingService.Domain**
+   - `Entities`: JobPosting
+   - `ValueObjects`: JobDetails, JobRequirements
+   - `Services`: JobPostingDomainService
+   - `Aggregates`: JobPostingAggregate
+
+3. **JobPostingService.Infrastructure**
+   - `Repositories`: JobPostingRepository (implements IJobPostingRepository)
+   - `Persistence`: JobPostingDbContext
+   - `Configurations`: Entity configurations for JobPosting
+   - `ExternalServices`: JobBoardService (implements IJobBoardService), SocialMediaService (implements ISocialMediaService)
+
+4. **JobPostingService.API**
+   - `Controllers`: JobPostingController
+   - `DTOs`: JobPostingDto, CreateJobPostingRequest, UpdateJobPostingRequest
+   - `Mappings`: AutoMapper profiles for mapping between domain entities and DTOs
+
+### Conclusion
+
+This architecture ensures each microservice is self-contained and follows the principles of Clean Architecture and Hexagonal Architecture. By adopting this approach, the ATS system becomes modular, easy to maintain, and scalable, allowing for future enhancements and integrations with minimal impact on existing functionality.
+
+![image](https://github.com/eltonina/AI4Devs-design/assets/23495050/6d546843-e442-4267-9a0f-08cf6a6fff90)
+
