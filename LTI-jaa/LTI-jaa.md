@@ -884,3 +884,142 @@ This high-level documentation outlines a clean, modular architecture for the ATS
 
 ![image](https://github.com/eltonina/AI4Devs-design/assets/23495050/6d546843-e442-4267-9a0f-08cf6a6fff90)
 
+## C4 diagrams
+Sure, I'll create a C4 model for the "Job Posting Service" focusing on the `CreateJobPostingCommand`. The C4 model includes four levels of diagrams: Context, Container, Component, and Code.
+
+### Index
+
+1. [Context Diagram (C1)](#context-diagram-c1)
+2. [Container Diagram (C2)](#container-diagram-c2)
+3. [Component Diagram (C3)](#component-diagram-c3)
+4. [Code Diagram (C4)](#code-diagram-c4)
+
+### Context Diagram (C1)
+
+```mermaid
+flowchart TB
+    subgraph Internet
+        ATSFrontend[ATS Frontend]
+        JobBoard[Job Boards]
+        SocialMedia[Social Media Platforms]
+    end
+
+    subgraph ATSSystem[ATS System]
+        JobPostingService[Job Posting Service]
+    end
+
+    ATSFrontend -->|Create Job Posting| JobPostingService
+    JobPostingService -->|Distribute Job Posting| JobBoard
+    JobPostingService -->|Distribute Job Posting| SocialMedia
+```
+
+### Container Diagram (C2)
+
+```mermaid
+flowchart TB
+    subgraph JobPostingService[Job Posting Service]
+        APS[Application Layer]
+        DMS[Domain Layer]
+        IFS[Infrastructure Layer]
+        APS --> DMS
+        APS --> IFS
+    end
+
+    ATSFrontend[ATS Frontend] -->|HTTP| APS
+    IFS -->|HTTP| JobBoard[Job Boards]
+    IFS -->|HTTP| SocialMedia[Social Media Platforms]
+    IFS -->|Database| JobPostingDB[Job Posting Database]
+```
+
+### Component Diagram (C3)
+
+```mermaid
+flowchart TB
+    subgraph APS[Application Layer]
+        APS_CMD[CreateJobPostingCommand]
+        APS_HDL[CreateJobPostingHandler]
+        APS_IF[Interfaces]
+        APS_IF -->|implements| APS_HDL
+    end
+
+    subgraph DMS[Domain Layer]
+        DMS_SRV[JobPostingDomainService]
+        DMS_ENT[Entities]
+        DMS_VO[Value Objects]
+        APS_CMD --> APS_HDL
+        APS_HDL --> DMS_SRV
+        DMS_SRV --> DMS_ENT
+        DMS_SRV --> DMS_VO
+    end
+
+    subgraph IFS[Infrastructure Layer]
+        IFS_REPO[JobPostingRepository]
+        IFS_DB[JobPostingDbContext]
+        APS_IF -->|IJobPostingRepository| IFS_REPO
+        IFS_REPO --> IFS_DB
+    end
+```
+
+### Code Diagram (C4)
+
+```mermaid
+classDiagram
+    class CreateJobPostingCommand {
+        +string Title
+        +string Description
+        +string Requirements
+        +CreateJobPostingCommand(string title, string description, string requirements)
+    }
+
+    class CreateJobPostingHandler {
+        -IJobPostingRepository repository
+        +CreateJobPostingHandler(IJobPostingRepository repository)
+        +Handle(CreateJobPostingCommand command)
+    }
+
+    class IJobPostingRepository {
+        <<interface>>
+        +Save(JobPosting jobPosting)
+    }
+
+    class JobPostingRepository {
+        -JobPostingDbContext context
+        +JobPostingRepository(JobPostingDbContext context)
+        +Save(JobPosting jobPosting)
+    }
+
+    class JobPosting {
+        +string Id
+        +string Title
+        +string Description
+        +string Requirements
+        +JobPosting(string title, string description, string requirements)
+    }
+
+    class JobPostingDbContext {
+        +DbSet<JobPosting> JobPostings
+        +SaveChanges()
+    }
+
+    CreateJobPostingCommand --> CreateJobPostingHandler : "used by"
+    CreateJobPostingHandler --> IJobPostingRepository : "calls"
+    JobPostingRepository --> JobPostingDbContext : "uses"
+    IJobPostingRepository <|-- JobPostingRepository : "implements"
+    JobPostingRepository --> JobPosting : "persists"
+```
+
+### Detailed Index
+
+1. **Context Diagram (C1)**
+   - Overview of how the Job Posting Service interacts with external systems and the ATS frontend.
+
+2. **Container Diagram (C2)**
+   - Detailed view of the Job Posting Service, including its application, domain, and infrastructure layers.
+
+3. **Component Diagram (C3)**
+   - Breaks down the components within the Job Posting Service, showing the CreateJobPostingCommand, handler, interfaces, and repositories.
+
+4. **Code Diagram (C4)**
+   - Class diagram representing the implementation details for the `CreateJobPostingCommand`, handler, repository, and related classes.
+
+This C4 model should provide a comprehensive high-level design of the Job Posting Service and its `CreateJobPostingCommand`, showing how it fits within the broader ATS system and detailing its internal architecture.
