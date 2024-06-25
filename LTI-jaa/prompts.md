@@ -94,6 +94,6 @@ Use Case 3: Interview Scheduling and Management
 I wanted to refine and improve the data model because looks a bit basic:
 
 ```markdown
-Please give a try again, I want you to take the image attached and organize in a better way the fields and tables and relationships as well.
+Please give a try again, I want you to take the image attached and organize in a better way the fields and tables and relationships as well. Please add the explanation of every object
 ```
 ![image](https://github.com/eltonina/AI4Devs-design/assets/23495050/50a81cb9-ed90-49e7-a60c-c6e079498ba7)
