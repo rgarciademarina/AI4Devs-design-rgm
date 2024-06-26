@@ -1259,7 +1259,7 @@ Provide the diagrams using both Mermeid code.
 If you have any questions, ask me.
 ```
 
-Certainly! I'll create the C4 diagrams for LTI-ATS-JACA, considering the given tech stack, system architecture, and "Must Have" priorities. I'll provide both PlantUML and Mermaid code for each diagram. We'll create three levels of C4 diagrams: Context, Container, and Component.
+Certainly! I'll create the C4 diagrams for LTI-ATS-JACA, considering the given tech stack, system architecture, and "Must Have" priorities. I'll provide Mermaid code for each diagram. We'll create three levels of C4 diagrams: Context, Container, and Component.
 
 Let's start with the Context Diagram:
 
