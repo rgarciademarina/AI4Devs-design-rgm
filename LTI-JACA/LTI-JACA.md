@@ -357,7 +357,8 @@ graph TD
 end
 ```
 
-<div hidden>
+![](leanCanvasDiagram.svg)
+<details>
 ```plantuml
 @startuml leanCanvasDiagram
 skinparam rectangle {
@@ -365,9 +366,6 @@ skinparam rectangle {
     BackgroundColor white
     BorderColor black
 }
-</div>
-
-![](leanCanvasDiagram.svg)
 
 rectangle "Problem\n--\n• Inefficient hiring processes\n• Poor candidate experience\n• Lack of data-driven insights\n• Difficulty in scaling recruitment" as Problem
 
@@ -398,6 +396,7 @@ Costs -[hidden]up- Revenue
 
 @enduml
 ```
+</details>
 
 ## Functional Requirements
 
