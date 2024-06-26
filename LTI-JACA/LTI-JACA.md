@@ -357,47 +357,6 @@ graph TD
 end
 ```
 
-![[leanCanvasDiagram.svg]]
-<details>
-
-```plantuml
-@startuml leanCanvasDiagram
-skinparam rectangle {
-    RoundCorner 25
-    BackgroundColor white
-    BorderColor black
-}
-
-rectangle "Problem\n--\n• Inefficient hiring processes\n• Poor candidate experience\n• Lack of data-driven insights\n• Difficulty in scaling recruitment" as Problem
-
-rectangle "Solution\n--\n• AI-powered matching\n• Intuitive customization\n• Unified communication hub\n• Predictive analytics" as Solution
-
-rectangle "Unique Value Proposition\n--\n• Adaptive AI for smarter hiring\n• Seamless scalability\n• Rapid implementation\n• Compliance assurance" as UVP
-
-rectangle "Unfair Advantage\n--\n• Proprietary AI algorithms\n• Global talent pool network\n• Continuous learning platform" as Advantage
-
-rectangle "Customer Segments\n--\n• SMBs to Enterprises\n• High-growth tech companies\n• Staffing agencies\n• Global organizations" as Segments
-
-rectangle "Key Metrics\n--\n• User adoption rate\n• Time-to-hire reduction\n• Customer satisfaction score\n• Revenue growth" as Metrics
-
-rectangle "Channels\n--\n• Direct sales\n• Partner network\n• Content marketing\n• Industry events" as Channels
-
-rectangle "Cost Structure\n--\n• Software development\n• AI research & maintenance\n• Sales & marketing\n• Customer support" as Costs
-
-rectangle "Revenue Streams\n--\n• Subscription model\n• Pay-per-use option\n• Premium features\n• Implementation services" as Revenue
-
-Problem -[hidden]right- Solution
-Solution -[hidden]right- UVP
-UVP -[hidden]right- Advantage
-
-Segments -[hidden]down- Metrics
-Metrics -[hidden]down- Channels
-
-Costs -[hidden]up- Revenue
-
-@enduml
-```
-
 </details>
 
 ## Functional Requirements
@@ -538,27 +497,23 @@ Costs -[hidden]up- Revenue
    - Basic user registration and authentication
    - Role-based access control
 
-```plantuml
-@startuml User Management
-
-left to right direction
-actor "User" as U
-actor "Administrator" as A
-
-rectangle "User Management" {
-  usecase "Register Account" as UC1
-  usecase "Login" as UC2
-  usecase "Reset Password" as UC3
-  usecase "Manage User Roles" as UC4
-}
-
-U --> UC1
-U --> UC2
-U --> UC3
-A --> UC4
-A --> UC2
-
-@enduml
+```mermaid
+graph TD
+    A[User Management]
+    A --> B(Register User)
+    A --> C(Authenticate User)
+    A --> D(Manage Roles)
+    A --> E(Reset Password)
+    
+    B --> F((System))
+    C --> F
+    D --> F
+    E --> F
+    
+    G((Admin)) --> B
+    G --> D
+    H((User)) --> C
+    H --> E
 ```
 
 Users can register accounts, login, and reset passwords. Administrators have additional capabilities to manage user roles and also need to login to access these functions.
@@ -567,27 +522,23 @@ Users can register accounts, login, and reset passwords. Administrators have add
    - Create, edit, and post job requisitions
    - Basic approval workflow
 
-```plantuml
-@startuml Job Requisition Management
-
-left to right direction
-actor "Recruiter" as R
-actor "Hiring Manager" as HM
-
-rectangle "Job Requisition Management" {
-  usecase "Create Job Requisition" as UC1
-  usecase "Edit Job Requisition" as UC2
-  usecase "Post Job Requisition" as UC3
-  usecase "Approve Job Requisition" as UC4
-}
-
-R --> UC1
-R --> UC2
-R --> UC3
-HM --> UC4
-HM --> UC2
-
-@enduml
+```mermaid
+graph TD
+    A[Job Requisition Management]
+    A --> B(Create Job Requisition)
+    A --> C(Edit Job Requisition)
+    A --> D(Post Job Requisition)
+    A --> E(Approve Job Requisition)
+    
+    B --> F((System))
+    C --> F
+    D --> F
+    E --> F
+    
+    G((Recruiter)) --> B
+    G --> C
+    G --> D
+    H((Hiring Manager)) --> E
 ```
 
 Recruiters can create, edit, and post job requisitions, while Hiring Managers can approve requisitions and also have the ability to edit them if necessary.
@@ -597,27 +548,23 @@ Recruiters can create, edit, and post job requisitions, while Hiring Managers ca
    - Resume parsing and data extraction
    - Basic candidate search and filtering
 
-```plantuml
-@startuml Candidate Management
-
-left to right direction
-actor "Recruiter" as R
-actor "System" as S
-
-rectangle "Candidate Management" {
-  usecase "Create Candidate Profile" as UC1
-  usecase "Parse Resume" as UC2
-  usecase "Search Candidates" as UC3
-  usecase "Filter Candidates" as UC4
-}
-
-R --> UC1
-R --> UC3
-R --> UC4
-S --> UC2
-UC1 ..> UC2 : <<include>>
-
-@enduml
+```mermaid
+graph TD
+    A[Candidate Management]
+    A --> B(Create Candidate Profile)
+    A --> C(Parse Resume)
+    A --> D(Search Candidates)
+    A --> E(Filter Candidates)
+    
+    B --> F((System))
+    C --> F
+    D --> F
+    E --> F
+    
+    G((Recruiter)) --> B
+    G --> D
+    G --> E
+    H((Candidate)) --> B
 ```
 
 Recruiters can create candidate profiles, search, and filter candidates. The system automatically parses resumes when a candidate profile is created.
@@ -626,27 +573,20 @@ Recruiters can create candidate profiles, search, and filter candidates. The sys
    - Online job application form
    - Document upload (resumes, cover letters)
 
-```plantuml
-@startuml Application Process
-
-left to right direction
-actor "Candidate" as C
-actor "System" as S
-
-rectangle "Application Process" {
-  usecase "Fill Application Form" as UC1
-  usecase "Upload Documents" as UC2
-  usecase "Submit Application" as UC3
-  usecase "Process Application" as UC4
-}
-
-C --> UC1
-C --> UC2
-C --> UC3
-S --> UC4
-UC3 ..> UC4 : <<trigger>>
-
-@enduml
+```mermaid
+graph TD
+    A[Application Process]
+    A --> B(Submit Application)
+    A --> C(Upload Documents)
+    A --> D(Review Application)
+    
+    B --> E((System))
+    C --> E
+    D --> E
+    
+    F((Candidate)) --> B
+    F --> C
+    G((Recruiter)) --> D
 ```
 
 Candidates can fill out application forms, upload documents, and submit applications. Once submitted, the system processes the application automatically.
@@ -655,26 +595,20 @@ Candidates can fill out application forms, upload documents, and submit applicat
    - Basic screening questions
    - AI-powered candidate ranking
 
-```plantuml
-@startuml Screening and Assessment
-
-left to right direction
-actor "Recruiter" as R
-actor "System" as S
-actor "Candidate" as C
-
-rectangle "Screening and Assessment" {
-  usecase "Set Screening Questions" as UC1
-  usecase "Answer Screening Questions" as UC2
-  usecase "Rank Candidates" as UC3
-}
-
-R --> UC1
-C --> UC2
-S --> UC3
-UC2 ..> UC3 : <<trigger>>
-
-@enduml
+```mermaid
+graph TD
+    A[Screening and Assessment]
+    A --> B(Create Screening Questions)
+    A --> C(Answer Screening Questions)
+    A --> D(Rank Candidates)
+    
+    B --> E((System))
+    C --> E
+    D --> E
+    
+    F((Recruiter)) --> B
+    G((Candidate)) --> C
+    H((AI)) --> D
 ```
 
 Recruiters set screening questions, candidates answer them, and the system automatically ranks candidates based on their responses.
@@ -683,24 +617,21 @@ Recruiters set screening questions, candidates answer them, and the system autom
    - Interview scheduling
    - Basic feedback collection
 
-```plantuml
-@startuml Interview Management
-
-left to right direction
-actor "Recruiter" as R
-actor "Interviewer" as I
-
-rectangle "Interview Management" {
-  usecase "Schedule Interview" as UC1
-  usecase "Conduct Interview" as UC2
-  usecase "Provide Feedback" as UC3
-}
-
-R --> UC1
-I --> UC2
-I --> UC3
-
-@enduml
+```mermaid
+graph TD
+    A[Interview Management]
+    A --> B(Schedule Interview)
+    A --> C(Conduct Interview)
+    A --> D(Provide Feedback)
+    
+    B --> E((System))
+    C --> E
+    D --> E
+    
+    F((Recruiter)) --> B
+    G((Interviewer)) --> C
+    G --> D
+    H((Candidate)) --> C
 ```
 
 Recruiters schedule interviews, while interviewers conduct interviews and provide feedback.
@@ -709,28 +640,21 @@ Recruiters schedule interviews, while interviewers conduct interviews and provid
    - Email templates and notifications
    - Automated status updates
 
-```plantuml
-@startuml Communication
-
-left to right direction
-actor "Recruiter" as R
-actor "System" as S
-actor "Candidate" as C
-
-rectangle "Communication" {
-  usecase "Create Email Template" as UC1
-  usecase "Send Automated Notification" as UC2
-  usecase "Update Application Status" as UC3
-  usecase "Receive Communication" as UC4
-}
-
-R --> UC1
-R --> UC3
-S --> UC2
-C --> UC4
-UC3 ..> UC2 : <<trigger>>
-
-@enduml
+```mermaid
+graph TD
+    A[Communication]
+    A --> B(Create Email Template)
+    A --> C(Send Notification)
+    A --> D(Update Application Status)
+    
+    B --> E((System))
+    C --> E
+    D --> E
+    
+    F((Recruiter)) --> B
+    F --> C
+    F --> D
+    G((Candidate)) --> C
 ```
 
 Recruiters can create email templates and update application statuses. The system sends automated notifications, which are received by candidates.
@@ -739,25 +663,21 @@ Recruiters can create email templates and update application statuses. The syste
    - Standard reports on key metrics
    - Basic dashboard
 
-```plantuml
-@startuml Reporting and Analytics
-
-left to right direction
-actor "Recruiter" as R
-actor "Hiring Manager" as HM
-
-rectangle "Reporting and Analytics" {
-  usecase "Generate Standard Reports" as UC1
-  usecase "View Dashboard" as UC2
-  usecase "Export Data" as UC3
-}
-
-R --> UC1
-R --> UC2
-R --> UC3
-HM --> UC2
-
-@enduml
+```mermaid
+graph TD
+    A[Reporting and Analytics]
+    A --> B(Generate Standard Report)
+    A --> C(View Dashboard)
+    A --> D(Export Data)
+    
+    B --> E((System))
+    C --> E
+    D --> E
+    
+    F((Recruiter)) --> B
+    F --> C
+    F --> D
+    G((Hiring Manager)) --> C
 ```
 
 Both recruiters and hiring managers can view dashboards, while recruiters can also generate standard reports and export data.
@@ -766,28 +686,20 @@ Both recruiters and hiring managers can view dashboards, while recruiters can al
    - EEO data collection
    - Basic compliance checklist
 
-```plantuml
-@startuml Compliance and EEO
-
-left to right direction
-actor "Recruiter" as R
-actor "System" as S
-actor "Candidate" as C
-
-rectangle "Compliance and EEO" {
-  usecase "Collect EEO Data" as UC1
-  usecase "Generate EEO Report" as UC2
-  usecase "Verify Job Posting Compliance" as UC3
-  usecase "Provide EEO Information" as UC4
-}
-
-R --> UC2
-R --> UC3
-S --> UC1
-C --> UC4
-UC4 ..> UC1 : <<include>>
-
-@enduml
+```mermaid
+graph TD
+    A[Compliance and EEO]
+    A --> B(Collect EEO Data)
+    A --> C(Generate EEO Report)
+    A --> D(Verify Compliance Checklist)
+    
+    B --> E((System))
+    C --> E
+    D --> E
+    
+    F((Candidate)) --> B
+    G((Recruiter)) --> C
+    G --> D
 ```
 
 The system collects EEO data from candidates, recruiters can generate EEO reports and verify job posting compliance.
@@ -796,33 +708,30 @@ The system collects EEO data from candidates, recruiters can generate EEO report
     - Data encryption
     - Compliance with basic data protection regulations
 
-```plantuml
-@startuml Security and Data Protection
-
-left to right direction
-actor "User" as U
-actor "System" as S
-actor "Administrator" as A
-
-rectangle "Security and Data Protection" {
-  usecase "Encrypt Data" as UC1
-  usecase "Authenticate User" as UC2
-  usecase "Authorize Access" as UC3
-  usecase "Audit System Access" as UC4
-  usecase "Manage Security Settings" as UC5
-}
-
-U --> UC2
-S --> UC1
-S --> UC3
-S --> UC4
-A --> UC5
-UC2 ..> UC3 : <<include>>
-
-@enduml
+```mermaid
+graph TD
+    A[Security and Data Protection]
+    A --> B(Encrypt Data)
+    A --> C(Manage User Permissions)
+    A --> D(Perform Security Audit)
+    A --> E(Implement Data Protection Policies)
+    A --> F(Monitor System Access)
+    
+    B --> G((System))
+    C --> G
+    D --> G
+    E --> G
+    F --> G
+    
+    H((Admin)) --> C
+    H --> D
+    H --> E
+    I((User)) --> G
+    J((Security Officer)) --> D
+    J --> F
 ```
 
-The system encrypts data, authenticates users, authorizes access, and audits system access. Administrators can manage security settings.
+The system is responsible for encrypting data and implementing data protection policies. Admins manage user permissions and implement data protection policies. Security officers perform security audits and monitor system access. All users interact with the system, which applies these security measures to protect their data and actions.
 
 ### Should Have (Important features for competitive advantage)
 
@@ -904,134 +813,116 @@ The system encrypts data, authenticates users, authorizes access, and audits sys
 
 ### Diagram
 
-```plantuml
-@startuml LTI-ATS-JACA ERD
-
-!define TABLE(x) class x << (T,#FFAAAA) >>
-!define PK(x) <u>x</u>
-!define FK(x) x
-
-hide methods
-hide stereotypes
-
-skinparam class {
-    BackgroundColor White
-    ArrowColor Red
-    BorderColor Black
-}
-
-TABLE(User) {
-    PK(user_id): INT
-    username: VARCHAR(50)
-    email: VARCHAR(100)
-    password_hash: VARCHAR(255)
-    role: ENUM('admin', 'recruiter', 'hiring_manager')
-    created_at: DATETIME
-    updated_at: DATETIME
-}
-
-TABLE(JobRequisition) {
-    PK(job_id): INT
-    FK(creator_id): INT
-    title: VARCHAR(100)
-    description: TEXT
-    requirements: TEXT
-    status: ENUM('draft', 'pending', 'approved', 'closed')
-    created_at: DATETIME
-    updated_at: DATETIME
-}
-
-TABLE(Candidate) {
-    PK(candidate_id): INT
-    first_name: VARCHAR(50)
-    last_name: VARCHAR(50)
-    email: VARCHAR(100)
-    phone: VARCHAR(20)
-    resume_url: VARCHAR(255)
-    created_at: DATETIME
-    updated_at: DATETIME
-}
-
-TABLE(Application) {
-    PK(application_id): INT
-    FK(job_id): INT
-    FK(candidate_id): INT
-    status: ENUM('submitted', 'screening', 'interviewing', 'offered', 'hired', 'rejected')
-    applied_at: DATETIME
-    updated_at: DATETIME
-}
-
-TABLE(Interview) {
-    PK(interview_id): INT
-    FK(application_id): INT
-    FK(interviewer_id): INT
-    schedule: DATETIME
-    status: ENUM('scheduled', 'completed', 'cancelled')
-    feedback: TEXT
-    created_at: DATETIME
-    updated_at: DATETIME
-}
-
-TABLE(ScreeningQuestion) {
-    PK(question_id): INT
-    FK(job_id): INT
-    question: TEXT
-    question_type: ENUM('multiple_choice', 'text', 'boolean')
-    created_at: DATETIME
-    updated_at: DATETIME
-}
-
-TABLE(CandidateAnswer) {
-    PK(answer_id): INT
-    FK(question_id): INT
-    FK(application_id): INT
-    answer: TEXT
-    created_at: DATETIME
-}
-
-TABLE(Communication) {
-    PK(communication_id): INT
-    FK(sender_id): INT
-    FK(recipient_id): INT
-    subject: VARCHAR(255)
-    body: TEXT
-    type: ENUM('email', 'notification')
-    sent_at: DATETIME
-}
-
-User "1" -- "0..*" JobRequisition : creates
-User "1" -- "0..*" Interview : conducts
-JobRequisition "1" -- "0..*" Application : receives
-Candidate "1" -- "0..*" Application : submits
-Application "1" -- "0..*" Interview : has
-JobRequisition "1" -- "0..*" ScreeningQuestion : has
-Application "1" -- "0..*" CandidateAnswer : provides
-ScreeningQuestion "1" -- "0..*" CandidateAnswer : answered by
-User "1" -- "0..*" Communication : sends
-Candidate "1" -- "0..*" Communication : receives
-
-@enduml
+```mermaid
+erDiagram
+    User ||--o{ JobRequisition : "creates"
+    User ||--o{ Candidate : "manages"
+    User ||--o{ Interview : "schedules"
+    User {
+        int user_id PK
+        string username
+        string email
+        string password_hash
+        string role
+        datetime created_at
+        datetime last_login
+    }
+    
+    JobRequisition ||--o{ Application : "receives"
+    JobRequisition {
+        int job_id PK
+        string title
+        text description
+        string status
+        int created_by FK
+        datetime created_at
+        datetime posted_at
+    }
+    
+    Candidate ||--o{ Application : "submits"
+    Candidate {
+        int candidate_id PK
+        string first_name
+        string last_name
+        string email
+        text resume
+        datetime created_at
+    }
+    
+    Application ||--o{ Interview : "leads to"
+    Application {
+        int application_id PK
+        int job_id FK
+        int candidate_id FK
+        string status
+        datetime applied_at
+    }
+    
+    Interview {
+        int interview_id PK
+        int application_id FK
+        int interviewer_id FK
+        datetime scheduled_at
+        string status
+        text feedback
+    }
+    
+    ScreeningQuestion ||--o{ JobRequisition : "belongs to"
+    ScreeningQuestion {
+        int question_id PK
+        int job_id FK
+        text question
+        string question_type
+    }
+    
+    Communication {
+        int communication_id PK
+        int user_id FK
+        int candidate_id FK
+        string type
+        text content
+        datetime sent_at
+    }
+    
+    Report {
+        int report_id PK
+        string report_name
+        string report_type
+        json parameters
+        datetime generated_at
+    }
+    
+    EEOData ||--o{ Candidate : "belongs to"
+    EEOData {
+        int eeo_id PK
+        int candidate_id FK
+        string gender
+        string ethnicity
+        string veteran_status
+        string disability_status
+    }
 ```
 
 ### Description
 
-1. User: Represents system users (admins, recruiters, hiring managers).
-2. JobRequisition: Stores job posting details.
-3. Candidate: Contains candidate information.
+1. User: Represents system users (recruiters, hiring managers, admins).
+2. JobRequisition: Stores information about job openings.
+3. Candidate: Contains details of job applicants.
 4. Application: Represents a candidate's application for a specific job.
 5. Interview: Stores interview details for applications.
-6. ScreeningQuestion: Contains screening questions for job requisitions.
-7. CandidateAnswer: Stores candidate responses to screening questions.
-8. Communication: Represents emails and notifications sent within the system.
+6. ScreeningQuestion: Contains screening questions associated with job requisitions.
+7. Communication: Tracks all communications with candidates.
+8. Report: Stores generated reports.
+9. EEOData: Contains Equal Employment Opportunity data for candidates.
 
 ### Relationships
 
-- Users create job requisitions and conduct interviews.
-- Job requisitions receive multiple applications.
-- Candidates submit multiple applications.
-- Applications have multiple interviews and candidate answers.
-- Job requisitions have multiple screening questions.
-- Users send communications, and candidates receive them.
+- Users create JobRequisitions and manage Candidates.
+- JobRequisitions receive multiple Applications.
+- Candidates submit multiple Applications.
+- Applications can lead to multiple Interviews.
+- ScreeningQuestions belong to JobRequisitions.
+- EEOData belongs to Candidates.
 
 ## Architecture
 
@@ -1130,74 +1021,80 @@ The system is built with microservices architecture in mind, allowing for indepe
 
 ### Context
 
-```plantuml
-@startuml C4_Context
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Context.puml
-
-LAYOUT_WITH_LEGEND()
-
-Person(candidate, "Candidate", "A person applying for a job")
-Person(recruiter, "Recruiter", "A person managing the recruitment process")
-Person(hiringManager, "Hiring Manager", "A person involved in hiring decisions")
-
-System(ltiAtsJaca, "LTI-ATS-JACA", "Applicant Tracking System")
-
-System_Ext(emailSystem, "Email System", "External email service")
-System_Ext(jobBoards, "Job Boards", "External job posting platforms")
-
-Rel(candidate, ltiAtsJaca, "Submits applications, views job listings")
-Rel(recruiter, ltiAtsJaca, "Manages job postings, reviews applications, schedules interviews")
-Rel(hiringManager, ltiAtsJaca, "Reviews candidates, provides feedback")
-Rel(ltiAtsJaca, emailSystem, "Sends notifications")
-Rel(ltiAtsJaca, jobBoards, "Posts job listings")
-
-@enduml
+```mermaid
+graph TB
+    subgraph lb[LTI-ATS-JACA]
+        ltiAtsJaca[Applicant Tracking System]
+    end
+    
+    candidate[Candidate]
+    recruiter[Recruiter]
+    hiringManager[Hiring Manager]
+    emailSystem[Email System]
+    jobBoards[Job Boards]
+    
+    candidate -->|Submits applications, views job listings| ltiAtsJaca
+    recruiter -->|Manages job postings, reviews applications, schedules interviews| ltiAtsJaca
+    hiringManager -->|Reviews candidates, provides feedback| ltiAtsJaca
+    ltiAtsJaca -->|Sends notifications| emailSystem
+    ltiAtsJaca -->|Posts job listings| jobBoards
+    
+    class candidate,recruiter,hiringManager person
+    class emailSystem,jobBoards external_system
+    class lb system_boundary
+    
+    classDef person fill:#08427B
+    classDef external_system fill:#999999
+    classDef system_boundary fill:#ffffff,stroke:#444444,stroke-width:2px,stroke-dasharray: 5 5
 ```
 
 ### Container
 
-```plantuml
-@startuml C4_Container
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Container.puml
-
-LAYOUT_WITH_LEGEND()
-
-Person(candidate, "Candidate", "A person applying for a job")
-Person(recruiter, "Recruiter", "A person managing the recruitment process")
-Person(hiringManager, "Hiring Manager", "A person involved in hiring decisions")
-
-System_Boundary(ltiAtsJaca, "LTI-ATS-JACA") {
-    Container(webApp, "Web Application", "React, TypeScript", "Provides all ATS functionality via web browser")
-    Container(mobileApp, "Mobile App", "React Native", "Provides limited ATS functionality via mobile")
-    Container(apiGateway, "API Gateway", "Kong", "Routes API requests")
-    Container(appServer, "Application Server", "Node.js, Express", "Handles business logic")
-    ContainerDb(database, "Database", "PostgreSQL", "Stores user, job, and application data")
-    Container(searchEngine, "Search Engine", "Elasticsearch", "Provides fast search capabilities")
-    Container(cacheLayer, "Cache", "Redis", "Caches frequently accessed data")
-    Container(messageQueue, "Message Queue", "RabbitMQ", "Handles asynchronous tasks")
-}
-
-System_Ext(emailSystem, "Email System", "External email service")
-System_Ext(jobBoards, "Job Boards", "External job posting platforms")
-
-Rel(candidate, webApp, "Uses", "HTTPS")
-Rel(candidate, mobileApp, "Uses", "HTTPS")
-Rel(recruiter, webApp, "Uses", "HTTPS")
-Rel(hiringManager, webApp, "Uses", "HTTPS")
-
-Rel(webApp, apiGateway, "Makes API calls to", "JSON/HTTPS")
-Rel(mobileApp, apiGateway, "Makes API calls to", "JSON/HTTPS")
-Rel(apiGateway, appServer, "Routes requests to", "JSON/HTTPS")
-
-Rel(appServer, database, "Reads from and writes to", "SQL/TCP")
-Rel(appServer, searchEngine, "Reads from and writes to", "JSON/HTTPS")
-Rel(appServer, cacheLayer, "Reads from and writes to", "Redis Protocol")
-Rel(appServer, messageQueue, "Publishes messages to", "AMQP")
-
-Rel(appServer, emailSystem, "Sends emails using", "SMTP")
-Rel(appServer, jobBoards, "Posts jobs to", "API/HTTPS")
-
-@enduml
+```mermaid
+graph TB
+    subgraph lb[LTI-ATS-JACA]
+        webApp[Web Application<br/>React, TypeScript]
+        mobileApp[Mobile App<br/>React Native]
+        apiGateway[API Gateway<br/>Kong]
+        appServer[Application Server<br/>Node.js, Express]
+        database[(Database<br/>PostgreSQL)]
+        searchEngine[Search Engine<br/>Elasticsearch]
+        cacheLayer[Cache<br/>Redis]
+        messageQueue[Message Queue<br/>RabbitMQ]
+    end
+    
+    candidate[Candidate]
+    recruiter[Recruiter]
+    hiringManager[Hiring Manager]
+    emailSystem[Email System]
+    jobBoards[Job Boards]
+    
+    candidate -->|Uses| webApp
+    candidate -->|Uses| mobileApp
+    recruiter -->|Uses| webApp
+    hiringManager -->|Uses| webApp
+    
+    webApp -->|Makes API calls to| apiGateway
+    mobileApp -->|Makes API calls to| apiGateway
+    apiGateway -->|Routes requests to| appServer
+    
+    appServer -->|Reads from and writes to| database
+    appServer -->|Reads from and writes to| searchEngine
+    appServer -->|Reads from and writes to| cacheLayer
+    appServer -->|Publishes messages to| messageQueue
+    
+    appServer -->|Sends emails using| emailSystem
+    appServer -->|Posts jobs to| jobBoards
+    
+    class candidate,recruiter,hiringManager person
+    class emailSystem,jobBoards external_system
+    class lb system_boundary
+    class webApp,mobileApp,apiGateway,appServer,database,searchEngine,cacheLayer,messageQueue container
+    
+    classDef person fill:#08427B
+    classDef external_system fill:#999999
+    classDef system_boundary fill:#ffffff,stroke:#444444,stroke-width:2px,stroke-dasharray: 5 5
+    classDef container fill:#438DD5
 ```
 
 ### Component
@@ -1273,390 +1170,357 @@ graph TB
 
 ##### Interaction Diagram
 
-```plantuml
-@startuml Job Controller Interaction
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
-
-Component(jobController, "Job Controller", "Express.js", "Handles job-related operations")
-Component(authService, "Auth Service", "Node.js", "Handles authentication")
-Component(searchService, "Search Service", "Node.js", "Interfaces with Elasticsearch")
-Component(emailService, "Email Service", "Node.js", "Handles email notifications")
-Component(jobBoardService, "Job Board Service", "Node.js", "Interfaces with external job boards")
-ContainerDb(database, "Database", "PostgreSQL", "Stores job data")
-
-Rel(jobController, authService, "Authenticates requests")
-Rel(jobController, searchService, "Searches for jobs")
-Rel(jobController, emailService, "Sends job-related emails")
-Rel(jobController, jobBoardService, "Posts jobs to external boards")
-Rel(jobController, database, "CRUD operations")
-
-@enduml
+```mermaid
+graph TD
+    A[Client] -->|HTTP Request| B[Job Controller]
+    B -->|Query/Update| C[Job Service]
+    C -->|CRUD Operations| D[Job Repository]
+    D -->|Database Operations| E[(Database)]
 ```
 
 ##### Sequence Diagram
 
-```plantuml
-@startuml Job Controller Sequence
-actor Client
-participant "Job Controller" as JC
-participant "Auth Service" as AS
-participant "Search Service" as SS
-participant "Email Service" as ES
-participant "Job Board Service" as JBS
-database Database
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant JC as JobController
+    participant JS as JobService
+    participant JR as JobRepository
+    participant DB as Database
 
-Client -> JC: POST /jobs (Create new job)
-JC -> AS: Authenticate request
-AS --> JC: Authentication result
-JC -> Database: Insert new job
-Database --> JC: Job created
-JC -> SS: Index new job
-SS --> JC: Indexing confirmation
-JC -> ES: Send job creation notification
-ES --> JC: Notification sent
-JC -> JBS: Post job to external boards
-JBS --> JC: Posting confirmation
-JC --> Client: Job creation response
+    C->>JC: POST /jobs (Create Job)
+    JC->>JS: createJob(jobDTO)
+    JS->>JR: save(job)
+    JR->>DB: INSERT INTO jobs
+    DB-->>JR: Job Created
+    JR-->>JS: Job Object
+    JS-->>JC: JobDTO
+    JC-->>C: 201 Created (JobDTO)
 
-@enduml
+    C->>JC: GET /jobs/{id} (Get Job)
+    JC->>JS: getJob(id)
+    JS->>JR: findById(id)
+    JR->>DB: SELECT FROM jobs
+    DB-->>JR: Job Data
+    JR-->>JS: Job Object
+    JS-->>JC: JobDTO
+    JC-->>C: 200 OK (JobDTO)
 ```
 
 ##### Class Diagram
 
-```plantuml
-@startuml Job Controller Class
-class JobController {
-  -authService: AuthService
-  -searchService: SearchService
-  -emailService: EmailService
-  -jobBoardService: JobBoardService
-  -jobRepository: JobRepository
-  +createJob(jobData: JobData): Job
-  +updateJob(jobId: string, jobData: JobData): Job
-  +deleteJob(jobId: string): void
-  +getJob(jobId: string): Job
-  +searchJobs(criteria: SearchCriteria): Job[]
-  +postJobToExternalBoards(jobId: string): void
-}
+```mermaid
+classDiagram
+    class JobController {
+        -JobService jobService
+        +createJob(JobDTO) : ResponseEntity
+        +getJob(Long) : ResponseEntity
+        +updateJob(Long, JobDTO) : ResponseEntity
+        +deleteJob(Long) : ResponseEntity
+        +listJobs(Pageable) : ResponseEntity
+    }
+    class JobService {
+        -JobRepository jobRepository
+        +createJob(JobDTO) : JobDTO
+        +getJob(Long) : JobDTO
+        +updateJob(Long, JobDTO) : JobDTO
+        +deleteJob(Long) : void
+        +listJobs(Pageable) : Page<JobDTO>
+    }
+    class JobRepository {
+        +save(Job) : Job
+        +findById(Long) : Optional<Job>
+        +delete(Job) : void
+        +findAll(Pageable) : Page<Job>
+    }
+    class Job {
+        -Long id
+        -String title
+        -String description
+        -JobStatus status
+        -Date createdAt
+        -Date updatedAt
+    }
+    class JobDTO {
+        +Long id
+        +String title
+        +String description
+        +JobStatus status
+        +Date createdAt
+        +Date updatedAt
+    }
 
-class JobRepository {
-  +create(jobData: JobData): Job
-  +update(jobId: string, jobData: JobData): Job
-  +delete(jobId: string): void
-  +findById(jobId: string): Job
-  +search(criteria: SearchCriteria): Job[]
-}
-
-class Job {
-  -id: string
-  -title: string
-  -description: string
-  -requirements: string[]
-  -postingDate: Date
-  -closingDate: Date
-  -status: JobStatus
-}
-
-enum JobStatus {
-  DRAFT
-  PUBLISHED
-  CLOSED
-}
-
-JobController --> JobRepository
-JobController --> AuthService
-JobController --> SearchService
-JobController --> EmailService
-JobController --> JobBoardService
-JobRepository --> Job
-
-@enduml
+    JobController --> JobService
+    JobService --> JobRepository
+    JobRepository --> Job
+    JobService --> JobDTO
 ```
 
 #### Application Controller
 
 ##### Interaction Diagram
 
-```plantuml
-@startuml Application Controller Interaction
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
-
-Component(applicationController, "Application Controller", "Express.js", "Handles application-related operations")
-Component(authService, "Auth Service", "Node.js", "Handles authentication")
-Component(searchService, "Search Service", "Node.js", "Interfaces with Elasticsearch")
-Component(emailService, "Email Service", "Node.js", "Handles email notifications")
-ContainerDb(database, "Database", "PostgreSQL", "Stores application data")
-
-Rel(applicationController, authService, "Authenticates requests")
-Rel(applicationController, searchService, "Searches for applications")
-Rel(applicationController, emailService, "Sends application-related emails")
-Rel(applicationController, database, "CRUD operations")
-
-@enduml
+```mermaid
+graph TD
+    A[Client] -->|HTTP Request| B[Application Controller]
+    B -->|Query/Update| C[Application Service]
+    C -->|CRUD Operations| D[Application Repository]
+    D -->|Database Operations| E[(Database)]
 ```
 
 ##### Sequence Diagram
 
-```plantuml
-@startuml Application Controller Sequence
-actor Candidate
-participant "Application Controller" as AC
-participant "Auth Service" as AS
-participant "Search Service" as SS
-participant "Email Service" as ES
-database Database
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant AC as ApplicationController
+    participant AS as ApplicationService
+    participant AR as ApplicationRepository
+    participant DB as Database
 
-Candidate -> AC: POST /applications (Submit application)
-AC -> AS: Authenticate request
-AS --> AC: Authentication result
-AC -> Database: Insert new application
-Database --> AC: Application created
-AC -> SS: Index new application
-SS --> AC: Indexing confirmation
-AC -> ES: Send application confirmation email
-ES --> AC: Email sent
-AC --> Candidate: Application submission response
+    C->>AC: POST /applications (Submit Application)
+    AC->>AS: submitApplication(applicationDTO)
+    AS->>AR: save(application)
+    AR->>DB: INSERT INTO applications
+    DB-->>AR: Application Created
+    AR-->>AS: Application Object
+    AS-->>AC: ApplicationDTO
+    AC-->>C: 201 Created (ApplicationDTO)
 
-@enduml
+    C->>AC: GET /applications/{id} (Get Application)
+    AC->>AS: getApplication(id)
+    AS->>AR: findById(id)
+    AR->>DB: SELECT FROM applications
+    DB-->>AR: Application Data
+    AR-->>AS: Application Object
+    AS-->>AC: ApplicationDTO
+    AC-->>C: 200 OK (ApplicationDTO)
 ```
 
 ##### Class Diagram
 
-```plantuml
-@startuml Application Controller Class
-class ApplicationController {
-  -authService: AuthService
-  -searchService: SearchService
-  -emailService: EmailService
-  -applicationRepository: ApplicationRepository
-  +submitApplication(applicationData: ApplicationData): Application
-  +updateApplicationStatus(applicationId: string, status: ApplicationStatus): Application
-  +getApplication(applicationId: string): Application
-  +searchApplications(criteria: SearchCriteria): Application[]
-  +sendApplicationStatusUpdate(applicationId: string): void
-}
+```mermaid
+classDiagram
+    class ApplicationController {
+        -ApplicationService applicationService
+        +submitApplication(ApplicationDTO) : ResponseEntity
+        +getApplication(Long) : ResponseEntity
+        +updateApplication(Long, ApplicationDTO) : ResponseEntity
+        +deleteApplication(Long) : ResponseEntity
+        +listApplications(Pageable) : ResponseEntity
+    }
+    class ApplicationService {
+        -ApplicationRepository applicationRepository
+        +submitApplication(ApplicationDTO) : ApplicationDTO
+        +getApplication(Long) : ApplicationDTO
+        +updateApplication(Long, ApplicationDTO) : ApplicationDTO
+        +deleteApplication(Long) : void
+        +listApplications(Pageable) : Page<ApplicationDTO>
+    }
+    class ApplicationRepository {
+        +save(Application) : Application
+        +findById(Long) : Optional<Application>
+        +delete(Application) : void
+        +findAll(Pageable) : Page<Application>
+    }
+    class Application {
+        -Long id
+        -Long jobId
+        -Long candidateId
+        -ApplicationStatus status
+        -Date appliedAt
+    }
+    class ApplicationDTO {
+        +Long id
+        +Long jobId
+        +Long candidateId
+        +ApplicationStatus status
+        +Date appliedAt
+    }
 
-class ApplicationRepository {
-  +create(applicationData: ApplicationData): Application
-  +update(applicationId: string, applicationData: ApplicationData): Application
-  +findById(applicationId: string): Application
-  +search(criteria: SearchCriteria): Application[]
-}
-
-class Application {
-  -id: string
-  -candidateId: string
-  -jobId: string
-  -resumeUrl: string
-  -coverLetter: string
-  -status: ApplicationStatus
-  -submissionDate: Date
-}
-
-enum ApplicationStatus {
-  SUBMITTED
-  UNDER_REVIEW
-  INTERVIEW_SCHEDULED
-  REJECTED
-  ACCEPTED
-}
-
-ApplicationController --> ApplicationRepository
-ApplicationController --> AuthService
-ApplicationController --> SearchService
-ApplicationController --> EmailService
-ApplicationRepository --> Application
-
-@enduml
+    ApplicationController --> ApplicationService
+    ApplicationService --> ApplicationRepository
+    ApplicationRepository --> Application
+    ApplicationService --> ApplicationDTO
 ```
 
 #### Interview Controller
 
 ##### Interaction Diagram
 
-```plantuml
-@startuml Interview Controller Interaction
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
-
-Component(interviewController, "Interview Controller", "Express.js", "Handles interview-related operations")
-Component(authService, "Auth Service", "Node.js", "Handles authentication")
-Component(emailService, "Email Service", "Node.js", "Handles email notifications")
-ContainerDb(database, "Database", "PostgreSQL", "Stores interview data")
-
-Rel(interviewController, authService, "Authenticates requests")
-Rel(interviewController, emailService, "Sends interview-related emails")
-Rel(interviewController, database, "CRUD operations")
-
-@enduml
+```mermaid
+graph TD
+    A[Client] -->|HTTP Request| B[Interview Controller]
+    B -->|Query/Update| C[Interview Service]
+    C -->|CRUD Operations| D[Interview Repository]
+    D -->|Database Operations| E[(Database)]
 ```
 
 ##### Sequence Diagram
 
-```plantuml
-@startuml Interview Controller Sequence
-actor Recruiter
-participant "Interview Controller" as IC
-participant "Auth Service" as AS
-participant "Email Service" as ES
-database Database
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant IC as InterviewController
+    participant IS as InterviewService
+    participant IR as InterviewRepository
+    participant DB as Database
 
-Recruiter -> IC: POST /interviews (Schedule interview)
-IC -> AS: Authenticate request
-AS --> IC: Authentication result
-IC -> Database: Insert new interview
-Database --> IC: Interview scheduled
-IC -> ES: Send interview invitation email
-ES --> IC: Email sent
-IC --> Recruiter: Interview scheduling response
+    C->>IC: POST /interviews (Schedule Interview)
+    IC->>IS: scheduleInterview(interviewDTO)
+    IS->>IR: save(interview)
+    IR->>DB: INSERT INTO interviews
+    DB-->>IR: Interview Scheduled
+    IR-->>IS: Interview Object
+    IS-->>IC: InterviewDTO
+    IC-->>C: 201 Created (InterviewDTO)
 
-@enduml
+    C->>IC: GET /interviews/{id} (Get Interview)
+    IC->>IS: getInterview(id)
+    IS->>IR: findById(id)
+    IR->>DB: SELECT FROM interviews
+    DB-->>IR: Interview Data
+    IR-->>IS: Interview Object
+    IS-->>IC: InterviewDTO
+    IC-->>C: 200 OK (InterviewDTO)
 ```
 
 ##### Class Diagram
 
-```plantuml
-@startuml Interview Controller Class
-class InterviewController {
-  -authService: AuthService
-  -emailService: EmailService
-  -interviewRepository: InterviewRepository
-  +scheduleInterview(interviewData: InterviewData): Interview
-  +updateInterviewDetails(interviewId: string, interviewData: InterviewData): Interview
-  +cancelInterview(interviewId: string): void
-  +getInterview(interviewId: string): Interview
-  +getInterviewsForApplication(applicationId: string): Interview[]
-  +sendInterviewInvitation(interviewId: string): void
-}
+```mermaid
+classDiagram
+    class InterviewController {
+        -InterviewService interviewService
+        +scheduleInterview(InterviewDTO) : ResponseEntity
+        +getInterview(Long) : ResponseEntity
+        +updateInterview(Long, InterviewDTO) : ResponseEntity
+        +cancelInterview(Long) : ResponseEntity
+        +listInterviews(Pageable) : ResponseEntity
+    }
+    class InterviewService {
+        -InterviewRepository interviewRepository
+        +scheduleInterview(InterviewDTO) : InterviewDTO
+        +getInterview(Long) : InterviewDTO
+        +updateInterview(Long, InterviewDTO) : InterviewDTO
+        +cancelInterview(Long) : void
+        +listInterviews(Pageable) : Page<InterviewDTO>
+    }
+    class InterviewRepository {
+        +save(Interview) : Interview
+        +findById(Long) : Optional<Interview>
+        +delete(Interview) : void
+        +findAll(Pageable) : Page<Interview>
+    }
+    class Interview {
+        -Long id
+        -Long applicationId
+        -Long interviewerId
+        -Date scheduledAt
+        -InterviewStatus status
+        -String feedback
+    }
+    class InterviewDTO {
+        +Long id
+        +Long applicationId
+        +Long interviewerId
+        +Date scheduledAt
+        +InterviewStatus status
+        +String feedback
+    }
 
-class InterviewRepository {
-  +create(interviewData: InterviewData): Interview
-  +update(interviewId: string, interviewData: InterviewData): Interview
-  +delete(interviewId: string): void
-  +findById(interviewId: string): Interview
-  +findByApplicationId(applicationId: string): Interview[]
-}
-
-class Interview {
-  -id: string
-  -applicationId: string
-  -interviewerId: string
-  -scheduledDate: Date
-  -duration: number
-  -type: InterviewType
-  -status: InterviewStatus
-  -feedback: string
-}
-
-enum InterviewType {
-  PHONE_SCREEN
-  VIDEO_CALL
-  ON_SITE
-}
-
-enum InterviewStatus {
-  SCHEDULED
-  COMPLETED
-  CANCELED
-}
-
-InterviewController --> InterviewRepository
-InterviewController --> AuthService
-InterviewController --> EmailService
-InterviewRepository --> Interview
-
-@enduml
+    InterviewController --> InterviewService
+    InterviewService --> InterviewRepository
+    InterviewRepository --> Interview
+    InterviewService --> InterviewDTO
 ```
 
 #### User Controller
 
 ##### Interaction Diagram
 
-```plantuml
-@startuml User Controller Interaction
-!include https://raw.githubusercontent.com/plantuml-stdlib/C4-PlantUML/master/C4_Component.puml
-
-Component(userController, "User Controller", "Express.js", "Handles user-related operations")
-Component(authService, "Auth Service", "Node.js", "Handles authentication")
-Component(emailService, "Email Service", "Node.js", "Handles email notifications")
-ContainerDb(database, "Database", "PostgreSQL", "Stores user data")
-
-Rel(userController, authService, "Authenticates requests")
-Rel(userController, emailService, "Sends user-related emails")
-Rel(userController, database, "CRUD operations")
-
-@enduml
+```mermaid
+graph TD
+    A[Client] -->|HTTP Request| B[User Controller]
+    B -->|Query/Update| C[User Service]
+    C -->|CRUD Operations| D[User Repository]
+    D -->|Database Operations| E[(Database)]
 ```
 
 ##### Sequence Diagram
 
-```plantuml
-@startuml User Controller Sequence
-actor User
-participant "User Controller" as UC
-participant "Auth Service" as AS
-participant "Email Service" as ES
-database Database
+```mermaid
+sequenceDiagram
+    participant C as Client
+    participant UC as UserController
+    participant US as UserService
+    participant UR as UserRepository
+    participant DB as Database
 
-User -> UC: POST /users (Register new user)
-UC -> Database: Check if user exists
-Database --> UC: User existence result
-UC -> Database: Insert new user
-Database --> UC: User created
-UC -> AS: Generate authentication token
-AS --> UC: Authentication token
-UC -> ES: Send welcome email
-ES --> UC: Email sent
-UC --> User: Registration response with token
+    C->>UC: POST /users (Create User)
+    UC->>US: createUser(userDTO)
+    US->>UR: save(user)
+    UR->>DB: INSERT INTO users
+    DB-->>UR: User Created
+    UR-->>US: User Object
+    US-->>UC: UserDTO
+    UC-->>C: 201 Created (UserDTO)
 
-@enduml
+    C->>UC: GET /users/{id} (Get User)
+    UC->>US: getUser(id)
+    US->>UR: findById(id)
+    UR->>DB: SELECT FROM users
+    DB-->>UR: User Data
+    UR-->>US: User Object
+    US-->>UC: UserDTO
+    UC-->>C: 200 OK (UserDTO)
 ```
 
 ##### Class Diagram
 
-```plantuml
-@startuml User Controller Class
-class UserController {
-  -authService: AuthService
-  -emailService: EmailService
-  -userRepository: UserRepository
-  +registerUser(userData: UserData): User
-  +updateUser(userId: string, userData: UserData): User
-  +deleteUser(userId: string): void
-  +getUser(userId: string): User
-  +loginUser(credentials: LoginCredentials): AuthToken
-  +resetPassword(userId: string): void
-}
+```mermaid
+classDiagram
+    class UserController {
+        -UserService userService
+        +createUser(UserDTO) : ResponseEntity
+        +getUser(Long) : ResponseEntity
+        +updateUser(Long, UserDTO) : ResponseEntity
+        +deleteUser(Long) : ResponseEntity
+        +listUsers(Pageable) : ResponseEntity
+    }
+    class UserService {
+        -UserRepository userRepository
+        +createUser(UserDTO) : UserDTO
+        +getUser(Long) : UserDTO
+        +updateUser(Long, UserDTO) : UserDTO
+        +deleteUser(Long) : void
+        +listUsers(Pageable) : Page<UserDTO>
+    }
+    class UserRepository {
+        +save(User) : User
+        +findById(Long) : Optional<User>
+        +delete(User) : void
+        +findAll(Pageable) : Page<User>
+    }
+    class User {
+        -Long id
+        -String username
+        -String email
+        -String passwordHash
+        -UserRole role
+        -Date createdAt
+        -Date lastLogin
+    }
+    class UserDTO {
+        +Long id
+        +String username
+        +String email
+        +UserRole role
+        +Date createdAt
+        +Date lastLogin
+    }
 
-class UserRepository {
-  +create(userData: UserData): User
-  +update(userId: string, userData: UserData): User
-  +delete(userId: string): void
-  +findById(userId: string): User
-  +findByEmail(email: string): User
-}
-
-class User {
-  -id: string
-  -email: string
-  -passwordHash: string
-  -firstName: string
-  -lastName: string
-  -role: UserRole
-  -createdAt: Date
-  -updatedAt: Date
-}
-
-enum UserRole {
-  ADMIN
-  RECRUITER
-  HIRING_MANAGER
-  CANDIDATE
-}
-
-UserController --> UserRepository
-UserController --> AuthService
-UserController --> EmailService
-UserRepository --> User
-
-@enduml
+    UserController --> UserService
+    UserService --> UserRepository
+    UserRepository --> User
+    UserService --> UserDTO
 ```
