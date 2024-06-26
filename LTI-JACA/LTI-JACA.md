@@ -357,8 +357,9 @@ graph TD
 end
 ```
 
-![](leanCanvasDiagram.svg)
+![[leanCanvasDiagram.svg]]
 <details>
+
 ```plantuml
 @startuml leanCanvasDiagram
 skinparam rectangle {
@@ -396,6 +397,7 @@ Costs -[hidden]up- Revenue
 
 @enduml
 ```
+
 </details>
 
 ## Functional Requirements
