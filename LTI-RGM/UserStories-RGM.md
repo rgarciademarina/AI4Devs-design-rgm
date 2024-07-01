@@ -63,7 +63,7 @@ The story includes specific UI elements, validation rules, and system behaviors,
 By starting with this level of detail for the first user story, you're setting a high standard for documentation and clarity that will benefit the entire project. As the team becomes more familiar with the system and its requirements, future stories may not need quite this level of detail, but it's a great way to kick off the development process.
 Would you like me to elaborate on any specific part of this user story or discuss how it fits into the larger ATS project?
 
-[user-story-job-posting](/user-stories/job-posting/user-story-job-posting.md)
+[user-story-job-posting](/LTI-RGM/user-stories/job-posting/user-story-job-posting.md)
 
 ## Prompt 3
 
@@ -91,7 +91,7 @@ Identification of potential bottlenecks or dependencies
 The team can use this list as a starting point and may need to adjust or add tasks as they begin work and uncover any unforeseen complexities.
 Would you like me to elaborate on any specific subtask or discuss how to prioritize these tasks within the development process?
 
-[job-posting-subtasks](/user-stories/job-posting/job-posting-subtasks.md)
+[job-posting-subtasks](/LTI-RGM/user-stories/job-posting/job-posting-subtasks.md)
 
 ## Prompt 4
 
@@ -114,8 +114,8 @@ These detailed subtasks will help ensure that the foundation of the job posting 
 Would you like me to explain any specific part of these subtasks in more detail, or discuss how they fit into the larger development process?
 
 
-[database-schema-subtask](/user-stories/job-posting/subtasks/database-schema-subtask.md)
-[api-endpoints-subtask](/user-stories/job-posting/subtasks/api-endpoints-subtask.md)
+[database-schema-subtask](/LTI-RGM/user-stories/job-posting/subtasks/database-schema-subtask.md)
+[api-endpoints-subtask](/LTI-RGM/user-stories/job-posting/subtasks/api-endpoints-subtask.md)
 
 ## Prompt 5
 
@@ -139,5 +139,5 @@ The testing subtasks cover a wide range of testing types, from unit tests to use
 This level of detail will help the development team understand the full scope of the feature and implement it correctly from the start. It also provides clear checkpoints for quality assurance and project management.
 Would you like me to elaborate on any specific part of this user story or subtask list, or discuss how it fits into the larger ATS project?
 
-[user-story-job-applications](/user-stories/job-applications/user-story-submit-application.md)
-[job-applications-subtasks](/user-stories/job-applications/job-application-subtasks.md)
+[user-story-job-applications](/LTI-RGM/user-stories/job-applications/user-story-submit-application.md)
+[job-applications-subtasks](/LTI-RGM/user-stories/job-applications/job-application-subtasks.md)
