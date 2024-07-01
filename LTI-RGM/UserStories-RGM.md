@@ -270,4 +270,4 @@ By the end of these four sprints, we should have a functional system that allows
 Remember, this is an initial plan and should be treated as flexible. In real Scrum environments, the specific tasks for each sprint beyond the current one would typically be less detailed, as they would be refined closer to the time of execution based on progress and any changing requirements.
 Would you like me to elaborate on any specific part of this sprint plan or discuss how to adapt it if progress is faster or slower than anticipated?
 
-[initial-sprint-planning](/LTI-RGM/user-stories/sprint-planning/initial-sprint-planning.md)
+[initial-sprint-planning](/LTI-RGM/sprint-planning/initial-sprint-planning.md)
