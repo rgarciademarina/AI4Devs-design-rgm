@@ -1,293 +1,352 @@
 # LTI-JCO
 
-- [Descripción breve del software LTI](#descripción-breve-del-software-lti)
-- [Valor añadido y ventajas competitivas](#valor-añadido-y-ventajas-competitivas)
-- [Funciones principales](#funciones-principales)
-- [Diagrama Lean Canvas](#diagrama-lean-canvas)
-- [Casos de Uso Principales del ATS de LTI](#casos-de-uso-principales-del-ats-de-lti)
-- [Modelo de datos](#modelo-de-datos)
-- [Diseño del Sistema a Alto Nivel](#diseño-del-sistema-a-alto-nivel)
-- [Diagrama AWS](#diagrama-aws)
-- [Diagrama C4](#diagrama-c4)
+### Tabla de Contenidos
+
+  - [Descripción breve del software LTI](#descripción-breve-del-software-lti)
+  - [Valor añadido y ventajas competitivas](#valor-añadido-y-ventajas-competitivas)
+  - [Funciones principales](#funciones-principales)
+  - [Lean Canvas para el ATS de LTI](#lean-canvas-para-el-ats-de-lti)
+  - [Descripción de los 3 principales casos de uso](#descripción-de-los-3-principales-casos-de-uso)
+  - [Modelo de datos](#modelo-de-datos)
+  - [Diseño del Sistema a Alto Nivel](#diseño-del-sistema-a-alto-nivel)
+  - [Diagrama C4](#diagrama-c4)
 
 ### Descripción breve del software LTI
 
-LTI es un avanzado sistema de seguimiento de candidatos (ATS) diseñado para transformar y optimizar el proceso de contratación. Con un enfoque en la eficiencia, la colaboración en tiempo real y la automatización impulsada por inteligencia artificial, LTI permite a los departamentos de recursos humanos y a los reclutadores gestionar de manera efectiva el ciclo de vida completo de la contratación, desde la solicitud hasta la incorporación del nuevo empleado.
+LTI es un sistema avanzado de seguimiento de candidatos (ATS) diseñado para revolucionar el proceso de reclutamiento. Nuestro software combina la última tecnología en automatización, inteligencia artificial y colaboración en tiempo real para mejorar la eficiencia y la efectividad de los departamentos de recursos humanos. Con LTI, las empresas pueden gestionar sus procesos de contratación de manera más rápida, colaborativa y precisa.
 
 ### Valor añadido y ventajas competitivas
 
-- **Eficiencia mejorada:** LTI automatiza tareas repetitivas y administra grandes volúmenes de datos de candidatos, permitiendo a los equipos de recursos humanos centrarse en la toma de decisiones estratégicas.
-- **Colaboración en tiempo real:** Integración fluida de comunicación y herramientas colaborativas para que los reclutadores y gerentes trabajen conjuntamente en tiempo real.
-- **Asistencia de IA:** Utiliza inteligencia artificial para mejorar la preselección de candidatos, análisis de currículums, programación de entrevistas y generación de informes detallados.
-- **Interfaz intuitiva:** Diseñada para ser fácil de usar, lo que reduce el tiempo de capacitación y mejora la adopción por parte del equipo.
-- **Analíticas y reportes avanzados:** Ofrece insights y reportes detallados para ayudar a las empresas a mejorar continuamente sus procesos de contratación.
+1. **Automatización inteligente**: LTI automatiza tareas repetitivas y consume tiempo, como la clasificación de currículums y la programación de entrevistas, permitiendo a los reclutadores enfocarse en tareas estratégicas.
+
+2. **Asistencia de IA avanzada**: Nuestra IA no solo ayuda en la clasificación de candidatos, sino que también proporciona recomendaciones basadas en datos históricos y análisis predictivos para identificar a los mejores talentos.
+
+3. **Colaboración en tiempo real**: LTI facilita la colaboración entre reclutadores y managers a través de una plataforma centralizada, permitiendo comentarios, evaluaciones y decisiones en tiempo real.
+
+4. **Experiencia de usuario optimizada**: Una interfaz intuitiva y fácil de usar que mejora la adopción y el uso diario por parte de los equipos de recursos humanos y de contratación.
+
+5. **Integración completa**: LTI se integra perfectamente con otras herramientas y plataformas de gestión de recursos humanos, lo que garantiza una interoperabilidad y flujo de datos sin interrupciones.
+
+6. **Analítica y reportes detallados**: Proporcionamos análisis en profundidad y reportes personalizables que permiten a las empresas tomar decisiones basadas en datos y mejorar continuamente sus procesos de contratación.
 
 ### Funciones principales
 
-1. **Automatización del flujo de trabajo:** Automatización de tareas rutinarias como el envío de correos electrónicos, recordatorios de entrevistas y actualización de estados de los candidatos.
-2. **Preselección y análisis de candidatos impulsados por IA:** Algoritmos de IA que filtran y analizan currículums, identificando los candidatos más adecuados basados en criterios personalizados.
-3. **Portal de colaboración en tiempo real:** Herramientas integradas de chat y videoconferencia que permiten la colaboración sin interrupciones entre reclutadores y gerentes.
-4. **Gestión centralizada de candidatos:** Base de datos unificada que almacena toda la información de los candidatos, incluyendo currículums, cartas de presentación, notas de entrevistas y más.
-5. **Analíticas y reportes:** Dashboard interactivo con métricas clave y reportes personalizables para evaluar el rendimiento del proceso de contratación.
-6. **Programación de entrevistas:** Herramientas de programación automatizadas que sincronizan calendarios y envían invitaciones a entrevistas.
-7. **Integraciones con otras herramientas:** Integración con sistemas de gestión de recursos humanos (HRMS), plataformas de redes sociales y sitios de empleo para una gestión de candidatos sin fisuras.
+1. **Clasificación y filtrado automático de candidatos**:
+   - **IA de análisis de CV**: Utiliza inteligencia artificial para escanear y clasificar currículums, destacando los perfiles más adecuados según las descripciones de los puestos.
+   - **Filtro automatizado**: Aplica filtros personalizados para reducir la cantidad de candidatos y centrarse en los más prometedores.
 
-### Diagrama Lean Canvas
+2. **Programación y gestión de entrevistas**:
+   - **Calendario inteligente**: Sincroniza con los calendarios de los entrevistadores y candidatos para programar entrevistas automáticamente en los momentos disponibles.
+   - **Recordatorios automáticos**: Envía recordatorios a los candidatos y entrevistadores para minimizar los no-shows.
 
-![alt text](assets/lean-canvas.png)
+3. **Asistencia de IA en la toma de decisiones**:
+   - **Recomendaciones de candidatos**: Basado en datos históricos y criterios específicos, la IA sugiere los mejores candidatos para cada puesto.
+   - **Análisis predictivo**: Prevén tendencias y patrones para ayudar en la planificación de futuras necesidades de contratación.
 
-### Casos de Uso Principales del ATS de LTI
+4. **Plataforma de colaboración en tiempo real**:
+   - **Comentarios y evaluaciones en vivo**: Permite a los miembros del equipo dejar comentarios y evaluaciones en tiempo real durante el proceso de entrevistas.
+   - **Tablero de decisiones**: Centraliza la toma de decisiones con herramientas de votación y consenso.
 
-#### Caso de Uso 1: Automatización del Filtrado de Candidatos
+5. **Integraciones y API**:
+   - **Integración con plataformas de RRHH**: Compatible con sistemas de gestión de recursos humanos (HRMS) y otras herramientas de reclutamiento.
+   - **API abierta**: Permite personalizaciones y extensiones para adaptarse a las necesidades específicas de la empresa.
 
-**Descripción**:
-El ATS de LTI automatiza el proceso de filtrado inicial de candidatos, utilizando algoritmos de inteligencia artificial para evaluar currículums y perfiles, seleccionando los más adecuados según los requisitos del puesto.
+6. **Analítica avanzada y reportes**:
+   - **Dashboards personalizables**: Visualiza datos clave de contratación en tiempo real.
+   - **Reportes detallados**: Genera reportes específicos sobre rendimiento de candidatos, tiempos de contratación, y otros KPIs relevantes.
 
-**Diagrama Mermaid**:
-```mermaid
-graph TD
-    A[Inicio] --> B[Recepción de Currículums]
-    B --> C[Análisis con IA]
-    C --> D{Cumple Requisitos}
-    D --> |Sí| E[Enviar a Reclutador]
-    D --> |No| F[Notificación de Rechazo]
-    E --> G[Revisión por Reclutador]
-    F --> H[Guardar en Base de Datos]
-```
+7. **Portal de candidatos**:
+   - **Aplicaciones fáciles**: Interfaz amigable para los candidatos que simplifica el proceso de solicitud.
+   - **Seguimiento del estado de la solicitud**: Permite a los candidatos ver el estado de su aplicación en tiempo real.
 
-#### Caso de Uso 2: Programación Automática de Entrevistas
+### Lean Canvas para el ATS de LTI
 
-**Descripción**:
-LTI permite la programación automática de entrevistas, sincronizando las agendas de los reclutadores y los candidatos, y enviando recordatorios para evitar ausencias y retrasos.
+![alt text](assets/leancanvas-2.png)
 
-**Diagrama Mermaid**:
-```mermaid
-graph TD
-    A[Inicio] --> B[Selección de Candidato]
-    B --> C[Disponibilidad de Reclutador]
-    C --> D[Disponibilidad de Candidato]
-    D --> E[Programar Entrevista]
-    E --> F[Enviar Invitaciones]
-    F --> G[Confirmación de Candidato]
-    G --> H[Recordatorio de Entrevista]
-```
+### Descripción detallada del Lean Canvas
 
-#### Caso de Uso 3: Colaboración en Tiempo Real entre Reclutadores y Managers
+#### Problema
+1. **Tareas repetitivas y que consumen mucho tiempo en el proceso de contratación**: Los reclutadores pierden mucho tiempo en tareas manuales como la revisión de currículums y la programación de entrevistas.
+2. **Falta de colaboración eficiente entre reclutadores y managers**: La comunicación y la toma de decisiones pueden ser lentas y desorganizadas.
+3. **Dificultad para identificar a los mejores talentos de manera rápida**: La selección de candidatos puede ser ineficiente, lo que lleva a la pérdida de buenos candidatos.
 
-**Descripción**:
-El sistema permite la colaboración en tiempo real entre los reclutadores y los managers a través de herramientas de comunicación integradas, facilitando la toma de decisiones rápidas y efectivas.
+#### Segmentos de Clientes
+1. **Empresas medianas y grandes**: Organizaciones con una alta demanda de contratación y recursos suficientes para invertir en tecnología avanzada.
+2. **Departamentos de Recursos Humanos**: Equipos internos de RRHH que buscan mejorar sus procesos de contratación.
+3. **Agencias de reclutamiento**: Empresas especializadas en la contratación de personal para otras organizaciones.
 
-**Diagrama Mermaid**:
-```mermaid
-graph TD
-    A[Inicio] --> B[Selección de Candidatos]
-    B --> C[Herramienta de Comunicación]
-    C --> D[Reclutadores y Managers Colaboran]
-    D --> E[Comentarios y Feedback]
-    E --> F[Decisión de Contratación]
-    F --> G[Notificación al Candidato]
-```
+#### Propuesta de Valor Única
+- **"Revoluciona tu proceso de contratación con automatización inteligente y colaboración en tiempo real, potenciando la eficiencia y la precisión."**
 
-Estos casos de uso ilustran cómo LTI puede optimizar y facilitar los procesos de reclutamiento mediante la automatización, la programación eficiente y la colaboración en tiempo real.
+#### Solución
+1. **Automatización de clasificación y filtrado de candidatos**: Uso de IA para revisar y clasificar currículums.
+2. **Programación y gestión automática de entrevistas**: Herramientas que sincronizan agendas y envían recordatorios.
+3. **Asistencia de IA para recomendaciones y análisis predictivo**: IA que sugiere los mejores candidatos y prevé necesidades futuras.
+4. **Plataforma de colaboración en tiempo real**: Espacio centralizado para comentarios y decisiones.
+5. **Integración con sistemas de RRHH**: Compatibilidad con otras herramientas de gestión.
+6. **Analítica avanzada y reportes detallados**: Dashboards y reportes personalizables para análisis profundo.
+
+#### Canales
+1. **Marketing digital (SEO, SEM, redes sociales)**: Estrategias para atraer tráfico y conversiones.
+2. **Alianzas estratégicas con consultoras de RRHH**: Colaboraciones para ampliar el alcance.
+3. **Ferias y conferencias de tecnología y RRHH**: Eventos para mostrar el producto.
+4. **Webinars y demostraciones en línea**: Presentaciones para educar y atraer clientes.
+
+#### Fuentes de Ingresos
+1. **Suscripciones mensuales/anuales**: Modelo de suscripción basado en el uso del software.
+2. **Licencias de software**: Pago por uso de licencias.
+3. **Servicios de implementación y soporte premium**: Servicios adicionales para personalización y soporte avanzado.
+4. **Consultoría personalizada**: Servicios de consultoría específicos para necesidades particulares.
+
+#### Estructura de Costos
+1. **Desarrollo y mantenimiento de software**: Gastos en tecnología y desarrollo continuo.
+2. **Gastos de marketing y ventas**: Inversiones en promoción y ventas.
+3. **Costos de infraestructura tecnológica (servidores, almacenamiento)**: Gastos en hardware y servicios en la nube.
+4. **Salarios del equipo**: Pago al personal de la empresa.
+5. **Gastos administrativos**: Costos operativos generales.
+
+#### Métricas Clave
+1. **Tasa de adopción de la plataforma**: Medida de cuántas nuevas empresas están utilizando el ATS.
+2. **Número de usuarios activos mensuales**: Cuántos usuarios están utilizando activamente el software cada mes.
+3. **Tiempo de reducción en el proceso de contratación**: Cuánto tiempo se ahorra en la contratación.
+4. **Nivel de satisfacción del cliente**: Feedback y encuestas de satisfacción.
+5. **Tasa de retención de clientes**: Porcentaje de clientes que renuevan su suscripción.
+
+#### Ventaja Injusta
+1. **Uso de IA avanzada para análisis predictivo y recomendaciones**: Tecnología superior en IA.
+2. **Capacidades de colaboración en tiempo real únicas en el mercado**: Características que facilitan una colaboración efectiva.
+3. **Integración fluida con múltiples plataformas de RRHH**: Compatibilidad con diversas herramientas de gestión.
+
+### Descripción de los 3 principales casos de uso
+
+#### Caso de Uso 1: Clasificación y Filtrado Automático de Candidatos
+Los usuarios logueados (reclutadores) pueden cargar currículums, y el sistema los clasifica automáticamente utilizando IA, aplicando filtros personalizados según los criterios del puesto de trabajo.
+
+![alt text](assets/use_case_1.png)
+
+En este diagrama, el reclutador carga los currículums en el sistema. La IA del sistema clasifica los currículums automáticamente y aplica filtros personalizados. El reclutador recibe los resultados clasificados.
+
+
+#### Caso de Uso 2: Programación y Gestión de Entrevistas
+Los usuarios logueados (reclutadores y managers) pueden sincronizar sus calendarios y programar entrevistas automáticamente con los candidatos seleccionados. El sistema envía recordatorios automáticos tanto a candidatos como a entrevistadores.
+
+![alt text](assets/use_case_2.png)
+
+En este diagrama, tanto reclutadores como managers sincronizan sus calendarios con el sistema. El sistema programa entrevistas automáticamente y envía recordatorios a candidatos, reclutadores y managers.
+
+#### Caso de Uso 3: Colaboración en Tiempo Real
+Los usuarios logueados (reclutadores y managers) pueden dejar comentarios y evaluaciones en tiempo real sobre los candidatos durante el proceso de entrevistas. Además, tienen un tablero centralizado para tomar decisiones conjuntas.
+
+![alt text](assets/use_case_3.png)
+
+En este diagrama, los reclutadores y managers dejan comentarios y evaluaciones en tiempo real sobre los candidatos. Un tablero centralizado facilita la toma de decisiones conjuntas.
 
 ### Modelo de datos
 
 ```mermaid
 erDiagram
-    CANDIDATE {
-        int id PK
-        string name
+    Usuario {
+        int id
+        string nombre
         string email
-        string phone
-        string resume_link
-        string status
-        date application_date
+        string contrasena
+        string rol
     }
 
-    JOB {
-        int id PK
-        string title
-        string description
-        string location
-        string department
-        date posted_date
-        string status
-    }
-
-    RECRUITER {
-        int id PK
-        string name
+    Reclutador {
+        int id
+        string nombre
         string email
-        string phone
-        string department
+        string contrasena
     }
 
-    INTERVIEW {
-        int id PK
-        date interview_date
-        time interview_time
-        string location
-        int candidate_id FK
-        int recruiter_id FK
+    Manager {
+        int id
+        string nombre
+        string email
+        string contrasena
     }
 
-    FEEDBACK {
-        int id PK
-        int candidate_id FK
-        int recruiter_id FK
-        int job_id FK
-        string comments
-        date feedback_date
+    Candidato {
+        int id
+        string nombre
+        string email
+        string telefono
     }
 
-    APPLICATION {
-        int id PK
-        int candidate_id FK
-        int job_id FK
-        string status
-        date application_date
+    Curriculum {
+        int id
+        int candidato_id
+        string documento
+        string clasificacion
     }
 
-    CANDIDATE ||--o{ APPLICATION : applies_to
-    JOB ||--o{ APPLICATION : has
-    RECRUITER ||--o{ INTERVIEW : conducts
-    CANDIDATE ||--o{ INTERVIEW : attends
-    CANDIDATE ||--o{ FEEDBACK : receives
-    JOB ||--o{ FEEDBACK : about
-    RECRUITER ||--o{ FEEDBACK : gives
+    Puesto {
+        int id
+        string titulo
+        string descripcion
+        string requisitos
+        string estado
+    }
+
+    Entrevista {
+        int id
+        int candidato_id
+        int puesto_id
+        int reclutador_id
+        int manager_id
+        datetime fecha
+        string estado
+    }
+
+    Comentario {
+        int id
+        int usuario_id
+        int candidato_id
+        int entrevista_id
+        text comentario
+        datetime fecha
+    }
+
+    Evaluacion {
+        int id
+        int usuario_id
+        int candidato_id
+        int entrevista_id
+        int puntuacion
+        text feedback
+    }
+
+    Calendario {
+        int id
+        int usuario_id
+        datetime disponibilidad
+    }
+
+    Recordatorio {
+        int id
+        int entrevista_id
+        datetime fecha_envio
+        string mensaje
+    }
+
+    Filtro {
+        int id
+        int puesto_id
+        string criterio
+        string valor
+    }
+
+    Usuario ||--o{ Comentario : escribe
+    Usuario ||--o{ Evaluacion : evalua
+    Usuario ||--o{ Calendario : tiene
+
+    Reclutador ||--|| Usuario : hereda
+    Manager ||--|| Usuario : hereda
+    Candidato ||--o{ Curriculum : tiene
+
+    Candidato ||--o{ Entrevista : participa
+    Puesto ||--o{ Entrevista : tiene
+    Reclutador ||--o{ Entrevista : organiza
+    Manager ||--o{ Entrevista : asiste
+
+    Entrevista ||--o{ Comentario : recibe
+    Entrevista ||--o{ Evaluacion : recibe
+    Entrevista ||--o{ Recordatorio : genera
+
+    Puesto ||--o{ Filtro : define
 ```
 
-**Relaciones**
+### Descripción de las Entidades
 
-- Un candidato puede tener múltiples aplicaciones (one-to-many).
-- Un trabajo puede tener múltiples aplicaciones (one-to-many).
-- Un reclutador puede conducir múltiples entrevistas (one-to-many).
-- Un candidato puede asistir a múltiples entrevistas (one-to-many).
-- Un candidato puede recibir múltiples comentarios de feedback (one-to-many).
-- Un trabajo puede tener múltiples comentarios de feedback sobre candidatos (one-to-many).
-- Un reclutador puede dar múltiples comentarios de feedback (one-to-many).
+1. **Usuario**: Representa a cualquier usuario del sistema.
+   - Atributos: id (int), nombre (string), email (string), contraseña (string), rol (string).
+
+2. **Reclutador**: Es una especialización de Usuario.
+   - Atributos: id (int), nombre (string), email (string), contraseña (string).
+
+3. **Manager**: Es una especialización de Usuario.
+   - Atributos: id (int), nombre (string), email (string), contraseña (string).
+
+4. **Candidato**: Representa a los candidatos que aplican a puestos de trabajo.
+   - Atributos: id (int), nombre (string), email (string), telefono (string).
+
+5. **Curriculum**: Contiene la información del currículum de un candidato.
+   - Atributos: id (int), candidato_id (int), documento (string), clasificacion (string).
+
+6. **Puesto**: Detalla los puestos de trabajo disponibles.
+   - Atributos: id (int), titulo (string), descripcion (string), requisitos (string), estado (string).
+
+7. **Entrevista**: Información sobre las entrevistas programadas.
+   - Atributos: id (int), candidato_id (int), puesto_id (int), reclutador_id (int), manager_id (int), fecha (datetime), estado (string).
+
+8. **Comentario**: Comentarios hechos por los usuarios sobre los candidatos.
+   - Atributos: id (int), usuario_id (int), candidato_id (int), entrevista_id (int), comentario (text), fecha (datetime).
+
+9. **Evaluación**: Evaluaciones hechas por los usuarios sobre los candidatos.
+   - Atributos: id (int), usuario_id (int), candidato_id (int), entrevista_id (int), puntuacion (int), feedback (text).
+
+10. **Calendario**: Disponibilidad de los usuarios para entrevistas.
+    - Atributos: id (int), usuario_id (int), disponibilidad (datetime).
+
+11. **Recordatorio**: Recordatorios enviados para entrevistas.
+    - Atributos: id (int), entrevista_id (int), fecha_envio (datetime), mensaje (string).
+
+12. **Filtro**: Criterios y valores de filtrado para los puestos.
+    - Atributos: id (int), puesto_id (int), criterio (string), valor (string).
 
 ### Diseño del Sistema a Alto Nivel
+#### Componentes del Sistema
 
-El ATS de LTI será diseñado como una arquitectura basada en microservicios utilizando AWS (Amazon Web Services) para garantizar escalabilidad, alta disponibilidad y facilidad de mantenimiento. A continuación, se describen los componentes clave y el flujo general del sistema.
+1. **Frontend**: Un servidor web (EC2) que maneja las solicitudes de los usuarios.
+2. **Load Balancer (ELB)**: Balanceador de carga para distribuir el tráfico entre múltiples instancias del servidor web.
+3. **DNS (Route53)**: Sistema de nombres de dominio para manejar las solicitudes de los usuarios y dirigirlas al balanceador de carga.
+4. **Firewall (WAF)**: Firewall de aplicaciones web para proteger contra amenazas comunes.
+5. **Backend (Application Server en EC2)**: Servidor de aplicaciones que maneja la lógica del negocio.
+6. **Bases de Datos**:
+   - **RDS**: Base de datos relacional para almacenar datos estructurados.
+   - **DynamoDB**: Base de datos NoSQL para datos no estructurados.
+7. **ML Model (Sagemaker)**: Modelo de aprendizaje automático para la clasificación y recomendaciones de candidatos.
+8. **Almacenamiento (S3)**: Almacenamiento de currículums y otros archivos.
+9. **Cola de Tareas (SQS)**: Sistema de colas para manejar tareas asincrónicas.
+10. **Monitoreo (CloudWatch)**: Servicio para monitorear la infraestructura y las aplicaciones.
+11. **IAM**: Gestión de identidades y accesos para manejar permisos y seguridad.
 
-#### Componentes Principales
 
-1. **Frontend**:
-   - **React.js**: Aplicación web para la interfaz de usuario.
-   - **AWS S3**: Almacenamiento de contenido estático (HTML, CSS, JS).
 
-2. **Backend**:
-   - **Microservicios**: Implementados en **Node.js** o **Python**, utilizando **AWS Lambda** para ejecutar código sin servidor.
-   - **API Gateway**: **AWS API Gateway** para gestionar las solicitudes API y enrutarlas a los microservicios correspondientes.
-   - **Autenticación**: **Amazon Cognito** para la gestión de usuarios y autenticación.
 
-3. **Base de Datos**:
-   - **Amazon RDS**: Base de datos relacional para almacenar datos estructurados.
-   - **Amazon DynamoDB**: Base de datos NoSQL para datos no estructurados o semi-estructurados.
+### Explicación del Diagrama
 
-4. **Almacenamiento**:
-   - **AWS S3**: Almacenamiento de currículums, documentos y otros archivos.
+1. **Route53** gestiona las solicitudes DNS y las dirige al **WAF**.
+2. **WAF** protege la aplicación y dirige el tráfico al **Load Balancer (ELB)**.
+3. **ELB** distribuye las solicitudes entre los **Web Servers (EC2)** en la subred pública.
+4. **Web Servers (EC2)** manejan las solicitudes y las envían al **Application Server (EC2)** en la subred privada.
+5. **Application Server (EC2)** procesa las solicitudes utilizando:
+   - **RDS** para datos estructurados.
+   - **DynamoDB** para datos no estructurados.
+   - **Sagemaker** para procesamiento de ML.
+   - **S3** para almacenamiento de archivos.
+   - **SQS** para manejo de tareas asincrónicas.
+6. **CloudWatch** monitorea la infraestructura y aplicaciones, proporcionando métricas y alertas.
+7. **IAM** maneja las identidades y accesos para asegurar el sistema.
 
-5. **Mensajería y Colas**:
-   - **Amazon SQS**: Colas de mensajes para la gestión de tareas asíncronas.
-   - **Amazon SNS**: Servicio de notificación para enviar mensajes y alertas.
-
-6. **Analítica y Reporting**:
-   - **AWS QuickSight**: Herramienta de análisis y visualización de datos.
-   - **AWS Glue**: Servicio de preparación de datos para ETL (Extract, Transform, Load).
-
-7. **Monitorización y Logging**:
-   - **Amazon CloudWatch**: Monitorización del rendimiento y logging.
-   - **AWS X-Ray**: Seguimiento de solicitudes para el análisis y depuración.
-
-### Diagrama AWS
-
-![alt text](assets/system-diagram.png)
+![alt text](assets/high-level_ats_architecture.png)
 
 ### Diagrama C4
-Vamos a generar un diagrama C4 que profundice en el componente "API REST" del sistema ATS de LTI y explicar la arquitectura del sistema en los cuatro niveles: contexto, contenedores, componentes y código.
+Para crear un diagrama C4 que llegue en profundidad a uno de los componentes del sistema ATS, nos enfocaremos en el "Application Server". A continuación, se presenta el código necesario en PlantUML para los cuatro niveles del modelo C4: Contexto, Contenedores, Componentes y Código.
 
-#### Nivel 1: Diagrama de Contexto
+### Nivel 1: Diagrama de Contexto
+![alt text](assets/c4_contexto.png)
+Muestra las interacciones entre el sistema ATS y sus principales usuarios (Admin, Manager, Reclutador, Candidato).
 
-```mermaid
-graph TB
+### Nivel 2: Diagrama de Contenedores
+![alt text](assets/c4_contenedores.png)
+Detalla los principales contenedores dentro del sistema ATS, incluyendo la aplicación web, el servidor de aplicaciones, las bases de datos, el modelo de IA y el almacenamiento.
 
-    A[Recruiter] -->|Gestiona candidatos| B[Sistema de Filtrado de Candidatos]
-    C[Manager] -->|Colabora en la revisión| B[Sistema de Filtrado de Candidatos]
-    D[Candidate] -->|Aplica a ofertas| B[Sistema de Filtrado de Candidatos]
-```
+### Nivel 3: Diagrama de Componentes (para el Application Server)
+![alt text](assets/c4_componentes.png)
+Se enfoca en el servidor de aplicaciones, mostrando sus principales componentes como el controlador de CV, el programador de entrevistas, el servicio de IA y el servicio de almacenamiento.
 
-El diagrama de contexto muestra cómo interactúan los actores principales (Recruiter, Manager, Candidate) con el sistema de filtrado de candidatos. Este nivel proporciona una visión general de quién usa el sistema y cómo se relaciona con él.
-
-#### Nivel 2: Diagrama de Contenedores
-
-```mermaid
-graph TB
-
-    A[Recruiter] -->|Usa| B[Aplicación Web]
-    C[Manager] -->|Usa| B[Aplicación Web]
-    D[Candidate] -->|Usa| B[Aplicación Web]
-
-    B[Aplicación Web] -->|Realiza solicitudes| E[API REST]
-    E[API REST] -->|Lee y escribe datos| F[Base de Datos]
-    E[API REST] -->|Envía currículums para análisis| G[Servicio de IA]
-    G[Servicio de IA] -->|Guarda resultados del filtrado| F[Base de Datos]
-```
-
-El diagrama de contenedores descompone el sistema en varios contenedores:
-- **Aplicación Web**: La interfaz de usuario que utilizan los reclutadores, managers y candidatos.
-- **API REST**: Proporciona acceso a los servicios del sistema.
-- **Base de Datos**: Almacena los datos de candidatos, trabajos y resultados del filtrado.
-- **Servicio de IA**: Analiza y filtra los currículums de los candidatos.
-
-#### Nivel 3: Diagrama de Componentes
-
-```mermaid
-graph TB
-
-    A[CandidateController] -->|Accede a datos de candidatos| B[DBService]
-    C[JobController] -->|Accede a datos de trabajos| B[DBService]
-    D[FilteringController] -->|Guarda resultados de filtrado| B[DBService]
-    D[FilteringController] -->|Envía currículums para análisis| E[IAServiceClient]
-    F[AuthController] -->|Gestiona usuarios| B[DBService]
-```
-El diagrama de componentes desglosa el API REST en sus componentes internos:
-- **AuthController**: Gestiona la autenticación y autorización de usuarios.
-- **CandidateController**: Gestiona las operaciones relacionadas con los candidatos.
-- **JobController**: Gestiona las operaciones relacionadas con los trabajos.
-- **FilteringController**: Gestiona el filtrado de candidatos.
-- **DBService**: Servicio para acceder a la base de datos.
-- **IAServiceClient**: Cliente para comunicarse con el Servicio de IA.
-
-#### Nivel 4: Diagrama de Código
-
-Para este nivel, se proporciona un ejemplo básico de cómo podría verse el código en uno de los componentes. Aquí, detallamos el `FilteringController`.
-
-```javascript
-// FilteringController.js
-const express = require('express');
-const router = express.Router();
-const dbService = require('../services/DBService');
-const iaServiceClient = require('../services/IAServiceClient');
-
-// Endpoint para filtrar candidatos
-router.post('/filter', async (req, res) => {
-    try {
-        const { jobId, resume } = req.body;
-        const analysisResult = await iaServiceClient.analyzeResume(resume);
-
-        const filteredCandidate = await dbService.saveFilteringResult(jobId, analysisResult);
-        res.status(200).json(filteredCandidate);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
-
-module.exports = router;
-```
-El nivel de código proporciona un ejemplo de cómo podría implementarse uno de los componentes, en este caso, el `FilteringController`. Este componente recibe solicitudes para filtrar candidatos, envía los currículums al Servicio de IA para su análisis y guarda los resultados en la base de datos.
-
-#### Diagrama C4 con Diagrams
-
-![alt text](assets/c4_diagrams.png)
+### Nivel 4: Diagrama de Código (para CV Controller)
+![alt text](assets/c4_codigo.png)
+Detalla la implementación del controlador de CV (CV Controller), mostrando las clases y sus interacciones dentro del componente.
