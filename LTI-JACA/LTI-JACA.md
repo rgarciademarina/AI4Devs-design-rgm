@@ -714,6 +714,7 @@ The system is responsible for encrypting data and implementing data protection p
 
 ### Diagram
 
+```mermaid
 erDiagram
     %% Job Service
     JOB {
@@ -786,6 +787,7 @@ erDiagram
     APPLICATION ||--o{ INTERVIEW : "schedules"
     USER ||--o{ JOB : "creates"
     USER ||--o{ INTERVIEW : "conducts"
+```
 
 ### Description
 
@@ -846,6 +848,7 @@ Key points about the design:
 
 ### Diagram
 
+```mermaid
 graph TB
     subgraph "Client"
         A[React.js Frontend]
@@ -941,6 +944,7 @@ graph TB
     G --> N
     O --> P
     P --> Q
+```
 
 ### Description
 
