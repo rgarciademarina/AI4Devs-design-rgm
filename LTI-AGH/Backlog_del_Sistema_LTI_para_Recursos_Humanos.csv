@@ -1,0 +1,9 @@
+User Story,Impacto en el Usuario y Valor del Negocio,Urgencia Basada en Tendencias del Mercado y Feedback de Usuarios,Complejidad y Esfuerzo Estimado de Implementación,Riesgos y Dependencias Entre Tareas
+Automatización del Proceso de Reclutamiento para el Administrador de Recursos Humanos,Alto impacto: mejora eficiencia y reduce tiempo de contratación,Alta urgencia: demanda alta por eficiencia en reclutamiento,Complejidad media: requiere integración con múltiples plataformas,Riesgo medio: dependencias en integración con plataformas externas
+Seguimiento del Proceso de Reclutamiento para el Gerente de Contratación,Alto impacto: facilita la toma de decisiones informadas,Alta urgencia: necesidad de visibilidad en tiempo real,Complejidad media: requiere desarrollo de dashboard y visualización de datos,Riesgo medio: dependencias en la recopilación y sincronización de datos
+Análisis de Estructura de Costos para el Analista Financiero,Alto impacto: optimiza el presupuesto y reduce costos,Media urgencia: creciente necesidad de optimización de costos,Alta complejidad: requiere análisis de datos y generación de informes,Riesgo alto: dependencias en la calidad y precisión de los datos financieros
+Experiencia de Usuario para el Candidato,Alto impacto: mejora la tasa de finalización de aplicaciones,Alta urgencia: competencia por talento requiere procesos amigables,Complejidad baja: diseño de interfaz y experiencia de usuario,Riesgo bajo: dependencias mínimas
+Integración con Sistemas Externos para el Administrador de Sistemas,Alto impacto: asegura coherencia y sincronización de datos,Media urgencia: creciente integración de sistemas en las empresas,Alta complejidad: requiere desarrollo de APIs y middleware,Riesgo alto: dependencias en la compatibilidad y seguridad de la integración
+,,,,
+,,,,
+,,,,
