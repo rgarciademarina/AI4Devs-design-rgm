@@ -1792,3 +1792,426 @@ classDiagram
 ```
 
 These diagrams provide a comprehensive view of the structure and interactions within each controller component of the LTI-ATS-JACA system. They follow UML best practices and use Mermaid syntax for easy integration into documentation.
+
+```
+Taking in consideration this is the Tech Stack we're going to follow for LTI-ATS-JACA
+1. Frontend: React.js with TypeScript
+2. Backend: Node.js with Express.js
+3. Database: PostgreSQL
+4. Caching: Redis
+5. Search Engine: Elasticsearch
+6. Message Queue: RabbitMQ
+7. Container Orchestration: Kubernetes
+8. CI/CD: GitHub Actions
+9. Monitoring: Prometheus and Grafana
+10. Logging: ELK Stack (Elasticsearch, Logstash, Kibana)
+11. API Gateway: Kong
+12. Authentication: OAuth 2.0 with JSON Web Tokens (JWT)
+13. Cloud Provider: AWS
+
+Create an Architecture Diagram using Mermeid code and a full description of the diagram. Also consider that this should follow a micro-services architecture.
+```
+
+Certainly! I'll create an Architecture Diagram for LTI-ATS-JACA using Mermaid code, considering the specified tech stack and a microservices architecture. Here's the diagram followed by a full description:
+
+```mermaid
+graph TB
+    subgraph "Client"
+        A[React.js Frontend]
+    end
+
+    subgraph "API Gateway"
+        B[Kong]
+    end
+
+    subgraph "Authentication"
+        C[OAuth 2.0 / JWT]
+    end
+
+    subgraph "Microservices"
+        D[Job Service]
+        E[Application Service]
+        F[Interview Service]
+        G[User Service]
+    end
+
+    subgraph "Message Queue"
+        H[RabbitMQ]
+    end
+
+    subgraph "Database"
+        I[(PostgreSQL)]
+    end
+
+    subgraph "Caching"
+        J[(Redis)]
+    end
+
+    subgraph "Search Engine"
+        K[Elasticsearch]
+    end
+
+    subgraph "Monitoring & Logging"
+        L[Prometheus]
+        M[Grafana]
+        N[ELK Stack]
+    end
+
+    subgraph "CI/CD"
+        O[GitHub Actions]
+    end
+
+    subgraph "Container Orchestration"
+        P[Kubernetes]
+    end
+
+    subgraph "Cloud Provider"
+        Q[AWS]
+    end
+
+    A -->|HTTPS| B
+    B -->|Auth| C
+    B -->|REST API| D
+    B -->|REST API| E
+    B -->|REST API| F
+    B -->|REST API| G
+    D <--> H
+    E <--> H
+    F <--> H
+    G <--> H
+    D --> I
+    E --> I
+    F --> I
+    G --> I
+    D --> J
+    E --> J
+    F --> J
+    G --> J
+    D --> K
+    E --> K
+    F --> K
+    G --> K
+    D --> L
+    E --> L
+    F --> L
+    G --> L
+    L --> M
+    D --> N
+    E --> N
+    F --> N
+    G --> N
+    O --> P
+    P --> Q
+```
+
+Description of the Architecture:
+
+1. Client: The frontend is built using React.js with TypeScript, providing a responsive and type-safe user interface.
+
+2. API Gateway: Kong serves as the API gateway, handling incoming requests, routing them to appropriate microservices, and managing cross-cutting concerns like rate limiting and authentication.
+
+3. Authentication: OAuth 2.0 with JWT is used for secure authentication and authorization across the system.
+
+4. Microservices: The backend is divided into four main microservices:
+   - Job Service: Manages job postings and related operations.
+   - Application Service: Handles job applications and candidate information.
+   - Interview Service: Manages interview scheduling and feedback.
+   - User Service: Handles user management and authentication.
+
+   Each microservice is built using Node.js with Express.js.
+
+5. Message Queue: RabbitMQ is used for asynchronous communication between microservices, enabling event-driven architecture and improving system resilience.
+
+6. Database: PostgreSQL serves as the primary database for storing structured data across all microservices.
+
+7. Caching: Redis is used for caching frequently accessed data, reducing database load and improving response times.
+
+8. Search Engine: Elasticsearch provides powerful full-text search capabilities, particularly useful for job and candidate searches.
+
+9. Monitoring & Logging:
+   - Prometheus collects metrics from all services.
+   - Grafana visualizes the metrics collected by Prometheus.
+   - ELK Stack (Elasticsearch, Logstash, Kibana) is used for centralized logging and log analysis.
+
+10. CI/CD: GitHub Actions automates the build, test, and deployment processes.
+
+11. Container Orchestration: Kubernetes manages the deployment, scaling, and operations of application containers across clusters of hosts.
+
+12. Cloud Provider: The entire infrastructure is hosted on AWS, leveraging its scalable and reliable cloud services.
+
+This architecture follows microservices best practices:
+
+- Loose coupling: Each service operates independently and communicates via well-defined APIs.
+- Scalability: Services can be scaled independently based on demand.
+- Resilience: Failure in one service doesn't bring down the entire system.
+- Technology diversity: Each service can potentially use different technologies if needed.
+- Continuous deployment: Services can be deployed independently, enabling faster iterations.
+
+The use of Kubernetes for container orchestration allows for efficient management of the microservices, while the API Gateway provides a single entry point for clients, simplifying the client-side code and providing a unified interface for the microservices.
+
+Monitoring, logging, and CI/CD are integral parts of the architecture, ensuring the system's health, performance, and rapid, reliable deployments.
+
+This architecture provides a robust, scalable, and maintainable foundation for the LTI-ATS-JACA applicant tracking system.
+
+```
+Each micro-service should have its own database, reflect that in the diagram.
+```
+
+You're absolutely right, and I apologize for the oversight. In a true microservices architecture, each service should indeed have its own database. I'll update the diagram to reflect this important aspect. Here's the revised architecture diagram:
+
+```mermaid
+graph TB
+    subgraph "Client"
+        A[React.js Frontend]
+    end
+
+    subgraph "API Gateway"
+        B[Kong]
+    end
+
+    subgraph "Authentication"
+        C[OAuth 2.0 / JWT]
+    end
+
+    subgraph "Microservices"
+        subgraph "Job Service"
+            D[Job Service]
+            D1[(Job DB)]
+        end
+        subgraph "Application Service"
+            E[Application Service]
+            E1[(Application DB)]
+        end
+        subgraph "Interview Service"
+            F[Interview Service]
+            F1[(Interview DB)]
+        end
+        subgraph "User Service"
+            G[User Service]
+            G1[(User DB)]
+        end
+    end
+
+    subgraph "Message Queue"
+        H[RabbitMQ]
+    end
+
+    subgraph "Caching"
+        J[(Redis)]
+    end
+
+    subgraph "Search Engine"
+        K[Elasticsearch]
+    end
+
+    subgraph "Monitoring & Logging"
+        L[Prometheus]
+        M[Grafana]
+        N[ELK Stack]
+    end
+
+    subgraph "CI/CD"
+        O[GitHub Actions]
+    end
+
+    subgraph "Container Orchestration"
+        P[Kubernetes]
+    end
+
+    subgraph "Cloud Provider"
+        Q[AWS]
+    end
+
+    A -->|HTTPS| B
+    B -->|Auth| C
+    B -->|REST API| D
+    B -->|REST API| E
+    B -->|REST API| F
+    B -->|REST API| G
+    D <--> H
+    E <--> H
+    F <--> H
+    G <--> H
+    D <--> D1
+    E <--> E1
+    F <--> F1
+    G <--> G1
+    D --> J
+    E --> J
+    F --> J
+    G --> J
+    D --> K
+    E --> K
+    F --> K
+    G --> K
+    D --> L
+    E --> L
+    F --> L
+    G --> L
+    L --> M
+    D --> N
+    E --> N
+    F --> N
+    G --> N
+    O --> P
+    P --> Q
+```
+
+Description of the updated architecture:
+
+The main change in this updated diagram is that each microservice now has its own dedicated database:
+
+1. Job Service: Connected to Job DB
+2. Application Service: Connected to Application DB
+3. Interview Service: Connected to Interview DB
+4. User Service: Connected to User DB
+
+All these databases are represented as separate entities (D1, E1, F1, G1) within their respective microservice subgraphs.
+
+This design adheres more closely to microservices principles:
+
+1. Database per Service: Each microservice has its own private database, ensuring loose coupling and independent scalability.
+
+2. Data Autonomy: Each service has complete control over its data model and schema, allowing for independent evolution.
+
+3. Polyglot Persistence: While we're using PostgreSQL across the board in this case, the architecture now allows for different database technologies per service if needed in the future.
+
+4. Scalability: Each database can be scaled independently based on the specific needs of its service.
+
+5. Fault Isolation: Issues with one database don't directly impact other services.
+
+The rest of the architecture remains the same:
+
+- The API Gateway (Kong) routes requests to the appropriate microservices.
+- RabbitMQ facilitates asynchronous communication between services.
+- Redis provides caching capabilities across services.
+- Elasticsearch offers powerful search functionality.
+- Monitoring and logging tools (Prometheus, Grafana, ELK Stack) oversee the entire system.
+- GitHub Actions manage the CI/CD pipeline.
+- Kubernetes orchestrates the containerized services.
+- The entire infrastructure is hosted on AWS.
+
+This revised architecture provides a more accurate representation of a microservices-based system, with each service maintaining its own data store. This approach enhances service independence, allows for better scalability, and provides more flexibility in terms of data management and evolution for each microservice.
+
+```
+Create an Entity Relationship Diagram for the "Must Have" features and following the micro-services architecture planned using Mermaid, following the best practices for UML syntax. Include the field names, field types, primary keys and foreign keys required for each entity following the best practices for RDMS.
+```
+
+Certainly! I'll create an Entity Relationship Diagram (ERD) for the "Must Have" features, following the microservices architecture we've planned. This ERD will be divided into four parts, one for each microservice (Job, Application, Interview, and User). I'll use Mermaid syntax and follow best practices for UML and RDBMS design.
+
+```mermaid
+erDiagram
+    %% Job Service
+    JOB {
+        BIGSERIAL job_id PK
+        VARCHAR(255) title
+        TEXT description
+        VARCHAR(50) status
+        BIGINT created_by_user_id FK
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
+    }
+    JOB_SCREENING_QUESTION {
+        BIGSERIAL question_id PK
+        BIGINT job_id FK
+        TEXT question
+        VARCHAR(50) question_type
+    }
+
+    %% Application Service
+    CANDIDATE {
+        BIGSERIAL candidate_id PK
+        VARCHAR(100) first_name
+        VARCHAR(100) last_name
+        VARCHAR(255) email
+        TEXT resume
+        TIMESTAMP created_at
+    }
+    APPLICATION {
+        BIGSERIAL application_id PK
+        BIGINT job_id FK
+        BIGINT candidate_id FK
+        VARCHAR(50) status
+        TIMESTAMP applied_at
+    }
+    EEO_DATA {
+        BIGSERIAL eeo_id PK
+        BIGINT candidate_id FK
+        VARCHAR(50) gender
+        VARCHAR(50) ethnicity
+        BOOLEAN veteran_status
+        BOOLEAN disability_status
+    }
+
+    %% Interview Service
+    INTERVIEW {
+        BIGSERIAL interview_id PK
+        BIGINT application_id FK
+        BIGINT interviewer_id FK
+        TIMESTAMP scheduled_at
+        VARCHAR(50) status
+        TEXT feedback
+    }
+
+    %% User Service
+    USER {
+        BIGSERIAL user_id PK
+        VARCHAR(100) username
+        VARCHAR(255) email
+        VARCHAR(255) password_hash
+        VARCHAR(50) role
+        TIMESTAMP created_at
+        TIMESTAMP last_login
+    }
+
+    %% Relationships
+    JOB ||--o{ JOB_SCREENING_QUESTION : "has"
+    JOB ||--o{ APPLICATION : "receives"
+    CANDIDATE ||--o{ APPLICATION : "submits"
+    CANDIDATE ||--o{ EEO_DATA : "provides"
+    APPLICATION ||--o{ INTERVIEW : "schedules"
+    USER ||--o{ JOB : "creates"
+    USER ||--o{ INTERVIEW : "conducts"
+```
+
+Description of the ERD:
+
+1. Job Service:
+   - JOB: Represents job postings.
+   - JOB_SCREENING_QUESTION: Stores screening questions for each job.
+
+2. Application Service:
+   - CANDIDATE: Stores information about job applicants.
+   - APPLICATION: Represents a candidate's application for a specific job.
+   - EEO_DATA: Contains Equal Employment Opportunity data for candidates.
+
+3. Interview Service:
+   - INTERVIEW: Stores interview details for applications.
+
+4. User Service:
+   - USER: Represents system users (recruiters, hiring managers, admins).
+
+Key points about the design:
+
+1. Primary Keys: Each table has a BIGSERIAL primary key, which auto-increments and ensures each record has a unique identifier.
+
+2. Foreign Keys: Foreign keys are used to establish relationships between tables, even across different services. In a microservices architecture, these would be logical relations rather than actual foreign key constraints in the database.
+
+3. Data Types: Appropriate PostgreSQL data types are used (e.g., VARCHAR for strings, TEXT for long text, TIMESTAMP for dates and times).
+
+4. Normalization: The design follows normalization principles to reduce data redundancy.
+
+5. Scalability: The use of BIGSERIAL for IDs allows for a large number of records.
+
+6. Audit Fields: Created_at and updated_at fields are included where appropriate for auditing purposes.
+
+7. Status Fields: Enum-like status fields are used to track the state of jobs, applications, and interviews.
+
+Inter-service relationships:
+- The JOB table in the Job Service has a foreign key to the USER table in the User Service (created_by_user_id).
+- The APPLICATION table in the Application Service has a foreign key to the JOB table in the Job Service.
+- The INTERVIEW table in the Interview Service has foreign keys to the APPLICATION table in the Application Service and the USER table in the User Service.
+
+In a true microservices architecture, these cross-service relationships would be managed at the application level rather than through direct database foreign keys. Each service would maintain its own database integrity, and inter-service data consistency would be ensured through careful API design and eventual consistency patterns.
+
+This ERD provides a solid foundation for the "Must Have" features of the LTI-ATS-JACA system, following best practices for both UML and RDBMS design in a microservices context.

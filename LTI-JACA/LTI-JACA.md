@@ -499,21 +499,10 @@ end
 
 ```mermaid
 graph TD
-    A[User Management]
-    A --> B(Register User)
-    A --> C(Authenticate User)
-    A --> D(Manage Roles)
-    A --> E(Reset Password)
-    
-    B --> F((System))
-    C --> F
-    D --> F
-    E --> F
-    
-    G((Admin)) --> B
-    G --> D
-    H((User)) --> C
-    H --> E
+    G((Admin)) --> B(Register User)
+    G --> D(Manage Roles)
+    H((User)) --> C(Authenticate User)
+    H --> E(Reset Password)
 ```
 
 Users can register accounts, login, and reset passwords. Administrators have additional capabilities to manage user roles and also need to login to access these functions.
@@ -524,21 +513,10 @@ Users can register accounts, login, and reset passwords. Administrators have add
 
 ```mermaid
 graph TD
-    A[Job Requisition Management]
-    A --> B(Create Job Requisition)
-    A --> C(Edit Job Requisition)
-    A --> D(Post Job Requisition)
-    A --> E(Approve Job Requisition)
-    
-    B --> F((System))
-    C --> F
-    D --> F
-    E --> F
-    
-    G((Recruiter)) --> B
-    G --> C
-    G --> D
-    H((Hiring Manager)) --> E
+    G((Recruiter)) --> B(Create Job Requisition)
+    G --> C(Edit Job Requisition)
+    G --> D(Post Job Requisition)
+    H((Hiring Manager)) --> E(Approve Job Requisition)
 ```
 
 Recruiters can create, edit, and post job requisitions, while Hiring Managers can approve requisitions and also have the ability to edit them if necessary.
@@ -550,20 +528,10 @@ Recruiters can create, edit, and post job requisitions, while Hiring Managers ca
 
 ```mermaid
 graph TD
-    A[Candidate Management]
-    A --> B(Create Candidate Profile)
-    A --> C(Parse Resume)
-    A --> D(Search Candidates)
-    A --> E(Filter Candidates)
-    
-    B --> F((System))
-    C --> F
-    D --> F
-    E --> F
-    
-    G((Recruiter)) --> B
-    G --> D
-    G --> E
+    F((System)) --> C(Parse Resume)
+    G((Recruiter)) --> B(Create Candidate Profile)
+    G --> D(Search Candidates)
+    G --> E(Filter Candidates)
     H((Candidate)) --> B
 ```
 
@@ -575,18 +543,9 @@ Recruiters can create candidate profiles, search, and filter candidates. The sys
 
 ```mermaid
 graph TD
-    A[Application Process]
-    A --> B(Submit Application)
-    A --> C(Upload Documents)
-    A --> D(Review Application)
-    
-    B --> E((System))
-    C --> E
-    D --> E
-    
-    F((Candidate)) --> B
-    F --> C
-    G((Recruiter)) --> D
+    F((Candidate)) --> B(Submit Application)
+    F --> C(Upload Documents)
+    G((Recruiter)) --> D(Review Application)
 ```
 
 Candidates can fill out application forms, upload documents, and submit applications. Once submitted, the system processes the application automatically.
@@ -597,18 +556,10 @@ Candidates can fill out application forms, upload documents, and submit applicat
 
 ```mermaid
 graph TD
-    A[Screening and Assessment]
-    A --> B(Create Screening Questions)
-    A --> C(Answer Screening Questions)
-    A --> D(Rank Candidates)
-    
-    B --> E((System))
-    C --> E
-    D --> E
-    
-    F((Recruiter)) --> B
-    G((Candidate)) --> C
-    H((AI)) --> D
+    F((Recruiter)) --> B(Create Screening Questions)
+    G((Candidate)) --> C(Answer Screening Questions)
+    H((AI System)) --> D(Rank Candidates)
+    F --> D
 ```
 
 Recruiters set screening questions, candidates answer them, and the system automatically ranks candidates based on their responses.
@@ -619,18 +570,9 @@ Recruiters set screening questions, candidates answer them, and the system autom
 
 ```mermaid
 graph TD
-    A[Interview Management]
-    A --> B(Schedule Interview)
-    A --> C(Conduct Interview)
-    A --> D(Provide Feedback)
-    
-    B --> E((System))
-    C --> E
-    D --> E
-    
-    F((Recruiter)) --> B
-    G((Interviewer)) --> C
-    G --> D
+    F((Recruiter)) --> B(Schedule Interview)
+    G((Interviewer)) --> C(Conduct Interview)
+    G --> D(Provide Feedback)
     H((Candidate)) --> C
 ```
 
@@ -642,18 +584,9 @@ Recruiters schedule interviews, while interviewers conduct interviews and provid
 
 ```mermaid
 graph TD
-    A[Communication]
-    A --> B(Create Email Template)
-    A --> C(Send Notification)
-    A --> D(Update Application Status)
-    
-    B --> E((System))
-    C --> E
-    D --> E
-    
-    F((Recruiter)) --> B
-    F --> C
-    F --> D
+    F((Recruiter)) --> B(Create Email Template)
+    F --> C(Send Notification)
+    F --> D(Update Application Status)
     G((Candidate)) --> C
 ```
 
@@ -665,18 +598,9 @@ Recruiters can create email templates and update application statuses. The syste
 
 ```mermaid
 graph TD
-    A[Reporting and Analytics]
-    A --> B(Generate Standard Report)
-    A --> C(View Dashboard)
-    A --> D(Export Data)
-    
-    B --> E((System))
-    C --> E
-    D --> E
-    
-    F((Recruiter)) --> B
-    F --> C
-    F --> D
+    F((Recruiter)) --> B(Generate Standard Report)
+    F --> C(View Dashboard)
+    F --> D(Export Data)
     G((Hiring Manager)) --> C
 ```
 
@@ -688,18 +612,9 @@ Both recruiters and hiring managers can view dashboards, while recruiters can al
 
 ```mermaid
 graph TD
-    A[Compliance and EEO]
-    A --> B(Collect EEO Data)
-    A --> C(Generate EEO Report)
-    A --> D(Verify Compliance Checklist)
-    
-    B --> E((System))
-    C --> E
-    D --> E
-    
-    F((Candidate)) --> B
-    G((Recruiter)) --> C
-    G --> D
+    F((Candidate)) --> B(Collect EEO Data)
+    G((Recruiter)) --> C(Generate EEO Report)
+    G --> D(Verify Compliance Checklist)
 ```
 
 The system collects EEO data from candidates, recruiters can generate EEO reports and verify job posting compliance.
@@ -710,25 +625,11 @@ The system collects EEO data from candidates, recruiters can generate EEO report
 
 ```mermaid
 graph TD
-    A[Security and Data Protection]
-    A --> B(Encrypt Data)
-    A --> C(Manage User Permissions)
-    A --> D(Perform Security Audit)
-    A --> E(Implement Data Protection Policies)
-    A --> F(Monitor System Access)
-    
-    B --> G((System))
-    C --> G
-    D --> G
-    E --> G
-    F --> G
-    
-    H((Admin)) --> C
-    H --> D
-    H --> E
-    I((User)) --> G
-    J((Security Officer)) --> D
-    J --> F
+    G((System)) --> B(Encrypt Data)
+    H((Admin)) --> C(Manage User Permissions)
+    J((Security Officer)) --> D(Perform Security Audit)
+    J --> E(Implement Data Protection Policies)
+    J --> F(Monitor System Access)
 ```
 
 The system is responsible for encrypting data and implementing data protection policies. Admins manage user permissions and implement data protection policies. Security officers perform security audits and monitor system access. All users interact with the system, which applies these security measures to protect their data and actions.
@@ -813,116 +714,117 @@ The system is responsible for encrypting data and implementing data protection p
 
 ### Diagram
 
-```mermaid
 erDiagram
-    User ||--o{ JobRequisition : "creates"
-    User ||--o{ Candidate : "manages"
-    User ||--o{ Interview : "schedules"
-    User {
-        int user_id PK
-        string username
-        string email
-        string password_hash
-        string role
-        datetime created_at
-        datetime last_login
+    %% Job Service
+    JOB {
+        BIGSERIAL job_id PK
+        VARCHAR(255) title
+        TEXT description
+        VARCHAR(50) status
+        BIGINT created_by_user_id FK
+        TIMESTAMP created_at
+        TIMESTAMP updated_at
     }
-    
-    JobRequisition ||--o{ Application : "receives"
-    JobRequisition {
-        int job_id PK
-        string title
-        text description
-        string status
-        int created_by FK
-        datetime created_at
-        datetime posted_at
+    JOB_SCREENING_QUESTION {
+        BIGSERIAL question_id PK
+        BIGINT job_id FK
+        TEXT question
+        VARCHAR(50) question_type
     }
-    
-    Candidate ||--o{ Application : "submits"
-    Candidate {
-        int candidate_id PK
-        string first_name
-        string last_name
-        string email
-        text resume
-        datetime created_at
+
+    %% Application Service
+    CANDIDATE {
+        BIGSERIAL candidate_id PK
+        VARCHAR(100) first_name
+        VARCHAR(100) last_name
+        VARCHAR(255) email
+        TEXT resume
+        TIMESTAMP created_at
     }
-    
-    Application ||--o{ Interview : "leads to"
-    Application {
-        int application_id PK
-        int job_id FK
-        int candidate_id FK
-        string status
-        datetime applied_at
+    APPLICATION {
+        BIGSERIAL application_id PK
+        BIGINT job_id FK
+        BIGINT candidate_id FK
+        VARCHAR(50) status
+        TIMESTAMP applied_at
     }
-    
-    Interview {
-        int interview_id PK
-        int application_id FK
-        int interviewer_id FK
-        datetime scheduled_at
-        string status
-        text feedback
+    EEO_DATA {
+        BIGSERIAL eeo_id PK
+        BIGINT candidate_id FK
+        VARCHAR(50) gender
+        VARCHAR(50) ethnicity
+        BOOLEAN veteran_status
+        BOOLEAN disability_status
     }
-    
-    ScreeningQuestion ||--o{ JobRequisition : "belongs to"
-    ScreeningQuestion {
-        int question_id PK
-        int job_id FK
-        text question
-        string question_type
+
+    %% Interview Service
+    INTERVIEW {
+        BIGSERIAL interview_id PK
+        BIGINT application_id FK
+        BIGINT interviewer_id FK
+        TIMESTAMP scheduled_at
+        VARCHAR(50) status
+        TEXT feedback
     }
-    
-    Communication {
-        int communication_id PK
-        int user_id FK
-        int candidate_id FK
-        string type
-        text content
-        datetime sent_at
+
+    %% User Service
+    USER {
+        BIGSERIAL user_id PK
+        VARCHAR(100) username
+        VARCHAR(255) email
+        VARCHAR(255) password_hash
+        VARCHAR(50) role
+        TIMESTAMP created_at
+        TIMESTAMP last_login
     }
-    
-    Report {
-        int report_id PK
-        string report_name
-        string report_type
-        json parameters
-        datetime generated_at
-    }
-    
-    EEOData ||--o{ Candidate : "belongs to"
-    EEOData {
-        int eeo_id PK
-        int candidate_id FK
-        string gender
-        string ethnicity
-        string veteran_status
-        string disability_status
-    }
-```
+
+    %% Relationships
+    JOB ||--o{ JOB_SCREENING_QUESTION : "has"
+    JOB ||--o{ APPLICATION : "receives"
+    CANDIDATE ||--o{ APPLICATION : "submits"
+    CANDIDATE ||--o{ EEO_DATA : "provides"
+    APPLICATION ||--o{ INTERVIEW : "schedules"
+    USER ||--o{ JOB : "creates"
+    USER ||--o{ INTERVIEW : "conducts"
 
 ### Description
 
-1. User: Represents system users (recruiters, hiring managers, admins).
-2. JobRequisition: Stores information about job openings.
-3. Candidate: Contains details of job applicants.
-4. Application: Represents a candidate's application for a specific job.
-5. Interview: Stores interview details for applications.
-6. ScreeningQuestion: Contains screening questions associated with job requisitions.
-7. Communication: Tracks all communications with candidates.
-8. Report: Stores generated reports.
-9. EEOData: Contains Equal Employment Opportunity data for candidates.
+1. Job Service:
+   - JOB: Represents job postings.
+   - JOB_SCREENING_QUESTION: Stores screening questions for each job.
 
-### Relationships
+2. Application Service:
+   - CANDIDATE: Stores information about job applicants.
+   - APPLICATION: Represents a candidate's application for a specific job.
+   - EEO_DATA: Contains Equal Employment Opportunity data for candidates.
 
-- Users create JobRequisitions and manage Candidates.
-- JobRequisitions receive multiple Applications.
-- Candidates submit multiple Applications.
-- Applications can lead to multiple Interviews.
-- ScreeningQuestions belong to JobRequisitions.
-- EEOData belongs to Candidates.
+3. Interview Service:
+   - INTERVIEW: Stores interview details for applications.
+
+4. User Service:
+   - USER: Represents system users (recruiters, hiring managers, admins).
+
+Key points about the design:
+
+1. Primary Keys: Each table has a BIGSERIAL primary key, which auto-increments and ensures each record has a unique identifier.
+
+2. Foreign Keys: Foreign keys are used to establish relationships between tables, even across different services. In a microservices architecture, these would be logical relations rather than actual foreign key constraints in the database.
+
+3. Data Types: Appropriate PostgreSQL data types are used (e.g., VARCHAR for strings, TEXT for long text, TIMESTAMP for dates and times).
+
+4. Normalization: The design follows normalization principles to reduce data redundancy.
+
+5. Scalability: The use of BIGSERIAL for IDs allows for a large number of records.
+
+6. Audit Fields: Created_at and updated_at fields are included where appropriate for auditing purposes.
+
+7. Status Fields: Enum-like status fields are used to track the state of jobs, applications, and interviews.
+
+### Inter-service Relationships
+
+- The JOB table in the Job Service has a foreign key to the USER table in the User Service (created_by_user_id).
+- The APPLICATION table in the Application Service has a foreign key to the JOB table in the Job Service.
+- The INTERVIEW table in the Interview Service has foreign keys to the APPLICATION table in the Application Service and the USER table in the User Service.
 
 ## Architecture
 
@@ -935,7 +837,7 @@ erDiagram
 5. Search Engine: Elasticsearch
 6. Message Queue: RabbitMQ
 7. Container Orchestration: Kubernetes
-8. CI/CD: GitLab CI/CD
+8. CI/CD: GitHub Actions
 9. Monitoring: Prometheus and Grafana
 10. Logging: ELK Stack (Elasticsearch, Logstash, Kibana)
 11. API Gateway: Kong
@@ -944,78 +846,128 @@ erDiagram
 
 ### Diagram
 
-```mermaid
-graph TD
-    subgraph Client
-        A[Web Browser]
-        B[Mobile App]
+graph TB
+    subgraph "Client"
+        A[React.js Frontend]
     end
 
-    C[CDN: CloudFront]
-    D[Load Balancer: ELB]
-    E[API Gateway: Kong]
-    F[Web Server: Nginx]
-
-    subgraph "Application Servers"
-        G[Node.js + Express]
+    subgraph "API Gateway"
+        B[Kong]
     end
 
-    H[Authentication: OAuth 2.0 / JWT]
-    I[Message Queue: RabbitMQ]
-    J[Caching: Redis]
-    K[Search Engine: Elasticsearch]
-    L[Database: PostgreSQL]
-    M[Storage: S3]
+    subgraph "Authentication"
+        C[OAuth 2.0 / JWT]
+    end
+
+    subgraph "Microservices"
+        subgraph "Job Service"
+            D[Job Service]
+            D1[(Job DB)]
+        end
+        subgraph "Application Service"
+            E[Application Service]
+            E1[(Application DB)]
+        end
+        subgraph "Interview Service"
+            F[Interview Service]
+            F1[(Interview DB)]
+        end
+        subgraph "User Service"
+            G[User Service]
+            G1[(User DB)]
+        end
+    end
+
+    subgraph "Message Queue"
+        H[RabbitMQ]
+    end
+
+    subgraph "Caching"
+        J[(Redis)]
+    end
+
+    subgraph "Search Engine"
+        K[Elasticsearch]
+    end
 
     subgraph "Monitoring & Logging"
-        N[Prometheus]
-        O[Grafana]
-        P[ELK Stack]
+        L[Prometheus]
+        M[Grafana]
+        N[ELK Stack]
     end
 
-    Q[CI/CD: GitLab CI/CD]
-    R[Container Orchestration: Kubernetes]
+    subgraph "CI/CD"
+        O[GitHub Actions]
+    end
 
-    A --> C
-    B --> C
-    C --> D
-    D --> E
-    E --> F
-    F --> G
-    G --> H
-    G --> I
+    subgraph "Container Orchestration"
+        P[Kubernetes]
+    end
+
+    subgraph "Cloud Provider"
+        Q[AWS]
+    end
+
+    A -->|HTTPS| B
+    B -->|Auth| C
+    B -->|REST API| D
+    B -->|REST API| E
+    B -->|REST API| F
+    B -->|REST API| G
+    D <--> H
+    E <--> H
+    F <--> H
+    G <--> H
+    D <--> D1
+    E <--> E1
+    F <--> F1
+    G <--> G1
+    D --> J
+    E --> J
+    F --> J
     G --> J
+    D --> K
+    E --> K
+    F --> K
     G --> K
+    D --> L
+    E --> L
+    F --> L
     G --> L
-    G --> M
-    G -.-> N
-    G -.-> O
-    G -.-> P
-    Q -.-> R
-    R --> G
-```
+    L --> M
+    D --> N
+    E --> N
+    F --> N
+    G --> N
+    O --> P
+    P --> Q
 
 ### Description
 
-1. Client Layer: Users interact with the system through web browsers or mobile apps. The frontend is built with React.js and TypeScript for a responsive and type-safe user interface.
-2. Content Delivery Network (CDN): AWS CloudFront is used to serve static assets globally, reducing latency for users.
-3. Load Balancer: AWS Elastic Load Balancing distributes incoming traffic across multiple instances of the application servers.
-4. API Gateway: Kong serves as the API gateway, handling routing, rate limiting, and API versioning.
-5. Web Server: Nginx acts as a reverse proxy and handles SSL termination.
-6. Application Servers: Node.js with Express.js powers the backend, running in containers orchestrated by Kubernetes for scalability and easy management.
-7. Authentication: OAuth 2.0 with JWT is used for secure authentication and authorization.
-8. Message Queue: RabbitMQ handles asynchronous tasks and ensures system resilience.
-9. Caching: Redis is used for caching frequently accessed data, improving performance.
-10. Search Engine: Elasticsearch provides fast and efficient full-text search capabilities.
-11. Databases: PostgreSQL serves as the primary relational database for structured data storage.
-12. Storage: AWS S3 is used for storing files such as resumes and other documents.
-13. Monitoring & Logging: Prometheus and Grafana are used for real-time monitoring and visualization of system metrics. The ELK Stack (Elasticsearch, Logstash, Kibana) is used for centralized logging and log analysis.
-14. CI/CD: GitLab CI/CD is used for continuous integration and deployment, automating the build, test, and deployment processes.
-15. Container Orchestration: Kubernetes manages the deployment, scaling, and operations of application containers across clusters of hosts.
+Client: The frontend is built using React.js with TypeScript, providing a responsive and type-safe user interface.
+API Gateway: Kong serves as the API gateway, handling incoming requests, routing them to appropriate microservices, and managing cross-cutting concerns like rate limiting and authentication.
+Authentication: OAuth 2.0 with JWT is used for secure authentication and authorization across the system.
+Microservices: The backend is divided into four main microservices:
 
-This architecture is designed to be scalable, resilient, and maintainable. It leverages cloud services (AWS) for infrastructure, uses containers for consistency across environments, and implements modern DevOps practices for efficient development and operations.
+Job Service: Manages job postings and related operations.
+Application Service: Handles job applications and candidate information.
+Interview Service: Manages interview scheduling and feedback.
+User Service: Handles user management and authentication.
 
-The system is built with microservices architecture in mind, allowing for independent scaling and development of different components. The use of message queues and caching helps in handling high loads and improving response times. The inclusion of monitoring and logging systems ensures that the operations team can quickly identify and resolve any issues that arise.
+Each microservice is built using Node.js with Express.js.
+Message Queue: RabbitMQ is used for asynchronous communication between microservices, enabling event-driven architecture and improving system resilience.
+Database: PostgreSQL serves as the primary database for storing structured data across all microservices.
+Caching: Redis is used for caching frequently accessed data, reducing database load and improving response times.
+Search Engine: Elasticsearch provides powerful full-text search capabilities, particularly useful for job and candidate searches.
+Monitoring & Logging:
+
+Prometheus collects metrics from all services.
+Grafana visualizes the metrics collected by Prometheus.
+ELK Stack (Elasticsearch, Logstash, Kibana) is used for centralized logging and log analysis.
+
+CI/CD: GitHub Actions automates the build, test, and deployment processes.
+Container Orchestration: Kubernetes manages the deployment, scaling, and operations of application containers across clusters of hosts.
+Cloud Provider: The entire infrastructure is hosted on AWS, leveraging its scalable and reliable cloud services.
 
 ## C4
 
