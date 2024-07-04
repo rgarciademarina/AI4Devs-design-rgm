@@ -1,0 +1,11 @@
+Task,Start Date,End Date,Dependencies,Resources
+Automatización del Proceso de Reclutamiento,2024-07-05,2024-07-18,,Equipo de Desarrollo
+Integración con Plataformas Externas,2024-07-12,2024-07-25,Automatización del Proceso de Reclutamiento,Equipo de Integración
+Desarrollo de Dashboard de Seguimiento,2024-07-19,2024-08-01,Automatización del Proceso de Reclutamiento,Equipo de Desarrollo
+Recopilación y Sincronización de Datos,2024-07-26,2024-08-08,Desarrollo de Dashboard de Seguimiento,Equipo de Integración
+Análisis de Estructura de Costos,2024-08-02,2024-08-15,Recopilación y Sincronización de Datos,Equipo de Análisis
+Validación y Auditoría de Datos Financieros,2024-08-09,2024-08-22,Análisis de Estructura de Costos,Equipo de Finanzas
+Diseño de Interfaz de Usuario,2024-08-16,2024-08-29,,Equipo de Diseño
+Pruebas de Usabilidad y Feedback,2024-08-23,2024-09-05,Diseño de Interfaz de Usuario,Equipo de Usabilidad
+Integración con Sistemas Externos,2024-08-30,2024-09-12,Integración con Plataformas Externas,Equipo de Integración
+Pruebas de Compatibilidad y Seguridad,2024-09-06,2024-09-19,Integración con Sistemas Externos,Equipo de Seguridad
